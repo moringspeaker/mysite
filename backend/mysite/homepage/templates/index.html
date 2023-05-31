@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog List</title>
+</head>
+<body>
+    {% for blog in blogs %}
+        <h2>{{ blog.title }}</h2>
+        <p>{{ blog.content }}</p>
+        <p>Category: {{ blog.category.name }}</p>
+        <p>Created at: {{ blog.created_date }}</p>
+        <hr/>
+    {% empty %}
+        <p>No blogs available.</p>
+    {% endfor %}
+</body>
+</html>
