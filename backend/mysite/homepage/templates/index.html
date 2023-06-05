@@ -4,14 +4,19 @@
     <title>Blog List</title>
 </head>
 <body>
+{% block content %}
+    <h1>My Blogs</h1>
     {% for blog in blogs %}
-        <h2>{{ blog.title }}</h2>
-        <p>{{ blog.content }}</p>
-        <p>Category: {{ blog.category.name }}</p>
-        <p>Created at: {{ blog.created_date }}</p>
-        <hr/>
+        <div>
+            <h2>{{ blog.title }}</h2>
+            <p>{{ blog.content }}</p>
+            <p>{{ blog.category }}</p>
+            <small>Created at: {{ blog.created_date }}</small>
+        </div>
+        <hr>
     {% empty %}
         <p>No blogs available.</p>
     {% endfor %}
+{% endblock %}
 </body>
 </html>
