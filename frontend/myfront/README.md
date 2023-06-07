@@ -1,4 +1,4 @@
-# mysite-front
+# myfront
 
 ## Project setup
 ```
