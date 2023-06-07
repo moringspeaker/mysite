@@ -16,7 +16,7 @@ def register(request):
             return redirect('home') # change this to your homepage url name
     else:
         form = UserCreationForm()
-    return render(request, 'user/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 
 def login_view(request):
@@ -28,4 +28,4 @@ def login_view(request):
             return redirect('homepage') # change this to your homepage url name
     else:
         form = AuthenticationForm()
-    return render(request, 'user/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})

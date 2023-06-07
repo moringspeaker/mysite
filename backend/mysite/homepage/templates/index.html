@@ -17,6 +17,11 @@
     {% empty %}
         <p>No blogs available.</p>
     {% endfor %}
+    <div>
+        <button>
+            <a href="{% url 'login' %}">Login</a>
+        </button>
+    </div>
 {% endblock %}
 </body>
 </html>
