@@ -1,13 +1,21 @@
 <template>
-  <Nav-Bar />
+  <site-banner />
+  <nav-bar />
+  <div class="container-md">
+    <canvas id="canvas">
+
+    </canvas>
+  </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import SiteBanner from "@/components/sitebanner.vue";
 export default {
   name: 'App',
   components: {
     NavBar,
+    SiteBanner,
   }
 }
 </script>
