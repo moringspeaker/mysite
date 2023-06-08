@@ -1,0 +1,25 @@
+/* global.css */
+
+@font-face {
+    font-family: 'OribitronM';
+    src: url('~@/assets/fonts/Orbitron-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'FiraSan';
+    src: url('~@/assets/fonts/FiraSans-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lobster';
+    src: url('~@/assets/fonts/Lobster-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* other global styles */
