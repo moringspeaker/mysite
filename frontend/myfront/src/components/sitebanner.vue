@@ -3,10 +3,10 @@
       <div class="flex-column justify-content-center" style="position: relative" >
           <div id="title" class= "text-center mt-auto">
             <p class="site-title ">
-              <a id="webtitle" href="App.vue">Chenyu Gu's website
+              <a id="webtitle" href="App.vue">{{ Title }}
               </a>
             </p>
-            <p class="slogn">{{ slogn }}</p>
+            <p id="slogan" class="slogan">{{ slogan }}</p>
           </div>
       </div>
   </div>
@@ -17,12 +17,34 @@
 import BannerImage from '@/assets/BgImg/banner.jpg';
 export default {
   name: "site-banner",
+  props:{
+    lang:{
+      type:String,
+      default:"EN"
+    }
+  },
   data(){
     return {
-      slogn: "Live life. Learn lessons. Liberate yourself.",
+      Title:"Chenyu Gu's Website",
+      slogan: "Live life. Learn lessons. Liberate yourself.",
       imageUrl: BannerImage,
     }
   },
+  watch:{
+    lang(newLang){
+      if (newLang === "EN") {
+        document.getElementById("webtitle").style.fontFamily="OribitronM";
+        this.Title = "Chenyu's Website";
+        this.slogan = "Live life. Learn lessons. Liberate yourself.";
+      } else if (newLang === "中文") {
+        document.getElementById("webtitle").style.fontFamily="MSZ";
+        this.Title = "尘语的网站";
+        this.slogan = "宇宙以其不息的欲望将一个歌舞炼为永恒，\n" +
+            "这欲望有怎样一个人间的姓名，\n" +
+            "大可忽略不计。（史铁生）";
+      }
+    }
+  }
 }
 </script>
 
@@ -45,7 +67,7 @@ a{
 }
 #title{
   position: relative;
-  top: 70px;
+  top: 4.5rem;
 }
 
 .site-title {
@@ -62,8 +84,8 @@ a{
   color:  white;
 }
 
-.slogn{
-  font-family: Lobster;
+#slogan{
+  font-family: ZCOOL;
   text-align: center;
   color: #88ffcc;
   font-size: 30px;
