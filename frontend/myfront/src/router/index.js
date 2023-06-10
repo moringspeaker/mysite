@@ -25,7 +25,7 @@ const routes = [
         component: Blogs
     },
     {
-        path: "/Gallery",
+        path: "/gallery",
         name: "gallery",
         component: Gallery
     },
@@ -35,7 +35,7 @@ const routes = [
         component: Resources
     },
     {
-        path: "/publication",
+        path: "/publications",
         name: "publication",
         component: Publications
     },

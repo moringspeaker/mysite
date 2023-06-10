@@ -1,10 +1,10 @@
 <template>
-
+<P>Publication</P>
 </template>
 
 <script>
 export default {
-  name: "Publications"
+  name: "MyPublications"
 }
 </script>
 

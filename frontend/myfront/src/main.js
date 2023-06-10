@@ -6,6 +6,6 @@ import 'jquery'
 import 'popper.js'
 import 'bootstrap'
 import './globalfonts.css'  // import the global CSS file
+import router from "./router"
 
-
-createApp(App).mount('#app')
+createApp(App).use(router).mount('#app')

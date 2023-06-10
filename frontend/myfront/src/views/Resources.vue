@@ -1,10 +1,10 @@
 <template>
-
+<P>Res</P>
 </template>
 
 <script>
 export default {
-  name: "Resources"
+  name: "MyResources"
 }
 </script>
 

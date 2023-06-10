@@ -1,10 +1,10 @@
 <template>
-
+<p>Gallery</p>
 </template>
 
 <script>
 export default {
-  name: "Gallery"
+  name: "MyGallery"
 }
 </script>
 

@@ -15,7 +15,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li v-for="item in navitems" :key="item.id" class="nav-item" >
-            <a class="nav-link" :href="item.link">{{ item.name }}</a>
+            <router-link :to="item.link" class="nav-link" >{{ item.name }}</router-link>
           </li>
         </ul>
       </div>
@@ -47,12 +47,12 @@ export default {
       languages: ['EN', '中文'], // Replace with your desired language options
       selectedLanguage: 'EN' ,  // Set the default selected language
       navitems:[
-        { id: 1, name: "Home Page", link:"#" },
-        { id: 2, name: "Blogs", link:"#" },
-        { id: 3, name: "Publications" , link:"#"},
-        { id: 4, name: "My Resource", link:"#"},
-        { id: 5, name: "About Me", link:"#"},
-        {id: 6, name: "Gallery", link:"#"}
+        { id: 1, name: "Home Page", link:"/" },
+        { id: 2, name: "Blogs", link:"/blogs" },
+        { id: 3, name: "Publications" , link:"/publications"},
+        { id: 4, name: "My Resource", link:"/resources"},
+        { id: 5, name: "About Me", link:"aboutme"},
+        {id: 6, name: "Gallery", link:"gallery"}
       ],
     };
   },
@@ -65,20 +65,20 @@ export default {
 
       this.isDropdownOpen = false;
       let navitems1=[
-        { id: 1, name: "Home Page", link:"#" },
-        { id: 2, name: "Blogs", link:"#" },
-        { id: 3, name: "Publications" , link:"#"},
-        { id: 4, name: "My Resource", link:"#"},
-        { id: 5, name: "About Me", link:"#"},
-        {id: 6, name: "Gallery", link:"#"}
+        { id: 1, name: "Home Page", link:"/" },
+        { id: 2, name: "Blogs", link:"/blogs" },
+        { id: 3, name: "Publications" , link:"/publications"},
+        { id: 4, name: "My Resource", link:"/resources"},
+        { id: 5, name: "About Me", link:"aboutme"},
+        {id: 6, name: "Gallery", link:"gallery"}
       ];
       let   navitems2=[
-        { id: 1, name: "主页", link:"#" },
-        { id: 2, name: "博客", link:"#" },
-        { id: 3, name: "出版" , link:"#"},
-        { id: 4, name: "我的资源", link:"#"},
-        { id: 5, name: "关于我", link:"#"},
-        {id: 6, name: "我的瞬间", link:"#"}
+        { id: 1, name: "主页", link:"/" },
+        { id: 2, name: "博客", link:"/blogs" },
+        { id: 3, name: "出版" , link:"/publications"},
+        { id: 4, name: "我的资源", link:"/resources"},
+        { id: 5, name: "关于我", link:"aboutme"},
+        {id: 6, name: "我的瞬间", link:"gallery"}
       ];
       if(this.selectedLanguage === "EN"){
         this.navitems = navitems1
