@@ -2,11 +2,11 @@
   <div :style="{ backgroundImage: 'url(' + imageUrl + ')' }" class="banner">
       <div class="flex-column justify-content-center" style="position: relative" >
           <div id="title" class= "text-center mt-auto">
-            <p class="site-title ">
+            <h1 class="site-title ">
               <a id="webtitle" href="App.vue">{{ Title }}
               </a>
-            </p>
-            <p id="slogan" class="slogan">{{ slogan }}</p>
+            </h1>
+            <h4 id="slogan" class="slogan">{{ slogan }}</h4>
           </div>
       </div>
   </div>
@@ -41,7 +41,7 @@ export default {
         this.Title = "尘语的网站";
         this.slogan = "宇宙以其不息的欲望将一个歌舞炼为永恒，\n" +
             "这欲望有怎样一个人间的姓名，\n" +
-            "大可忽略不计。（史铁生）";
+            "大可忽略不计。";
       }
     }
   }
@@ -73,21 +73,21 @@ a{
 .site-title {
   text-align: center;
   color: white;
-  font-size: 20px;
+
   font-family: "Arial Black";
 
 }
 
 #webtitle{
   font-family: OribitronM;
-  font-size: 50px;
   color:  white;
+  font-size: 4rem;
 }
 
 #slogan{
   font-family: ZCOOL;
   text-align: center;
   color: #88ffcc;
-  font-size: 30px;
+  font-size: 1.5rem;
 }
 </style>
