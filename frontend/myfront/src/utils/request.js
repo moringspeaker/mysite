@@ -1,5 +1,5 @@
-;import axios  from "axios"
-import {error} from "@babel/eslint-parser/lib/convert";
+import axios  from "axios"
+// import {error} from "@babel/eslint-parser/lib/convert";
 
 const instance = axios.create({
     // public configuration

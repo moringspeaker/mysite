@@ -4,27 +4,32 @@
     <nav-bar @SelectLan="getLanguage"/>
   </header>
 
- <body>
-    <div id="content" class="container-padding" >
-      <div id="inner-content-wrapper" class="site-content">
-        <background-particles />
-      </div>
-    </div>
+ <main>
+   <VantaBirdsBackground>
+     <div id="content" class="container-padding" >
+       <div id="inner-content-wrapper" class="site-content">
 
- </body>
+       </div>
+     </div>
+
+   </VantaBirdsBackground>
+
+
+ </main>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
 import SiteBanner from "@/components/sitebanner.vue";
-
-import BackgroundParticles from "@/components/BackgroundParticles.vue"
+import VantaBirdsBackground from '@/components/VantaBirdsBackground.vue';
+import img from "@/assets/BgImg/MyAvatar.png"
 export default {
   name: 'App',
   data(){
     return{
       language:"EN",
-      cn: null
+      cn: null,
+      img:img,
     }
   },
   methods:{
@@ -33,7 +38,7 @@ export default {
     }
   },
   components: {
-    BackgroundParticles,
+    VantaBirdsBackground,
     NavBar,
     SiteBanner,
   }

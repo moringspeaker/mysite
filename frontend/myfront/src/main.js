@@ -8,4 +8,11 @@ import 'bootstrap'
 import './globalfonts.css'  // import the global CSS file
 import router from "./router"
 
-createApp(App).use(router).mount('#app')
+
+const app = createApp(App);
+
+app.use(router);
+
+
+app.mount('#app');
+
