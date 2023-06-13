@@ -12,32 +12,38 @@ const routes = [
     {
         path: "/",
         name: "homepage",
-        component:HomePage
+        component:HomePage,
+        props: route => ({ lang: route.query.lang })
     },
     {
         path: "/aboutme",
         name: "aboutme",
-        component: AboutMe
+        component: AboutMe,
+        props: route => ({ lang: route.query.lang })
     },
     {
         path: "/blogs",
         name: "blogs",
-        component: Blogs
+        component: Blogs,
+        props: route => ({ lang: route.query.lang })
     },
     {
         path: "/gallery",
         name: "gallery",
-        component: Gallery
+        component: Gallery,
+        props: route => ({ lang: route.query.lang })
     },
     {
         path: "/resources",
         name: "resources",
-        component: Resources
+        component: Resources,
+        props: route => ({ lang: route.query.lang })
     },
     {
         path: "/publications",
         name: "publication",
-        component: Publications
+        component: Publications,
+        props: route => ({ query: route.query.lang })
     },
 ]
 

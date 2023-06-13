@@ -1,59 +1,140 @@
 <template>
-  <header>
-    <site-banner :lang="language"/>
-    <nav-bar @SelectLan="getLanguage"/>
-  </header>
+  <swiper
+      class="my-swiper"
+      :modules="modules"
+      :slides-per-view="1"
+      :space-between="0"
+      :loop=true
+      navigation
+      :pagination="{ clickable: true }"
+      :scrollbar="{ draggable: true }"
+      @swiper="onSwiper"
+      @slideChange="onSlideChange"
+  >
+    <swiper-slide class="swiper-slide" v-for="(img, index) in imgUrl" :key="index">
+      <img :src="img.src">
+      <div class="subtitle" v-show="lang==='EN'">
+        {{ img.EN }}
+      </div>
+      <div class="subtitle" v-show="lang!=='EN'">
+        中文
+      </div>
 
- <main>
-   <VantaBirdsBackground>
-     <div id="content" class="container-padding" >
-       <div id="inner-content-wrapper" class="site-content">
+    </swiper-slide>
 
-       </div>
-     </div>
-
-   </VantaBirdsBackground>
-
-
- </main>
+  </swiper>
 </template>
 
+
 <script>
-import NavBar from "@/components/NavBar.vue";
-import SiteBanner from "@/components/sitebanner.vue";
-import VantaBirdsBackground from '@/components/VantaBirdsBackground.vue';
-import img from "@/assets/BgImg/MyAvatar.png"
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay'
+// Import Swiper styles
+
+
 export default {
-  name: 'App',
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
   data(){
     return{
-      language:"EN",
-      cn: null,
-      img:img,
+      imgUrl: [],
+      images:[
+        {src:'https://i.imgur.com/SlX7B65.png',EN: 'hi', CH: '你好'},
+        {src:'https://i.imgur.com/k0ItOuT.png',EN: 'hi', CH: '你好'},
+        {src:'https://i.imgur.com/Tj5VR88.png',EN: 'hi', CH: '你好'},
+      ],
+      lang: 'EN',
+    }
+  },
+  watch:{
+    getlang: function (data){
+      this.lang = data;
+      console.log(this.lang)
     }
   },
   methods:{
-    getLanguage(data){
-      this.language = data;
-    }
+    async fetchImage() {
+      for (let i in this.images) {
+        fetch(this.images[i].src) // Use this.images[i].src instead of i.src
+            .then((response) => response.blob())
+            .then((blob) => {
+              console.log(blob);
+              this.imgUrl.push({
+                src: URL.createObjectURL(blob),
+                EN: this.images[i].EN, // Use this.images[i].EN instead of i.EN
+                CH: this.images[i].CH, // Use this.images[i].CH instead of i.CH
+              });
+              console.log(this.imgUrl);
+            })
+            .catch((error) => {
+              console.error('Error fetching image:', error);
+            });
+      }
+    },
   },
-  components: {
-    VantaBirdsBackground,
-    NavBar,
-    SiteBanner,
+  setup() {
+    const onSwiper = (swiper) => {
+      console.log(swiper);
+    };
+    const onSlideChange = () => {
+      console.log('slide change');
+    };
+    return {
+      onSwiper,
+      onSlideChange,
+      modules: [Navigation, Pagination, Scrollbar, A11y],
+    };
+  },
+  beforeMount() {
+    this.fetchImage();
   }
-}
+};
 </script>
 
 <style>
-.container-padding {
-  padding: 20px;
+.my-swiper {
+  width: 100%;
+  height: 50%;
 }
 
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #333333;
 
-#inner-content-wrapper{
-  height: 50rem;
-  width: 50rem;
-  margin: auto;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.swiper-slide img {
+  display: flex;
+  width: 100%;
+  height: 85%;
+  object-fit: cover;
+
+}
+.subtitle {
+  /* Styles for the subtitle */
+  font-size: 25px;
+  color: white;
+  font-family: FiraSan;
 }
 </style>
+

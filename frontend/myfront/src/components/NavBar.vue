@@ -36,13 +36,11 @@
 
 <script>
 
-import avatar from '@/assets/BgImg/avatar.png';
 
 export default {
   name: 'Nav-bar',
   data(){
     return{
-      avatarUrl:avatar,
       isDropdownOpen: false, // Track the dropdown state
       languages: ['EN', '中文'], // Replace with your desired language options
       selectedLanguage: 'EN' ,  // Set the default selected language
@@ -58,8 +56,12 @@ export default {
   },
   methods: {
     selectLanguage(language) {
-      this.selectedLanguage = language;
-
+      if(language === "EN"){
+        this.selectedLanguage = "EN";
+      }
+      else{
+        this.selectedLanguage = "中文";
+      }
       //send this language selection to whole project
       this.$emit("SelectLan",this.selectedLanguage);
 
