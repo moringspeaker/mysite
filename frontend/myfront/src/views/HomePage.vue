@@ -17,12 +17,23 @@
         {{ img.EN }}
       </div>
       <div class="subtitle" v-show="lang!=='EN'">
-        中文
+        {{ img.CH }}
       </div>
-
     </swiper-slide>
-
   </swiper>
+
+  <div class="latest-release">
+    <h2>Latest Release</h2>
+    <div class="blog-item" v-for="(blog, index) in blogs" :key="index" @click="goToBlogPage(blog.id)">
+      <h3>{{ blog.title }}</h3>
+      <p>{{ blog.summary }}</p>
+      <div class="blog-meta">
+        <span class="author">{{ blog.author }}</span>
+        <span class="created-date">{{ blog.date }}</span>
+        <button class="jump-button" @click="goToBlogPage(blog.id)">Jump</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 
@@ -49,6 +60,9 @@ export default {
   props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
   data(){
     return{
+      ///////////////////////////blogs
+
+      //////////////////////////
       imgUrl: [],
       images:[
         {src:'https://i.imgur.com/SlX7B65.png',EN: 'hi', CH: '你好'},
@@ -135,6 +149,11 @@ export default {
   font-size: 25px;
   color: white;
   font-family: FiraSan;
+}
+.latest-release {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
 }
 </style>
 
