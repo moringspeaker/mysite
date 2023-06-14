@@ -71,8 +71,14 @@ main {
 }
 
 #inner-content-wrapper{
-  height: 50rem;
-  width: 50rem;
+  height: 200vh;
+  width: 120vh;
+  border: 1px solid #ccc;
+  padding: 10px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 15px 15px #cccccc;
 }
 </style>

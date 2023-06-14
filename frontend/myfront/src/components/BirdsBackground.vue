@@ -28,7 +28,7 @@ onMounted(()=>{
     minWidth: 200.00,
     scale: 1.00,
     scaleMobile: 1.00,
-    backgroundColor: 0x0,
+    backgroundColor: 0xf526D82,
     color1: 0xff9700,
     color2: 0xfc0afc,
     birdSize: 0.70,
@@ -51,6 +51,6 @@ onBeforeUnmount(()=>{
 <style lang="less" scoped>
 .vanta_area {
   width:100%;
-  height:100vh;
+  height:300vh;
 }
 </style>

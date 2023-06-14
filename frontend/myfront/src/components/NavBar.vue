@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
     <button
         class="navbar-toggler"
         type="button"
@@ -98,6 +98,9 @@ export default {
 
 <style scoped>
 /* Add any styles here if necessary */
+.custom-navbar {
+  background-color: #9DB2BF;
+}
 
 .navbar {
   display: flex;

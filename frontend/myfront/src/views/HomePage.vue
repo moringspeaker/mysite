@@ -21,19 +21,8 @@
       </div>
     </swiper-slide>
   </swiper>
+  <blog-window/>
 
-  <div class="latest-release">
-    <h2>Latest Release</h2>
-    <div class="blog-item" v-for="(blog, index) in blogs" :key="index" @click="goToBlogPage(blog.id)">
-      <h3>{{ blog.title }}</h3>
-      <p>{{ blog.summary }}</p>
-      <div class="blog-meta">
-        <span class="author">{{ blog.author }}</span>
-        <span class="created-date">{{ blog.date }}</span>
-        <button class="jump-button" @click="goToBlogPage(blog.id)">Jump</button>
-      </div>
-    </div>
-  </div>
 </template>
 
 
@@ -51,18 +40,17 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay'
 // Import Swiper styles
 
+import BlogWindow from "@/views/BlogWindow.vue";
 
 export default {
   components: {
+    BlogWindow,
     Swiper,
     SwiperSlide,
   },
   props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
   data(){
     return{
-      ///////////////////////////blogs
-
-      //////////////////////////
       imgUrl: [],
       images:[
         {src:'https://i.imgur.com/SlX7B65.png',EN: 'hi', CH: '你好'},
@@ -119,14 +107,14 @@ export default {
 
 <style>
 .my-swiper {
-  width: 100%;
-  height: 50%;
+  width: 60%;
+  height: 20%;
 }
 
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #333333;
+  background: #272929;
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -149,11 +137,8 @@ export default {
   font-size: 25px;
   color: white;
   font-family: FiraSan;
+  opacity: 50%;
 }
-.latest-release {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-}
+
 </style>
 
