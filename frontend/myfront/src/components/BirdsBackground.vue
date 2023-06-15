@@ -31,14 +31,14 @@ onMounted(()=>{
     backgroundColor: 0xf000000,
     color1: 0xff9700,
     color2: 0xfc0afc,
-    birdSize: 0.70,
+    birdSize: 0.50,
     wingSpan: 23.00,
     speedLimit: 6.00,
     separation: 34.00,
     alignment: 61.00,
     cohesion: 36.00,
     quantity: 4.00,
-    backgroundAlpha: 0.9
+    backgroundAlpha: 0.9,
   })
 })
 
@@ -48,9 +48,7 @@ onBeforeUnmount(()=>{
   }
 })
 </script>
+
 <style lang="less" scoped>
-.vanta_area {
-  width:100%;
-  height:300vh;
-}
+
 </style>

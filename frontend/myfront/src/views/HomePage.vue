@@ -22,7 +22,7 @@
     </swiper-slide>
   </swiper>
   <div class="content-wrapper">
-    <blog-window/>
+    <blog-window :sentlang="sentlang"/>
   </div>
 
 </template>
@@ -60,12 +60,14 @@ export default {
         {src:'https://i.imgur.com/Tj5VR88.png',EN: 'hi', CH: '你好'},
       ],
       lang: 'EN',
+      sentlang:'',
     }
   },
   watch:{
     getlang: function (data){
       this.lang = data;
-      console.log(this.lang)
+      this.sentlang = data;
+      // console.log(this.lang)
     }
   },
   methods:{

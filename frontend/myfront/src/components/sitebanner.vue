@@ -52,10 +52,10 @@ export default {
 a{
   text-decoration: none;
 }
+
 .banner {
   /* Set the height of the banner */
   height: 250px;
-
   /* Set the width of the banner */
   width: 100%;
 
@@ -63,8 +63,18 @@ a{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.8;
+
 }
+.banner:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black mask with 50% opacity */
+}
+
 #title{
   position: relative;
   top: 4.5rem;
@@ -73,9 +83,7 @@ a{
 .site-title {
   text-align: center;
   color: white;
-
   font-family: "Arial Black";
-
 }
 
 #webtitle{

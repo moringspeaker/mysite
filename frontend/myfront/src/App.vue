@@ -37,7 +37,7 @@ export default {
   methods:{
     getLanguage(data){
       this.lang = data;
-      this.getlang = data;  //  and pass the var to the declared method, using the same method to receive it in child components
+      this.getlang = data; //  and pass the var to the declared method, using the same method to receive it in child components
     }
   },
   components: {
@@ -61,6 +61,7 @@ main {
 
 .container-padding {
   padding: 20px;
+
 }
 
 #inner-content-wrapper{
