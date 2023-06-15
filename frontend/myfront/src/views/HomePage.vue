@@ -21,7 +21,9 @@
       </div>
     </swiper-slide>
   </swiper>
-  <blog-window/>
+  <div class="content-wrapper">
+    <blog-window/>
+  </div>
 
 </template>
 
@@ -114,7 +116,7 @@ export default {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #272929;
+  background: #2E4F4F;
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -137,8 +139,16 @@ export default {
   font-size: 25px;
   color: white;
   font-family: FiraSan;
-  opacity: 50%;
+
 }
 
+.content-wrapper{
+  height: 100%;
+  width: 100%;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 </style>
 

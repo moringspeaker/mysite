@@ -28,7 +28,7 @@ onMounted(()=>{
     minWidth: 200.00,
     scale: 1.00,
     scaleMobile: 1.00,
-    backgroundColor: 0xf526D82,
+    backgroundColor: 0xf000000,
     color1: 0xff9700,
     color2: 0xfc0afc,
     birdSize: 0.70,

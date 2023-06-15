@@ -8,7 +8,7 @@
     <main>
       <VantaBirds>
         <div id="content" class="container-padding full-height" >
-          <div id="inner-content-wrapper" class="site-content">
+          <div id="inner-content-wrapper" class="site-content x">
             <router-view :getlang="getlang"></router-view>
           </div>
         </div>
@@ -50,13 +50,6 @@ export default {
 
 <style>
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
 main {
   flex-grow: 1;
@@ -80,5 +73,6 @@ main {
   flex-direction: column;
   align-items: center;
   box-shadow: 0 15px 15px #cccccc;
+  justify-content: flex-start;
 }
 </style>

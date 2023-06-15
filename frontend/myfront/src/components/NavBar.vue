@@ -99,7 +99,7 @@ export default {
 <style scoped>
 /* Add any styles here if necessary */
 .custom-navbar {
-  background-color: #9DB2BF;
+  background-color: #323232;
 }
 
 .navbar {
