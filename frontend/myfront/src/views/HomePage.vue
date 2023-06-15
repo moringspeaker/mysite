@@ -42,7 +42,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay'
 // Import Swiper styles
 
-import BlogWindow from "@/views/BlogWindow.vue";
+import BlogWindow from "@/components/BlogWindow.vue";
 
 export default {
   components: {
