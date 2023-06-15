@@ -37,7 +37,7 @@ export default {
         this.Title = "Chenyu's Website";
         this.slogan = "Live life. Learn lessons. Liberate yourself.";
       } else if (newLang !== "EN") {
-        document.getElementById("webtitle").style.fontFamily="Msyh";
+        document.getElementById("webtitle").style.fontFamily="WY";
         this.Title = "尘语的网站";
         this.slogan = "宇宙以其不息的欲望将一个歌舞炼为永恒，\n" +
             "这欲望有怎样一个人间的姓名，\n" +
@@ -93,7 +93,7 @@ a{
 }
 
 #slogan{
-  font-family: ZCOOL;
+  font-family: WuHun;
   text-align: center;
   color: #88ffcc;
   font-size: 1.5rem;

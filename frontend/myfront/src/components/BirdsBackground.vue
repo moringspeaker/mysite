@@ -31,7 +31,7 @@ onMounted(()=>{
     backgroundColor: 0xf000000,
     color1: 0xff9700,
     color2: 0xfc0afc,
-    birdSize: 0.50,
+    birdSize: 0.30,
     wingSpan: 23.00,
     speedLimit: 6.00,
     separation: 34.00,
