@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from homepage import views as homepage_views
+# from homepage import views as homepage_views
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)

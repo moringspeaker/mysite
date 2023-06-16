@@ -10,10 +10,20 @@ class Category(models.Model):
         return self.name
 
 class Blog(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
+    id = models.AutoField(primary_key=True)
+
+    ENtitle = models.CharField(max_length=200,blank=True)
+    ENcontent = models.TextField()
+    ENauthor = models.CharField(max_length=200,default='ChenYu')
+    ENsummary = models.CharField(max_length=200,default='The weak is the recognition of love, just as giving up is the antidote of noise')
+
+    CHtitle = models.CharField(max_length=200,blank=True)
+    CHcontent = models.TextField()
+    CHauthor = models.CharField(max_length=200,default='尘语')
+    CHsummary = models.CharField(max_length=200,default='惟柔弱是爱愿的识别，正如放弃是喧嚣的解剂')
+
+    cover = models.ImageField(upload_to='medias/covers/', default='static/no-img.jpg')
     created_date = models.DateTimeField(default=timezone.now)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
     def __str__(self):
-        return self.title
+        return self.ENtitle
