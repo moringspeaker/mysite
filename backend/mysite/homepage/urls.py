@@ -4,7 +4,8 @@ from user.views import register
 from . import views
 
 urlpatterns = [
-    path("", views.index_view, name="homepage"),
+    # path("", views.index_view, name="homepage"),
     path('login/', login_view, name='login'),
     path('register/', register, name='register'),
+    path('api/swipers/', views.SwiperAPIView.as_view(), name='swipers_api'),
 ]

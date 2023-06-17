@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "homepage",
     "user",
     'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -140,9 +141,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 # 配置可跨域访问的 域名/IP
 CORS_ALLOWED_ORIGINS = [
-    '127.0.0.1:8000',
-    'localhost:8080',
-    # 'myname.com',
+    'http://127.0.0.1:8000',
+    'http://localhost:8080',
 ]
 # 使用正则表达式匹配允许访问的 域名/IP
 # CORS_ALLOWED_ORIGIN_REGEXES = [
