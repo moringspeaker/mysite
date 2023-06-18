@@ -1,13 +1,21 @@
-# from django.shortcuts import render
-# from blogs.models import Blog
-# from blogs.models import Category
-
-from rest_framework import generics
+from django.http import JsonResponse
 from .models import Swiper
+from blogs.models import Blog
 from .serializers import SwiperSerializer
+from blogs.serializers import BlogsSerializer
+def homepage(request):
+    blogs = Blog.objects.all()[:5]  # Get the latest 5 blogs
+    swipers = Swiper.objects.all()  # Get all swipers
 
-# Other views here...
+    blog_serializer = BlogsSerializer(blogs, many=True)
+    swiper_serializer = SwiperSerializer(swipers, many=True)
 
-class SwiperAPIView(generics.ListAPIView):  # use ListAPIView because we want a list of objects
-    queryset = Swiper.objects.all()
-    serializer_class = SwiperSerializer
+    blog_data = blog_serializer.data
+    swiper_data = swiper_serializer.data
+
+    response_data = {
+        'blogs': blog_data,
+        'swipers': swiper_data,
+    }
+
+    return JsonResponse(response_data)

@@ -4,4 +4,4 @@ from .models import Swiper
 class SwiperSerializer(serializers.ModelSerializer):
     class Meta:
         model = Swiper
-        fields = ['id', 'ENtitle','CHtitle' ,'img']
+        fields = ['id', 'ENtitle','CHtitle' ,'src']
