@@ -4,12 +4,17 @@
       :modules="modules"
       :slides-per-view="1"
       :space-between="0"
+      :autoplay="{
+      delay: 2500,
+      disableOnInteraction: false,
+    }"
       :loop=true
       navigation
       :pagination="{ clickable: true }"
       :scrollbar="{ draggable: true }"
       @swiper="onSwiper"
       @slideChange="onSlideChange"
+      @autoplayTimeLeft="onAutoplayTimeLeft"
   >
     <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
       <img :src="getImageUrl(img.src)" :alt="noimg">
@@ -32,8 +37,9 @@
 // import my axios instance
 import instance from '@/utils/request';
 
+import { ref } from 'vue';
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay, } from 'swiper';
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
@@ -94,6 +100,12 @@ export default {
   },
 
   setup() {
+    const progressCircle = ref(null);
+    const progressContent = ref(null);
+    const onAutoplayTimeLeft = (s, time, progress) => {
+      progressCircle.value.style.setProperty('--progress', 1 - progress);
+      progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
+    };
     const onSwiper = (swiper) => {
       console.log(swiper);
     };
@@ -103,7 +115,10 @@ export default {
     return {
       onSwiper,
       onSlideChange,
-      modules: [Navigation, Pagination, Scrollbar, A11y],
+      onAutoplayTimeLeft,
+      progressCircle,
+      progressContent,
+      modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
     };
   },
 };

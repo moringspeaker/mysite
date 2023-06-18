@@ -10,17 +10,17 @@
          </div>
           <div class="blog-content" v-show="lang==='EN'">
             <h4>{{ blog.ENtitle }}</h4>
-            <p>{{ blog.ENsummary }}</p>
-            <span class="author">Created by: </span>
-            <span class="authorname">{{ blog.ENauthor }}</span>
-            <span class="created-date block-display" id="timestamp">{{ blog.createdDate }}</span>
+            <p class="summary">{{ blog.ENsummary }}</p>
+            <p class="authorname"> Created by:<span class="badge bg-secondary ">{{ blog.ENauthor }}</span></p>
+            <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
+            <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
           </div>
           <div class="blog-content" v-show="lang!=='EN'">
             <h4>{{ blog.CHtitle }}</h4>
             <p>{{ blog.CHsummary }}</p>
-            <span class="author">发布自: </span>
-            <span class="authorname">{{ blog.CHauthor }}</span>
-            <span class="created-date block-display" id="timestamp">{{ blog.created_date }}</span>
+            <p class="authorname"> Created by:<span class="badge bg-secondary ">{{ blog.CHauthor }}</span></p>
+            <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
+            <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
           </div>
           <div class="blog-meta" v-show="lang==='EN'">
             <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">Jump</button>
@@ -103,16 +103,16 @@ export default {
   border-radius: 5%;
   position: relative;
 }
+
 .img-wrapper:after{
   content: "";
   position: absolute;
   right: -10px;        /* position line to the right of img-wrapper */
   top: 0;             /* align to top of img-wrapper */
-  height: 100%;       /* match height of img-wrapper */
+  height: 80%;       /* match height of img-wrapper */
   width: 1px;         /* line width */
   background: whitesmoke;  /* line color */
 }
-
 
 .blog-image {
   width: 100%; /* adjust this as per your need */
@@ -120,7 +120,6 @@ export default {
   object-fit: cover;
   border-radius: 5%;
 }
-
 
 .blog-content {
   flex-grow: 1;
@@ -144,14 +143,20 @@ export default {
   margin-top: 10%;
 }
 
-.latest-release .blog-item p {
-  margin: 5%;
+.latest-release .blog-item .summary {
+  margin-top: 10%;
   color: #88ffcc;
 }
 
 .latest-release .blog-item .author {
   margin-bottom: 5px;
   color: aqua;
+  margin-top: 1rem;
+}
+
+.latest-release .blog-item .category {
+  margin: 10px;
+  color: dodgerblue;
   margin-top: 1rem;
 }
 
@@ -167,7 +172,6 @@ export default {
 
 .btn-primary.jump-button {
   background-color: lightblue; /* Change background color to light blue */
-  border-radius: 15%; /* Round the corners of the button */
   padding: 15px 25px; /* Increase button size by adding padding */
   font-size: 18px; /* Increase font size */
   border: none; /* Remove default border */
