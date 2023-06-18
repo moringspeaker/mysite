@@ -4,7 +4,8 @@ from django.db import models
 from django.utils import timezone
 
 class Category(models.Model):
-    name = models.CharField(max_length=200)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200,unique=True)
 
     def __str__(self):
         return self.name
@@ -24,6 +25,7 @@ class Blog(models.Model):
 
     cover = models.ImageField(upload_to='medias/covers/', default='static/no-img.jpg')
     created_date = models.DateTimeField(default=timezone.now)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, to_field='name')
     def __str__(self):
-        return self.ENtitle
+        # return f"Blog: {self.ENtitle or self.CHtitle} - Category: {self.category.name}"
+        return self.ENtitle or self.CHtitle
