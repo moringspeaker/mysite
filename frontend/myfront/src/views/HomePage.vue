@@ -11,8 +11,8 @@
       @swiper="onSwiper"
       @slideChange="onSlideChange"
   >
-    <swiper-slide class="swiper-slide" v-for="(img, index) in images" :key="index">
-      <img :src="img.src" :alt="noimg">
+    <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
+      <img :src="getImageUrl(img.src)" :alt="noimg">
       <div class="subtitle" v-show="lang==='EN'">
         {{ img.ENtitle }}
       </div>
@@ -22,7 +22,7 @@
     </swiper-slide>
   </swiper>
   <div class="content-wrapper">
-    <blog-window :sentlang="sentlang"/>
+    <blog-window :lang="lang" :blogs="blogs"/>
   </div>
 
 </template>
@@ -48,6 +48,7 @@ import 'swiper/css/autoplay'
 import BlogWindow from "@/components/BlogWindow.vue";
 
 import NoImg from "@/static/no-image.png"
+// import swipe from "bootstrap/js/src/util/swipe";
 
 export default {
   components: {
@@ -56,26 +57,37 @@ export default {
     SwiperSlide,
   },
   props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
+  methods: {
+    getImageUrl(imageSrc) {
+      // Modify the image source URL here
+      console.log(`http://127.0.0.1:8000${imageSrc}`);
+      return `http://127.0.0.1:8000${imageSrc}`;
+    },
+  },
   data(){
     return{
       noimg: NoImg,
-      images: [],
+      homedata: [],
+      swipers: [],
       lang: 'EN',
-      sentlang:'',
+      sentlang: '',
+      blogs:[],
     }
   },
   watch:{
     getlang: function (data){
       this.lang = data;
-      this.sentlang = data;
+      // this.sentlang = data;
     }
   },
 
-  async mounted(){
+  async mounted() {
     try {
-      const response = await instance.get('http://localhost:8000/api/swipers/');
-      this.images = response.data;
-      console.log(this.images);
+      const response = await instance.get('http://localhost:8000/api/homepage/');
+      this.homedata = response.data;
+      this.swipers = this.homedata.swipers; // Make sure to use lowercase 'swipers'
+      this.blogs = this.homedata.blogs;
+      console.log("blog_view"+this.blogs)
     } catch (error) {
       console.error(error);
     }
