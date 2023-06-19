@@ -17,16 +17,16 @@
           </div>
           <div class="blog-content" v-show="lang!=='EN'">
             <h4>{{ blog.CHtitle }}</h4>
-            <p>{{ blog.CHsummary }}</p>
+            <p class="summary">{{ blog.CHsummary }}</p>
             <p class="authorname"> Created by:<span class="badge bg-secondary ">{{ blog.CHauthor }}</span></p>
             <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
           </div>
           <div class="blog-meta" v-show="lang==='EN'">
-            <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">Jump</button>
+            <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">Read...</button>
           </div>
           <div class="blog-meta" v-show="lang!=='EN'">
-            <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">打开</button>
+            <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">打开...</button>
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default {
   margin: 3vh;
   width:70%;
   float: left;
-  margin-left: 2px;
+  margin-left: 20px;
   /*border: 2px solid #222222;*/
 
 }

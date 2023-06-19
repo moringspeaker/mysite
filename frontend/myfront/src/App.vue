@@ -22,7 +22,7 @@
 import VantaBirds from "@/components/BirdsBackground.vue";
 import NavBar from "@/components/NavBar.vue";
 import SiteBanner from "@/components/sitebanner.vue";
-import img from "@/assets/BgImg/MyAvatar.png";
+
 
 export default {
   name: 'App',
@@ -30,7 +30,6 @@ export default {
     return{
       lang:"EN",
       cn: null,
-      img:img,
       getlang:'',     //  if parent component want to emit a var to child components, it should declare the method first
     }
   },

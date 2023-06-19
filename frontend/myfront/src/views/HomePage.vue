@@ -28,6 +28,7 @@
   </swiper>
   <div class="content-wrapper">
     <blog-window :lang="lang" :blogs="blogs"/>
+    <about-me :lang="lang" />
   </div>
 
 </template>
@@ -37,7 +38,7 @@
 // import my axios instance
 import instance from '@/utils/request';
 
-import { ref } from 'vue';
+// import { ref } from 'vue';
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay, } from 'swiper';
 // Import Swiper Vue.js components
@@ -51,7 +52,9 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay'
 // Import Swiper styles
 
+//import other components
 import BlogWindow from "@/components/BlogWindow.vue";
+import AboutMe from "@/components/AboutMe.vue";
 
 import NoImg from "@/static/no-image.png"
 // import swipe from "bootstrap/js/src/util/swipe";
@@ -61,6 +64,7 @@ export default {
     BlogWindow,
     Swiper,
     SwiperSlide,
+    AboutMe,
   },
   props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
   methods: {
@@ -100,12 +104,12 @@ export default {
   },
 
   setup() {
-    const progressCircle = ref(null);
-    const progressContent = ref(null);
-    const onAutoplayTimeLeft = (s, time, progress) => {
-      progressCircle.value.style.setProperty('--progress', 1 - progress);
-      progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
-    };
+    // const progressCircle = ref(null);
+    // const progressContent = ref(null);
+    // const onAutoplayTimeLeft = (s, time, progress) => {
+    //   progressCircle.value.style.setProperty('--progress', 1 - progress);
+    //   progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
+    // };
     const onSwiper = (swiper) => {
       console.log(swiper);
     };
@@ -115,9 +119,9 @@ export default {
     return {
       onSwiper,
       onSlideChange,
-      onAutoplayTimeLeft,
-      progressCircle,
-      progressContent,
+      // onAutoplayTimeLeft,
+      // progressCircle,
+      // progressContent,
       modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
     };
   },
