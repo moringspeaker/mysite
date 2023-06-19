@@ -11,14 +11,14 @@
           <div class="blog-content" v-show="lang==='EN'">
             <h4>{{ blog.ENtitle }}</h4>
             <p class="summary">{{ blog.ENsummary }}</p>
-            <p class="authorname"> Created by:<span class="badge bg-secondary ">{{ blog.ENauthor }}</span></p>
+            <p class="authorname"> Created by:<span class="badge bg-secondary authortag">{{ blog.ENauthor }}</span></p>
             <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
           </div>
           <div class="blog-content" v-show="lang!=='EN'">
             <h4>{{ blog.CHtitle }}</h4>
             <p class="summary">{{ blog.CHsummary }}</p>
-            <p class="authorname"> Created by:<span class="badge bg-secondary ">{{ blog.CHauthor }}</span></p>
+            <p class="authorname"> Created by:<span class="badge bg-secondary authortag" >{{ blog.CHauthor }}</span></p>
             <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
           </div>
@@ -148,15 +148,22 @@ export default {
   color: #88ffcc;
 }
 
-.latest-release .blog-item .author {
+.latest-release .blog-item .authorname {
   margin-bottom: 5px;
-  color: aqua;
+  color: #f0f0f0;
   margin-top: 1rem;
 }
 
+.authortag {
+  margin: 10px;
+  color: #FF8400;
+  margin-top: 1rem;
+}
+
+
 .latest-release .blog-item .category {
   margin: 10px;
-  color: dodgerblue;
+  color: #00FFF5;
   margin-top: 1rem;
 }
 
