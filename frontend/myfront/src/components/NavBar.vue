@@ -142,6 +142,7 @@ export default {
 
 ul:first-of-type {
   list-style-type: none;
+  justify-content: center;
   align-items: center;
   padding: 0;
 

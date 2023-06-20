@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       avatar,  // replace with your avatar url
-      ENintroduction: "Welcome to my personal website! This website is mainly used for recording fun and profound technologies, if you have any suggestions, welcome to leave me a message by opening an new issue",  // replace with your introduction
+      ENintroduction: "Welcome to my personal website! This website is mainly used for recording fun and profound technologies",  // replace with your introduction
       Chintroduction:"欢迎来到我的个人网站!本网站主要用于整理科研资料和有意思的计算机技术，以后会有更多功能，如果有任何建议，欢迎通过新建issue的方式给我留言",
     }
   }
@@ -43,37 +43,38 @@ export default {
 
 <style scoped>
 .about-me {
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 20%;
-  width: 40vh;
   background-color: #222222;
-  /*padding: 20px;*/
-  margin-top: 3.8vh;
-  margin-right: 20px;
+
+  margin-top: 3vh;
+  grid-row: 1 / 3;
+  grid-column: 2 / 3;
 }
 
 .about-me__header{
   background-color: #04293A;
   color:#f0f0f0;
   width: 100%;
-  display: flex;
-  flex-direction: row;
   height: 20%;
+  display: flex;
+  justify-content: center;  /* This centers the items horizontally */
   align-items: center;
-  justify-content: center;
+  height: 20%;
+
 }
 .title1{
   width: 100%;
-  margin-left: 33%;
+  text-align: center;
+  /*margin-left: 33%;*/
   font-size: 2rem;
 }
 .title2{
   width: 100%;
-  margin-left: 40%;
+  /*margin-left: 40%;*/
   font-size: 2rem;
+  text-align: center;
 }
 
 .about-me__avatar{

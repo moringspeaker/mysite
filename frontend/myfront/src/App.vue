@@ -64,8 +64,8 @@ main {
 }
 
 #inner-content-wrapper{
-  height: 200vh;
-  width: 120vh;
+  height: 180vh;
+  width: 110vh;
   border: 1px solid #ccc;
   padding: 10px;
   margin: auto;

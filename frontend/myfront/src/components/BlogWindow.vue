@@ -1,11 +1,11 @@
 <template>
-  <div class="latest-release col-md-8">
+  <div class="latest-release ">
     <h2 v-show="lang==='EN'">Latest Release</h2>
     <h2 v-show="lang!=='EN'">最新发布</h2>
     <div class="blog-container">
       <div class="blog-item" v-for="(blog, index) in blogs" :key="index" @click="goToBlogPage(blog.id)">
-        <div class="blog-box d-flex">
-         <div class="col-md-5 img-wrapper" >
+        <div class="blog-box">
+         <div class=" img-wrapper" >
            <img class="blog-image" :src="getImageUrl(blog.cover)" :alt="placeholder">
          </div>
           <div class="blog-content" v-show="lang==='EN'">
@@ -76,24 +76,31 @@ export default {
 
 <style scoped >
 .latest-release {
+  grid-column: 1/2;
+  grid-row: 1/5;
   background-color: #222222;
-  /*border-radius: 25px;*/
-  padding: 20px;
-  margin: 3vh;
-  width:70%;
+  padding: 15px;
+  margin-top: 3vh;
   float: left;
-  margin-left: 20px;
-  /*border: 2px solid #222222;*/
+  /*height:100vh;*/
+  border: 2px solid #222222;
 
 }
-
+.blog-container{
+  height:100%;
+  width: 100%;
+  display:grid;
+  grid-template-rows: repeat(5,19%);
+}
+.blog-item{
+  height: 10rem;
+}
 .blog-box {
   flex-shrink: 0;
   overflow: hidden;
   display: flex;
-  /*align-items: center;*/
   gap: 20px; /* adjust this as per your need */
-  /*justify-content: center;*/
+
 }
 
 .img-wrapper{
@@ -109,7 +116,7 @@ export default {
   position: absolute;
   right: -10px;        /* position line to the right of img-wrapper */
   top: 0;             /* align to top of img-wrapper */
-  height: 80%;       /* match height of img-wrapper */
+  height: 100%;       /* match height of img-wrapper */
   width: 1px;         /* line width */
   background: whitesmoke;  /* line color */
 }
@@ -140,7 +147,7 @@ export default {
 
 .latest-release .blog-item h4 {
   font-size: 1.5rem;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .latest-release .blog-item .summary {
@@ -157,19 +164,19 @@ export default {
 .authortag {
   margin: 10px;
   color: #FF8400;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 
 .latest-release .blog-item .category {
   margin: 10px;
   color: #00FFF5;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 .block-display {
   display: block;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .latest-release .blog-item .blog-meta {
@@ -183,7 +190,7 @@ export default {
   font-size: 18px; /* Increase font size */
   border: none; /* Remove default border */
   margin-right: 10px;
-  margin-top: 15rem;
+  margin-top: 14rem;
 }
 
 

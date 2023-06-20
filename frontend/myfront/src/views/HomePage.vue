@@ -29,6 +29,7 @@
   <div class="content-wrapper">
     <blog-window :lang="lang" :blogs="blogs"/>
     <about-me :lang="lang" />
+    <AudioPlayer/>
   </div>
 
 </template>
@@ -37,7 +38,6 @@
 <script>
 // import my axios instance
 import instance from '@/utils/request';
-
 // import { ref } from 'vue';
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay, } from 'swiper';
@@ -55,6 +55,7 @@ import 'swiper/css/autoplay'
 //import other components
 import BlogWindow from "@/components/BlogWindow.vue";
 import AboutMe from "@/components/AboutMe.vue";
+import AudioPlayer from "@/components/AudioPlayer.vue";
 
 import NoImg from "@/static/no-image.png"
 // import swipe from "bootstrap/js/src/util/swipe";
@@ -65,6 +66,7 @@ export default {
     Swiper,
     SwiperSlide,
     AboutMe,
+    AudioPlayer,
   },
   props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
   methods: {
@@ -164,12 +166,14 @@ export default {
 }
 
 .content-wrapper{
-  height: 100%;
-  width: 100%;
+  height: 80%;
+  width: 105vh;
   justify-content: flex-start;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-column-gap: 10px;
+  grid-auto-rows: minmax(8rem, auto);
+  grid-auto-flow: column dense;
 }
 </style>
 
