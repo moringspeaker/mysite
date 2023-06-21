@@ -15,10 +15,15 @@
 /* For large screens */
 @media screen and (min-width: 1920px) {
     :root {
-        font-size: 2vw;
+        font-size: 1vw;
     }
 }
 
+@media screen and (min-width: 3440px) and (min-height: 1000px){
+    :root {
+        font-size: 0.5vw;
+    }
+}
 
 @font-face {
     font-family: 'OribitronM';
