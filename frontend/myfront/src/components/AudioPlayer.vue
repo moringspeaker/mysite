@@ -1,65 +1,68 @@
 <template>
-  <div class="player">
-    <h2 class="player-title">{{ currentSong.name }}</h2>
-    <audio controls :src="currentSong.src" @timeupdate="updateCurrentTime" ref="audioRef"></audio>
-<!--    <div class="lyrics">-->
-<!--      <p>{{ currentSong.lyrics }}</p>-->
-<!--    </div>-->
-    <div class="playlist">
-      <div
-          v-for="(song, index) in songs"
-          :key="index"
-          @click="playSong(index)"
-      >
-       <p class="song-name"> {{ song.name }}</p>
-      </div>
+  <template>
+    <div class="audio-player" @click="togglePlay">
+      <div class="progress-bar" :style="{ width: progress + '%' }"></div>
     </div>
-  </div>
+  </template>
 </template>
 
 <script>
-import SAT from '@/static/songs/Ania-Sound-of-Silence.mp3'
+import { ref, onMounted, onUnmounted } from "vue";
+import img from  "@/static/audio.png";
 export default {
-  name:"AudioPlayer",
-  data() {
-    return {
-      songs: [
-        { name: 'Sound of the Silence', src: SAT}
-        // Add more songs as needed
-      ],
-      currentSong: {},
-      currentTime: 0
+  data(){
+    return{
+      bg:img,
     }
   },
-  mounted() {
-    // Set the first song as the current song on initial load
-    this.currentSong = this.songs[0];
+  setup() {
+    const audio = ref(null);
+    const playing = ref(false);
+    const progress = ref(0);
+
+    const togglePlay = () => {
+      if (playing.value) {
+        audio.value.pause();
+      } else {
+        audio.value.play();
+      }
+      playing.value = !playing.value;
+    };
+
+    const updateProgress = () => {
+      progress.value = (audio.value.currentTime / audio.value.duration) * 100;
+    };
+
+    onMounted(() => {
+      audio.value = new Audio("your-audio-file.mp3");
+      audio.value.addEventListener("timeupdate", updateProgress);
+    });
+
+    onUnmounted(() => {
+      audio.value.removeEventListener("timeupdate", updateProgress);
+      audio.value = null;
+    });
+
+    return { togglePlay, progress };
   },
-  methods: {
-    playSong(index) {
-      this.currentSong = this.songs[index];
-      this.$refs.audioRef.load();
-      this.$refs.audioRef.play();
-    },
-    updateCurrentTime() {
-      this.currentTime = this.$refs.audioRef.currentTime;
-      // Here you could handle the display of time-stamped lyrics based on this.currentTime
-    }
-  }
-}
+};
 </script>
+Lastly, apply your style to your audio player in style part:
 
+css
+Copy code
 <style scoped>
-
-.player{
-  grid-row: 3/4;
-  grid-column: 2/3;
+.audio-player {
+  width: 300px; /* Customize your length */
+  height: 50px;
+  /*background: url("@/static/audio.png") no-repeat center; !* Customize your background image *!*/
   background-color: #f0f0f0;
+  background-size: cover;
+  cursor: pointer;
 }
-.player-title{
-  text-align: center;
-}
-.song-name{
-  text-align: center;
+
+.progress-bar {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 }
 </style>
