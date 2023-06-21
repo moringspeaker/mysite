@@ -8,26 +8,26 @@
          <div class=" img-wrapper" >
            <img class="blog-image" :src="getImageUrl(blog.cover)" :alt="placeholder">
          </div>
-          <!-- <div class="blog-content" v-show="lang==='EN'">
+          <div class="blog-content" v-show="lang==='EN'">
             <h4>{{ blog.ENtitle }}</h4>
             <p class="summary">{{ blog.ENsummary }}</p>
-            <p class="authorname"> Created by:<span class="badge bg-secondary authortag">{{ blog.ENauthor }}</span></p>
-            <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
           </div>
           <div class="blog-content" v-show="lang!=='EN'">
             <h4>{{ blog.CHtitle }}</h4>
             <p class="summary">{{ blog.CHsummary }}</p>
-            <p class="authorname"> Created by:<span class="badge bg-secondary authortag" >{{ blog.CHauthor }}</span></p>
-            <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
-          </div> -->
-          <!-- <div class="blog-meta" v-show="lang==='EN'">
+          </div> 
+           <div class="blog-meta" v-show="lang==='EN'">
+             <p class="authorname"> Created by:<span class="badge bg-secondary authortag">{{ blog.ENauthor }}</span></p>
+             <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">Read...</button>
           </div>
           <div class="blog-meta" v-show="lang!=='EN'">
+            <p class="authorname"> Created by:<span class="badge bg-secondary authortag" >{{ blog.CHauthor }}</span></p>
+              <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">打开...</button>
-          </div> -->
+          </div> 
         </div>
       </div>
     </div>
@@ -109,7 +109,7 @@ export default {
 .latest-release .blog-item .blog-box{
   height: 100%;
   width: 100%;
-  display: grid;
+  display: inline-grid;
   grid-template-columns: 40% 40% 20%;
   overflow: hidden;
   grid-auto-rows: 1; 
@@ -118,14 +118,13 @@ export default {
 }
 .img-wrapper{
   grid-column: 1;
-  height: 100%; /* adjust as necessary */
+  height: 96%; /* adjust as necessary */
   border-radius: 5%;
   overflow: hidden;
   justify-items: stretch;
   align-items: stretch;
   box-sizing: border-box; 
   padding: 5px;
-  margin-bottom: 1%;
   position: relative;
 }
 
@@ -147,29 +146,42 @@ export default {
 }
 .blog-content {
   grid-column: 2;
+  margin-left: 4%;
   color: whitesmoke;
 }
 
+h4{
+  color:#f0f0f0;
+}
 
-/* 
-.block-display {
-  display: block;
-  margin-top: 0.5rem;
-} */
+.summary{
+  font-size: 1rem;
+  color: aquamarine;
+}
 
 .latest-release .blog-item .blog-meta {
   grid-column: 3;
-  display: flex;
-  align-items: center;
-  grid-row: 3/4;
+  align-items: flex-end;
+  justify-items: center;
+  margin-left: 4%;
 }
-
-
+.authorname{
+  color: #f0f0f0;
+}
+.authorname .authortag{
+  color: skyblue;
+}
+.tags{
+  color: #f0f0f0;
+}
+.tags .category{
+  color: burlywood;
+}
 .btn-primary.jump-button {
-  background-color: lightblue; /* Change background color to light blue */
-  padding: 15px 25px; /* Increase button size by adding padding */
-  font-size: 18px; /* Increase font size */
-  border: none; /* Remove default border */
+  background-color: lightblue; 
+  padding: 15px 25px;
+  font-size: 18px; 
+  border: none; 
 }
 
 
