@@ -21,12 +21,12 @@
            <div class="blog-meta" v-show="lang==='EN'">
              <p class="authorname"> Created by:<span class="badge bg-secondary authortag">{{ blog.ENauthor }}</span></p>
              <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
-            <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">Read...</button>
+            <button class="btn btn-outline-primary jump-button btn-sm" @click="goToBlogPage(blog.id)">Read...</button>
           </div>
           <div class="blog-meta" v-show="lang!=='EN'">
             <p class="authorname"> Created by:<span class="badge bg-secondary authortag" >{{ blog.CHauthor }}</span></p>
               <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
-            <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">打开...</button>
+            <button class="btn btn-outline-primary jump-button btn-sm" @click="goToBlogPage(blog.id)">打开...</button>
           </div> 
         </div>
       </div>
@@ -150,28 +150,32 @@ export default {
   color: whitesmoke;
   display:flex ;
   flex-direction: column;
-  align-items: start;
-  justify-items: stretch;
+  justify-content: space-between;
+  align-items:  start;
 }
 
 h4{
   color:#f0f0f0;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
 }
 
 .summary{
   font-size: 1rem;
   color: aquamarine;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 #timestamp{
   margin-bottom: 1px;
+  margin-top: 1rem;  
 }
 
 .latest-release .blog-item .blog-meta {
   grid-column: 3;
-  align-items: flex-end;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-content: end;
   margin-left: 4%;
 }
 .authorname{

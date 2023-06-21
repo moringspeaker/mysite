@@ -2,20 +2,20 @@
 
 :root {
     /* default font-size for medium screens */
-    font-size: 16px;
+    font-size: 1vw;
 }
 
 /* For small screens */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     :root {
-        font-size: 14px;
+        font-size: 0.5vw;
     }
 }
 
 /* For large screens */
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1920px) {
     :root {
-        font-size: 20px;
+        font-size: 2vw;
     }
 }
 
