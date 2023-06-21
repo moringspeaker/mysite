@@ -1,5 +1,25 @@
 /* global.css */
 
+:root {
+    /* default font-size for medium screens */
+    font-size: 16px;
+}
+
+/* For small screens */
+@media screen and (max-width: 600px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+/* For large screens */
+@media screen and (min-width: 1200px) {
+    :root {
+        font-size: 20px;
+    }
+}
+
+
 @font-face {
     font-family: 'OribitronM';
     src: url('~@/assets/fonts/Orbitron-Medium.ttf') format('truetype');

@@ -148,15 +148,24 @@ export default {
   grid-column: 2;
   margin-left: 4%;
   color: whitesmoke;
+  display:flex ;
+  flex-direction: column;
+  align-items: start;
+  justify-items: stretch;
 }
 
 h4{
   color:#f0f0f0;
+  margin-bottom: 2rem;
 }
 
 .summary{
   font-size: 1rem;
   color: aquamarine;
+  margin-bottom: 2rem;
+}
+#timestamp{
+  margin-bottom: 1px;
 }
 
 .latest-release .blog-item .blog-meta {
