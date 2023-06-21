@@ -8,7 +8,7 @@
          <div class=" img-wrapper" >
            <img class="blog-image" :src="getImageUrl(blog.cover)" :alt="placeholder">
          </div>
-          <div class="blog-content" v-show="lang==='EN'">
+          <!-- <div class="blog-content" v-show="lang==='EN'">
             <h4>{{ blog.ENtitle }}</h4>
             <p class="summary">{{ blog.ENsummary }}</p>
             <p class="authorname"> Created by:<span class="badge bg-secondary authortag">{{ blog.ENauthor }}</span></p>
@@ -21,13 +21,13 @@
             <p class="authorname"> Created by:<span class="badge bg-secondary authortag" >{{ blog.CHauthor }}</span></p>
             <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
             <p class="created-date block-display" id="timestamp">{{ blog.created_date }}</p>
-          </div>
-          <div class="blog-meta" v-show="lang==='EN'">
+          </div> -->
+          <!-- <div class="blog-meta" v-show="lang==='EN'">
             <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">Read...</button>
           </div>
           <div class="blog-meta" v-show="lang!=='EN'">
             <button class="btn btn-primary jump-button" @click="goToBlogPage(blog.id)">打开...</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -84,113 +84,92 @@ export default {
   float: left;
   /*height:100vh;*/
   border: 2px solid #222222;
-
 }
-.blog-container{
-  height:100%;
-  width: 100%;
-  display:grid;
-  grid-template-rows: repeat(5,19%);
-}
-.blog-item{
-  height: 10rem;
-}
-.blog-box {
-  flex-shrink: 0;
-  overflow: hidden;
-  display: flex;
-  gap: 20px; /* adjust this as per your need */
-
-}
-
-.img-wrapper{
-  height: 19rem;
-  width: 24rem;
-  margin: 0.8rem;
-  border-radius: 5%;
-  position: relative;
-}
-
-.img-wrapper:after{
-  content: "";
-  position: absolute;
-  right: -10px;        /* position line to the right of img-wrapper */
-  top: 0;             /* align to top of img-wrapper */
-  height: 100%;       /* match height of img-wrapper */
-  width: 1px;         /* line width */
-  background: whitesmoke;  /* line color */
-}
-
-.blog-image {
-  width: 100%; /* adjust this as per your need */
-  height: 100%;
-  object-fit: cover;
-  border-radius: 5%;
-}
-
-.blog-content {
-  flex-grow: 1;
-  color: whitesmoke;
-}
-
 .latest-release h2 {
   margin-bottom: 1rem;
   color: #f0f0f0;
 }
 
+.blog-container{
+  height:100%;
+  width: 100%;
+  display:grid;
+  grid-template-rows: repeat(5, 19%);
+  grid-template-columns: repeat(3, 33%);
+  grid-auto-flow: column dense;
+}
+
 .latest-release .blog-item {
   margin: 1%;
-  /*border: 2px solid #222222;*/
+  border: 2px solid #222222;
   background-color: #2C3333;
-  height: 25vh;
+  grid-column: 1/4;
 }
 
-.latest-release .blog-item h4 {
-  font-size: 1.5rem;
-  margin-top: 5%;
+.latest-release .blog-item .blog-box{
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40% 40% 20%;
+  overflow: hidden;
+  grid-auto-rows: 1; 
+  box-sizing: border-box;
+  padding: 5px;
+}
+.img-wrapper{
+  grid-column: 1;
+  height: 100%; /* adjust as necessary */
+  border-radius: 5%;
+  overflow: hidden;
+  justify-items: stretch;
+  align-items: stretch;
+  box-sizing: border-box; 
+  padding: 5px;
+  margin-bottom: 1%;
+  position: relative;
 }
 
-.latest-release .blog-item .summary {
-  margin-top: 10%;
-  color: #88ffcc;
+
+.blog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5%;
+}
+.img-wrapper:after{
+  content: "";
+  position: absolute;
+  right: 0; /* changed this from -20px to 0 */       
+  top: 0;            
+  height: 100%;      
+  width: 2px;         
+  background: whitesmoke;    
+}
+.blog-content {
+  grid-column: 2;
+  color: whitesmoke;
 }
 
-.latest-release .blog-item .authorname {
-  margin-bottom: 5px;
-  color: #f0f0f0;
-  margin-top: 1rem;
-}
 
-.authortag {
-  margin: 10px;
-  color: #FF8400;
-  margin-top: 0.8rem;
-}
-
-
-.latest-release .blog-item .category {
-  margin: 10px;
-  color: #00FFF5;
-  margin-top: 0.8rem;
-}
-
+/* 
 .block-display {
   display: block;
   margin-top: 0.5rem;
-}
+} */
 
 .latest-release .blog-item .blog-meta {
+  grid-column: 3;
   display: flex;
   align-items: center;
+  grid-row: 3/4;
 }
+
 
 .btn-primary.jump-button {
   background-color: lightblue; /* Change background color to light blue */
   padding: 15px 25px; /* Increase button size by adding padding */
   font-size: 18px; /* Increase font size */
   border: none; /* Remove default border */
-  margin-right: 10px;
-  margin-top: 14rem;
 }
 
 

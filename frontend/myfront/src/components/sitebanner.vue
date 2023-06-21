@@ -1,5 +1,11 @@
 <template>
-  <div :style="{ backgroundImage: 'url(' + imageUrl + ')' }" class="banner">
+  <div :style="{
+      backgroundImage: 'url(' + imageUrl + ')',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center center'
+    }" 
+   class="banner">
       <div class="flex-column justify-content-center" style="position: relative" >
           <div id="title" class= "text-center mt-auto">
             <h1 class="site-title ">
@@ -55,24 +61,33 @@ a{
 
 .banner {
   /* Set the height of the banner */
-  height: 250px;
+  height: 27vh;
   /* Set the width of the banner */
   width: 100%;
 
   /* Center and scale the background image */
-  background-position: center;
+ background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
+  overflow: hidden;
+  box-sizing: border-box;
 }
-.banner:before {
+/* .banner:before {
   content: "";
   position: absolute;
   top: 0;
   right: 0;
-  bottom: 80%;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* Black mask with 50% opacity */
+  background-color: rgba(0, 0, 0, 0.5); 
+} */
+.banner:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0; /* This ensures the mask's height matches the banner's height */
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #title{
