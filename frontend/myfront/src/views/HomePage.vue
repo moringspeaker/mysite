@@ -167,7 +167,7 @@ export default {
 
 .content-wrapper{
   height: 80%;
-  width: 105vh;
+  width: 95%;
   justify-content: flex-start;
   display: grid;
   grid-template-columns: 75% 25%;

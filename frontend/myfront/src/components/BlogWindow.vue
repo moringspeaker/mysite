@@ -112,7 +112,6 @@ export default {
   display: inline-grid;
   grid-template-columns: 40% 40% 20%;
   overflow: hidden;
-  grid-auto-rows: 1; 
   box-sizing: border-box;
   padding: 5px;
 }

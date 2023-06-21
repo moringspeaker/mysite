@@ -65,7 +65,6 @@ main {
 
 #inner-content-wrapper{
   height: 180vh;
-  width: 110vh;
   border: 1px solid #ccc;
   padding: 10px;
   margin: auto;

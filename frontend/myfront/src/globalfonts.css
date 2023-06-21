@@ -4,6 +4,9 @@
     /* default font-size for medium screens */
     font-size: 1vw;
 }
+#inner-content-wrapper{
+    width: 80vw;
+}
 
 /* For small screens */
 @media screen and (max-width: 1000px) {
@@ -22,6 +25,9 @@
 @media screen and (min-width: 3440px) and (min-height: 1000px){
     :root {
         font-size: 0.5vw;
+    }
+    #inner-content-wrapper{
+        width: 45vw;
     }
 }
 

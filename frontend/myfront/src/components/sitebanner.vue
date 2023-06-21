@@ -61,7 +61,7 @@ a{
 
 .banner {
   /* Set the height of the banner */
-  height: 27vh;
+  height: 25vh;
   /* Set the width of the banner */
   width: 100%;
 
@@ -92,7 +92,7 @@ a{
 
 #title{
   position: relative;
-  top: 4.5rem;
+  top: 8vh;
 }
 
 .site-title {
