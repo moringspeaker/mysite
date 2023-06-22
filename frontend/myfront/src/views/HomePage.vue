@@ -106,12 +106,6 @@ export default {
   },
 
   setup() {
-    // const progressCircle = ref(null);
-    // const progressContent = ref(null);
-    // const onAutoplayTimeLeft = (s, time, progress) => {
-    //   progressCircle.value.style.setProperty('--progress', 1 - progress);
-    //   progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
-    // };
     const onSwiper = (swiper) => {
       console.log(swiper);
     };

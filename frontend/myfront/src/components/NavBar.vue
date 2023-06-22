@@ -25,9 +25,9 @@
         </button>
         <ul v-show="isDropdownOpen" class="dropdown-menu dropdown-menu-lg-start" >
           <li v-for="(language, index) in languages" :key="index">
-            <a class="dropdown-item" href="#" @click="selectLanguage(language)">
+            <button class="dropdown-item" href="" @click="selectLanguage(language)">
               <i class="bi bi-translate"></i> {{ language }}
-            </a>
+            </button>
           </li>
         </ul>
       </div>
@@ -35,8 +35,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: 'Nav-bar',
   data(){

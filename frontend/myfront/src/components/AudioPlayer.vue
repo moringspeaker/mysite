@@ -1,15 +1,15 @@
 <template>
-  <template>
     <div class="audio-player" @click="togglePlay">
-      <div class="progress-bar" :style="{ width: progress + '%' }"></div>
+      <p>Hello World!</p>
+      <div class="progress-bar" :style="{ width: progress + '%' }">hi</div>
     </div>
-  </template>
 </template>
 
 <script>
 import { ref, onMounted, onUnmounted } from "vue";
 import img from  "@/static/audio.png";
 export default {
+  names:"AudioPlayer",
   data(){
     return{
       bg:img,
@@ -55,8 +55,7 @@ Copy code
 .audio-player {
   width: 300px; /* Customize your length */
   height: 50px;
-  /*background: url("@/static/audio.png") no-repeat center; !* Customize your background image *!*/
-  background-color: #f0f0f0;
+  background: url("@/static/audio.png") no-repeat center; /* Customize your background image */
   background-size: cover;
   cursor: pointer;
 }

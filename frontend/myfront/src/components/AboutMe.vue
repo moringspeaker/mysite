@@ -47,7 +47,7 @@ export default {
   align-items: center;
   justify-content: center;
   background-color: #222222;
-
+  border-radius: 10px;
   margin-top: 3vh;
   grid-row: 1 / 3;
   grid-column: 2 / 3;
@@ -62,7 +62,7 @@ export default {
   justify-content: center;  /* This centers the items horizontally */
   align-items: center;
   height: 20%;
-
+  border-radius: 10px;
 }
 .title1{
   width: 100%;
@@ -87,6 +87,10 @@ export default {
   border-top: 2px solid antiquewhite;
   color: #f0f0f0;
   padding: 10px;
+  background: url("@/static/audio.jpg") center; /* Customize your background image */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 .about-me__avatar p{
   font-size: 1.5rem;
