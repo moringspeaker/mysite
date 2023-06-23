@@ -1,7 +1,7 @@
 
 # Create your models here.
 from django.db import models
-from django.utils import timezone
+from django.utils import timezone, dateformat
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
@@ -9,6 +9,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+class Collection(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200, unique=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
 
 class Blog(models.Model):
     id = models.AutoField(primary_key=True)
@@ -25,7 +34,15 @@ class Blog(models.Model):
 
     cover = models.ImageField(upload_to='medias/covers/', default='static/no-img.jpg')
     created_date = models.DateTimeField(default=timezone.now)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, to_field='name')
+
+    collection = models.ForeignKey(Collection, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='blogs')
     def __str__(self):
         # return f"Blog: {self.ENtitle or self.CHtitle} - Category: {self.category.name}"
         return self.ENtitle or self.CHtitle
+    def formatted_created_date(self):
+        return self.created_date.strftime("%Y-%m-%d %H:%M:%S")
+    def save(self, *args, **kwargs):
+        if self.collection:
+            self.category = self.collection.category
+        super().save(*args, **kwargs)

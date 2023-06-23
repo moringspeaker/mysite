@@ -5,6 +5,8 @@ from .serializers import SwiperSerializer
 from blogs.serializers import BlogsSerializer
 def homepage(request):
     blogs = Blog.objects.all()[:5]  # Get the latest 5 blogs
+    for blog in blogs:
+        blog.created_time = blog.formatted_created_date()
     swipers = Swiper.objects.all()  # Get all swipers
 
     blog_serializer = BlogsSerializer(blogs, many=True)
