@@ -36,34 +36,67 @@ class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogsSerializer  # replace this with your actual serializer
 
-    def list(self, request, *args, **kwargs):
-        categories = Category.objects.all()
+    # def list(self, request):
+    #     data = {}
+    #
+    #     categories = Category.objects.all()
+    #     data_category={}
+    #     for category in categories:
+    #         categroy_blogs = []
+    #         data_category[category.name] = defaultdict(list)  # Create a default dictionary with category name
+    #         blogs = Blog.objects.filter(category=category)
+    #         for blog in blogs:
+    #           if blog.collection is None:   # If the blog does not belong to any collection, add it to the category
+    #             categroy_blogs.append(blog)
+    #         data_category[category.name] = categroy_blogs
+    #
+    #     collections = Collection.objects.all()
+    #     data_collection={}
+    #     for collection in collections:
+    #         collection_blog = []
+    #         data_collection[collection.name] = defaultdict(list)
+    #         blogs = Blog.objects.filter(collection=collection)
+    #         for blog in blogs:
+    #             collection_blog.append(blog)
+    #         data_collection[collection.name] = collection_blog
+    #
+    #     data['category'] = data_category
+    #     data['collection'] = data_collection
+    #
+    #     return Response(data)
+
+    def list(self, request):
         data = {}
 
+        categories = Category.objects.all()
+        data_category = {}
         for category in categories:
-            collection_groups = defaultdict(list)
+            category_blogs = []
+            data_category[category.name] = defaultdict(list)
             blogs = Blog.objects.filter(category=category)
-
             for blog in blogs:
                 if blog.collection is None:
-                    default_collection, _ = Collection.objects.get_or_create(
-                        name="default",
-                        category=category
-                    )
-                    collection_groups[default_collection.name].append({
-                        'blog': blog,
-                        'created_date_format': blog.formatted_created_date()
-                    })
-                else:
-                    collection_groups[blog.collection.name].append({
-                        'blog': blog,
-                        'created_date_format': blog.formatted_created_date()
-                    })
+                    # use the serializer to transform the model instance to Python native datatypes.
+                    serialized_blog = BlogsSerializer(blog).data
+                    category_blogs.append(serialized_blog)
+            data_category[category.name] = category_blogs
 
-            data[category.name] = collection_groups
+        collections = Collection.objects.all()
+        data_collection = {}
+
+        for collection in collections:
+            collection_blogs = []
+            data_collection[collection.name] = defaultdict(list)
+            blogs = Blog.objects.filter(collection=collection)
+            for blog in blogs:
+                # use the serializer to transform the model instance to Python native datatypes.
+                serialized_blog = BlogsSerializer(blog).data
+                collection_blogs.append(serialized_blog)
+            data_collection[collection.name] = collection_blogs
+            data_collection[collection.name].append(collection.category.name)   #
+
+        data['category'] = data_category
+        data['collection'] = data_collection
 
         return Response(data)
-
-
-
 
