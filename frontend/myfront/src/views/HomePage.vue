@@ -60,6 +60,8 @@ import AudioPlayer from "@/components/AudioPlayer.vue";
 import NoImg from "@/static/no-image.png"
 // import swipe from "bootstrap/js/src/util/swipe";
 
+import { formatDatetime } from '@/utils/datetimeUtils';
+
 export default {
   components: {
     BlogWindow,
@@ -90,7 +92,8 @@ export default {
     getlang: function (data){
       this.lang = data;
       // this.sentlang = data;
-    }
+    },
+
   },
 
   async mounted() {
@@ -99,7 +102,11 @@ export default {
       this.homedata = response.data;
       this.swipers = this.homedata.swipers; // Make sure to use lowercase 'swipers'
       this.blogs = this.homedata.blogs;
-      console.log("blog_view"+this.blogs)
+      this.blogs.forEach(blog => {
+        blog.created_date = formatDatetime(blog.created_date,"YYYY-MM-DD");
+        console.log(blog.created_date);
+      });
+
     } catch (error) {
       console.error(error);
     }
@@ -127,7 +134,7 @@ export default {
 <style>
 .my-swiper {
   width: 60%;
-  height: 20%;
+  height:40vh;
 }
 
 .swiper-slide {
@@ -160,7 +167,7 @@ export default {
 }
 
 .content-wrapper{
-  height: 80%;
+  height: 140vh;
   width: 95%;
   justify-content: flex-start;
   display: grid;

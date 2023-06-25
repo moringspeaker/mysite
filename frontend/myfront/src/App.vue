@@ -58,13 +58,14 @@ main {
   height: 100%;
 }
 
-.container-padding {
+#content {
+
   padding: 20px;
 
 }
 
 #inner-content-wrapper{
-  height: 180vh;
+
   border: 1px solid #ccc;
   padding: 10px;
   margin: auto;

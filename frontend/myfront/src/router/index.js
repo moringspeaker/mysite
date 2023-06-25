@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
-import AboutMe from "@/views/AboutMe.vue";
+import AboutMe from "@/views/MyInfo.vue";
 import Blogs from "@/views/Blogs.vue";
 import Gallery from "@/views/Gallery.vue";
 import Publications from "@/views/Publications.vue";
@@ -16,8 +16,8 @@ const routes = [
         props: route => ({ lang: route.query.lang })
     },
     {
-        path: "/aboutme",
-        name: "aboutme",
+        path: "/myinfo",
+        name: "myinfo",
         component: AboutMe,
         props: route => ({ lang: route.query.lang })
     },

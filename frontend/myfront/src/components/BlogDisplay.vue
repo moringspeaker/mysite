@@ -1,65 +1,156 @@
  <template>
+     <el-menu
+         default-active="2"
+         class="side-bar"
+         :collapse="isCollapse"
+         @open="handleOpen"
+         @close="handleClose"
+         text-color="#fff"
+         active-text-color="#ffd04b"
+         background-color="#222222"
+     >
+       <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub">
+         <template #title>{{ category }}</template>
+         <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index" class="blog-group" >
+           <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
+         </el-menu-item-group>
+         <div class="title-container">
+           <p class="collection-title">Blog Collections</p> <!-- Add your custom title here -->
+         </div>
+          <el-menu-item-group v-for="(items, collect) in collection_list" :key="collect" :index="collect" class="collection-group" v-show="collect===category">
+              <el-sub-menu v-for="(blogs, key) in items" :key="key" :index="key" class="collection-sub"
+                           text-color="#fff"
+                           active-text-color="#ffd04b"
+              >
+                <template #title>{{ key }}</template>
+                <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index" class="blogs-collection">
+                  {{ blog.ENtitle }}
+                </el-menu-item>
+              </el-sub-menu>
+          </el-menu-item-group>
+       </el-sub-menu>
+     </el-menu>
     <div class="main-container">
-
+      <div v-html="markdownContent"></div>
     </div>
   </template>
 
   <script>
     import placeholder from '@/static/placeholder.png';
+    import instance from "@/utils/request";
+    import source from '@/assets/markdown-sample.md'
+    import md from '@/markdownParser';
 
-    import bg1 from '@/static/blog-box/p1.png';
-    import bg2 from '@/static/blog-box/p2.png';
-    import bg3 from '@/static/blog-box/p3.png';
-    import bg4 from '@/static/blog-box/p4.png';
-    import bg5 from '@/static/blog-box/p5.png';
     export default {
-      name:"BlogCategory",
-
+      name:"BlogDisplay",
+      components:{
+        // Markdown,
+      },
       props: {
         lang: {
           type: String,
           default: "EN",
         },
-        blogdata: {
-          type: Object, // Update the type to Array
-          default: function () {
-            return {}; // Set the default value to an empty array
-          },
-        },
       },
-
       data() {
         return {
           placeholder: placeholder,
-          // Remove the 'blogs' data property since it's now received as a prop
-          bgs:[bg1,bg2,bg3,bg4,bg5],
-          blogList:[],
+          blogdata: {},
+          collection_list: {},
+          markdownContent: '',
         };
       },
-
-      async mounted() {
-        this.blogList = Object.values(this.blogdata);
-      },
-
       methods: {
         getImageUrl(imageSrc) {
           // Modify the image source URL here
           console.log(`http://127.0.0.1:8000${imageSrc}`);
           return `http://127.0.0.1:8000${imageSrc}`;
         },
-        getBackgroundStyle(blog, index) {
-          return {
-            backgroundImage: `url(${this.bgs[index]})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-          }
-        },
       },
+      created() {
+        this.markdownContent = md.render(source);
+      },
+      async mounted() {
+        try {
+          const response = await instance.get('http://localhost:8000/blogs/api/blogs/');
+          this.blogdata = response.data;
+          let collections = {};
+          collections = this.blogdata.collection;
+          delete  collections.default;
+          console.log(this.collection_list);
+
+          let newDictionary = {};   //Collate the obtained collection data
+
+          for (let collection in collections) {
+            let category = collections[collection].pop();
+            if (!newDictionary[category]) {
+              newDictionary[category] = {};
+            }
+            newDictionary[category][collection] = collections[collection];
+          }
+          console.log(newDictionary);
+          this.collection_list = newDictionary;
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
     }
   </script>
 
   <style scoped >
+  .side-bar {
 
+    min-height: 40%;
+    margin-top: 3vh;
+    width: 25%;
+    border-radius: 10px;
+    background-color: #222222;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .main-container {
+    background-color: #222222;
+    color: #f0f0f0;
+    width: 75%;
+    padding: 15px;
+    margin-top: 3vh;
+    float: left;
+    border: 2px solid #222222;
+    border-radius: 10px;
+  }
+  .category-sub{
+    background-color: #222222;
+  }
+  .blog-group{
+    background-color: #222222;
+  }
+  .blogs-collection .el-menu-item {
+    font-size: 20px; /* set your desired font size here */
+  }
+.title-container{
+  height:1.5rem;
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 1rem;
+  justify-items: center;
+}
+.collection-title{
+  font-size: 1rem;
+  text-align: center;
+  background-color: #222222;
+  color: wheat;
+}
+.collection-group{
+  background-color: #222222;
+}
+.collection-sub{
+  background-color: #222222;
+}
+.blogs-collection{
+  background-color: #222222;
+  height:1px;
+}
   </style>
 

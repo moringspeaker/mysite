@@ -4,26 +4,29 @@
       <h2 class="position1">Now you are at:</h2>
       <h2 class="position2">/Blog Page</h2>
     </div>
-      <div class="img-wrapper" v-show="lang!=='EN'" :style="getbgimg">
-        <h2 class="position1">你的位置是:</h2>
-        <h2 class="position2">/我的博客</h2>
-      </div>
-    <div class="content-wrapper">
-      <blog-category :lang="lang" :blogs="blogs"/>
+    <div class="img-wrapper" v-show="lang!=='EN'" :style="getbgimg">
+      <h2 class="position1">你的位置是:</h2>
+      <h2 class="position2">/我的博客</h2>
     </div>
+    <div class="content-wrapper">
+      <blog-display :lang="lang"  />
+    </div>
+
   </div>
+  <blog-footer/>
 </template>
 
 <script>
 import bgimg from '@/static/blog-background.png'
 
-import BlogCategory from "@/components/BlogCategory.vue";
+import BlogDisplay from "@/components/BlogDisplay.vue";
+import BlogFooter from "@/components/BlogFooter.vue";
 import instance from "@/utils/request";
-
 export default {
   name: "MyBlogs",
   components: {
-    BlogCategory,
+    BlogDisplay,
+    BlogFooter,
   },
   props:['getlang'],
   data(){
@@ -31,6 +34,7 @@ export default {
       bgimg:bgimg,
       lang: 'EN',
       sentlang: '',
+      blogdata: {},
     }
   },
   watch:{
@@ -51,11 +55,9 @@ export default {
   },
   async mounted() {
     try {
-      const response = await instance.get('http://localhost:8000/api/homepage/');
-      this.homedata = response.data;
-      this.swipers = this.homedata.swipers; // Make sure to use lowercase 'swipers'
-      this.blogs = this.homedata.blogs;
-      console.log("blog_view"+this.blogs)
+      const response = await instance.get('http://localhost:8000/blogs/api/blogs/');
+      this.blogdata = response.data;
+      console.log(this.blogdata);
     } catch (error) {
       console.error(error);
     }
@@ -65,21 +67,20 @@ export default {
 
 <style scoped>
 .banner-wrapper{
-  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: auto;
 }
 .img-wrapper{
-  height: 25%;
+  height: 35vh;
   width: 100%;
   border-radius: 10px;
   justify-items: center;
   align-items: center;
 }
 .position1{
-  margin-top: 15% ;
+  margin-top: 15vh ;
   color: #f0f0f0;
   text-align: center;
   font-family: FiraSan;
@@ -93,13 +94,11 @@ export default {
   font-size: 2.5rem;
 }
 .content-wrapper{
-  height: 80%;
-  width: 95%;
+  width: 99%;
   justify-content: flex-start;
-  display: grid;
-  grid-template-columns: 75% 25%;
-  grid-column-gap: 10px;
-  grid-auto-rows: minmax(8rem, auto);
-  grid-auto-flow: column dense;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: start;
 }
 </style>

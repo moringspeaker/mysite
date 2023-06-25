@@ -9,28 +9,28 @@
         aria-expanded="ture"
         aria-label="Toggle Navigation"
     >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li v-for="item in navitems" :key="item.id" class="nav-item" >
-            <router-link :to="item.link" class="nav-link" >{{ item.name }}</router-link>
-          </li>
-        </ul>
-      </div>
-      <div class="dropdown ">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" @click="toggleDropdown">
-          <i class="bi bi-translate"></i> {{ selectedLanguage }}
-        </button>
-        <ul v-show="isDropdownOpen" class="dropdown-menu dropdown-menu-lg-start" >
-          <li v-for="(language, index) in languages" :key="index">
-            <button class="dropdown-item" href="" @click="selectLanguage(language)">
-              <i class="bi bi-translate"></i> {{ language }}
-            </button>
-          </li>
-        </ul>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li v-for="item in navitems" :key="item.id" class="nav-item" >
+          <router-link :to="item.link" class="nav-link" >{{ item.name }}</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="dropdown ">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" @click="toggleDropdown">
+        <i class="bi bi-translate"></i> {{ selectedLanguage }}
+      </button>
+      <ul v-show="isDropdownOpen" class="dropdown-menu dropdown-menu-lg-start" >
+        <li v-for="(language, index) in languages" :key="index">
+          <button class="dropdown-item" href="" @click="selectLanguage(language)">
+            <i class="bi bi-translate"></i> {{ language }}
+          </button>
+        </li>
+      </ul>
+    </div>
   </nav>
 </template>
 
@@ -47,8 +47,8 @@ export default {
         { id: 2, name: "Blogs", link:"/blogs" },
         { id: 3, name: "Publications" , link:"/publications"},
         { id: 4, name: "My Resource", link:"/resources"},
-        { id: 5, name: "About Me", link:"aboutme"},
-        {id: 6, name: "Gallery", link:"gallery"}
+        { id: 5, name: "MyInfo", link:"/myinfo"},
+        {id: 6, name: "Gallery", link:"/gallery"}
       ],
     };
   },
@@ -69,16 +69,16 @@ export default {
         { id: 2, name: "Blogs", link:"/blogs" },
         { id: 3, name: "Publications" , link:"/publications"},
         { id: 4, name: "My Resource", link:"/resources"},
-        { id: 5, name: "About Me", link:"aboutme"},
-        {id: 6, name: "Gallery", link:"gallery"}
+        { id: 5, name: "MyInfo", link:"/myinfo"},
+        {id: 6, name: "Gallery", link:"/gallery"}
       ];
       let   navitems2=[
         { id: 1, name: "主页", link:"/" },
         { id: 2, name: "博客", link:"/blogs" },
         { id: 3, name: "出版" , link:"/publications"},
         { id: 4, name: "我的资源", link:"/resources"},
-        { id: 5, name: "关于我", link:"aboutme"},
-        {id: 6, name: "我的瞬间", link:"gallery"}
+        { id: 5, name: "关于我", link:"/myinfo"},
+        {id: 6, name: "我的瞬间", link:"/gallery"}
       ];
       if(this.selectedLanguage === "EN"){
         this.navitems = navitems1
