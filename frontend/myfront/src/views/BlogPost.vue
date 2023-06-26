@@ -9,7 +9,7 @@
       <h2 class="position2">/我的博客</h2>
     </div>
     <div class="content-wrapper">
-      <blog-display :lang="lang"  />
+
     </div>
 
   </div>
@@ -19,13 +19,12 @@
 <script>
 import bgimg from '@/static/blog-background.png'
 
-import BlogDisplay from "@/components/BlogDisplay.vue";
 import BlogFooter from "@/components/BlogFooter.vue";
 import instance from "@/utils/request";
 export default {
   name: "MyBlogs",
   components: {
-    BlogDisplay,
+
     BlogFooter,
   },
   props:['getlang','id'],
@@ -59,7 +58,10 @@ export default {
   },
   async mounted() {
     try {
-     const response = await instance.get(`blogs/${this.blogid}`);
+      const blogId = this.$route.params.id;
+      let backendUrl = process.env.VUE_APP_BACKEND_URL;
+      console.log()
+      const response = await instance.get(`${backendUrl}blogs/api/blogs/${blogId}`);
       this.blogdata = response.data;
       console.log(this.blogdata);
     } catch (error) {

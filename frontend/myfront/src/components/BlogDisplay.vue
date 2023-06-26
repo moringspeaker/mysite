@@ -12,7 +12,9 @@
        <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub">
          <template #title>{{ category }}</template>
          <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index" class="blog-group" >
+            <router-link :to="`/blogs/${blog.id}`">
            <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
+            </router-link>
          </el-menu-item-group>
          <div class="title-container">
            <p class="collection-title">Blog Collections</p> <!-- Add your custom title here -->
