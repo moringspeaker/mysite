@@ -9,10 +9,10 @@
          active-text-color="#ffd04b"
          background-color="#222222"
      >
-       <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub">
+       <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub" v-show="lang==='EN'">
          <template #title>{{ category }}</template>
          <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index" class="blog-group" >
-            <router-link :to="`/blogs/${blog.id}`">
+            <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
            <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
             </router-link>
          </el-menu-item-group>
@@ -26,25 +26,46 @@
               >
                 <template #title>{{ key }}</template>
                 <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index" class="blogs-collection">
-                  {{ blog.ENtitle }}
+                  <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
+                    <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
+                  </router-link>
                 </el-menu-item>
               </el-sub-menu>
           </el-menu-item-group>
        </el-sub-menu>
+       <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub" v-show="lang!=='EN'">
+         <template #title>{{ category }}</template>
+         <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index" class="blog-group" >
+           <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
+             <el-menu-item>{{ blog.CHtitle }}</el-menu-item>
+           </router-link>
+         </el-menu-item-group>
+         <div class="title-container">
+           <p class="collection-title">Blog Collections</p> <!-- Add your custom title here -->
+         </div>
+         <el-menu-item-group v-for="(items, collect) in collection_list" :key="collect" :index="collect" class="collection-group" v-show="collect===category">
+           <el-sub-menu v-for="(blogs, key) in items" :key="key" :index="key" class="collection-sub"
+                        text-color="#fff"
+                        active-text-color="#ffd04b"
+           >
+             <template #title>{{ key }}</template>
+             <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index" class="blogs-collection">
+               <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
+                 <el-menu-item>{{ blog.CHtitle }}</el-menu-item>
+               </router-link>
+             </el-menu-item>
+           </el-sub-menu>
+         </el-menu-item-group>
+       </el-sub-menu>
      </el-menu>
-    <div class="main-container">
-      <div v-html="markdownContent"></div>
-    </div>
   </template>
 
   <script>
     import placeholder from '@/static/placeholder.png';
     import instance from "@/utils/request";
-    import source from '@/assets/markdown-sample.md'
-    import md from '@/markdownParser';
 
     export default {
-      name:"BlogDisplay",
+      name:"BlogNavbar",
       components:{
         // Markdown,
       },
@@ -68,9 +89,6 @@
           console.log(`http://127.0.0.1:8000${imageSrc}`);
           return `http://127.0.0.1:8000${imageSrc}`;
         },
-      },
-      created() {
-        this.markdownContent = md.render(source);
       },
       async mounted() {
         try {
@@ -111,16 +129,6 @@
     font-size: 1rem;
     display: flex;
     flex-direction: column;
-  }
-  .main-container {
-    background-color: #222222;
-    color: #f0f0f0;
-    width: 75%;
-    padding: 15px;
-    margin-top: 3vh;
-    float: left;
-    border: 2px solid #222222;
-    border-radius: 10px;
   }
   .category-sub{
     background-color: #222222;

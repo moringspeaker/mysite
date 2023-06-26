@@ -9,7 +9,10 @@
       <h2 class="position2">/我的博客</h2>
     </div>
     <div class="content-wrapper">
-
+      <blog-navbar :lang="lang"  />
+      <div class="blog-container">
+        <div v-html="markdownContent"/>
+      </div>
     </div>
 
   </div>
@@ -18,13 +21,14 @@
 
 <script>
 import bgimg from '@/static/blog-background.png'
-
+import md from '@/markdownParser';
 import BlogFooter from "@/components/BlogFooter.vue";
 import instance from "@/utils/request";
+import BlogNavbar from "@/components/BlogNavbar.vue";
 export default {
   name: "MyBlogs",
   components: {
-
+    BlogNavbar,
     BlogFooter,
   },
   props:['getlang','id'],
@@ -32,15 +36,14 @@ export default {
     return{
       bgimg:bgimg,
       lang: 'EN',
-      sentlang: '',
-      blogdata: {},
       blogid: '',
+      blogcontent: '',
+      markdownContent: '',
     }
   },
   watch:{
     getlang: function (data){
       this.lang = data;
-      // this.sentlang = data;
     },
     id: function (data){
       this.blogid = data;
@@ -56,14 +59,30 @@ export default {
       }
     },
   },
+  methods:{
+    getblog(blogUrl) {
+  // Modify the image source URL here
+  console.log(`http://127.0.0.1:8000${blogUrl}`);
+  return `http://127.0.0.1:8000${blogUrl}`;
+      },
+  },
   async mounted() {
     try {
       const blogId = this.$route.params.id;
       let backendUrl = process.env.VUE_APP_BACKEND_URL;
       console.log()
       const response = await instance.get(`${backendUrl}blogs/api/blogs/${blogId}`);
-      this.blogdata = response.data;
-      console.log(this.blogdata);
+      this.blogcontent = response.data;
+      if (this.lang==='EN'){
+        let blogmdUrl = this.getblog(this.blogcontent.ENcontent);
+        console.log(blogmdUrl);
+        const blogmd  = await instance.get(blogmdUrl);
+        console.log(blogmd.data);
+        this.markdownContent = md.render(blogmd.data);
+      }
+      else {
+        this.markdownContent = md.render(this.blogcontent.CHcontent);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -106,5 +125,15 @@ export default {
   flex-direction: row;
   justify-items: center;
   align-items: start;
+}
+.blog-container {
+  background-color: #222222;
+  color: #f0f0f0;
+  width: 75%;
+  padding: 15px;
+  margin-top: 3vh;
+  float: left;
+  border: 2px solid #222222;
+  border-radius: 10px;
 }
 </style>
