@@ -71,6 +71,7 @@ export default {
 <style scoped>
 a {
   text-decoration: none;
+  color: #88ffcc;
 }
 .footer {
   padding: 20px;

@@ -1,11 +1,12 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 
 import AboutMe from "@/views/MyInfo.vue";
-import Blogs from "@/views/Blogs.vue";
+import MyBlogs from "@/views/MyBlogs.vue";
 import Gallery from "@/views/Gallery.vue";
 import Publications from "@/views/Publications.vue";
 import Resources from "@/views/Resources.vue";
 import HomePage from "@/views/HomePage.vue";
+import BlogPost from "@/views/BlogPost.vue";
 
 
 const routes = [
@@ -23,9 +24,15 @@ const routes = [
     },
     {
         path: "/blogs",
-        name: "blogs",
-        component: Blogs,
+        name: "Myblogs",
+        component: MyBlogs,
         props: route => ({ lang: route.query.lang })
+    },
+    {
+        path: "/blogs/:id",
+        name: "blogpost",
+        component: BlogPost,
+        props: route => ({ id: route.params.id, lang: route.query.lang })
     },
     {
         path: "/gallery",

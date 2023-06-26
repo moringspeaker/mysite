@@ -35,13 +35,13 @@ export default {
       lang: 'EN',
       sentlang: '',
       blogdata: {},
+      BlogId: '',
     }
   },
   watch:{
     getlang: function (data){
       this.lang = data;
-      // this.sentlang = data;
-    }
+    },
   },
   computed:{
     getbgimg(){

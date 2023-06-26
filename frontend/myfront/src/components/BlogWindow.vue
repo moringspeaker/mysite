@@ -111,8 +111,8 @@ export default {
   height:100%;
   width: 100%;
   display:grid;
-  grid-template-rows: repeat(5, 19%);
-  grid-template-columns: repeat(3, 33%);
+  grid-template-rows: repeat(5, 18%);
+  grid-template-columns: repeat(3, 32.5%);
   grid-auto-flow: column dense;
   grid-gap: 10px;
 }
