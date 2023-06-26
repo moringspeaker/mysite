@@ -9,7 +9,10 @@
       <h2 class="position2">/我的博客</h2>
     </div>
     <div class="content-wrapper">
-      <blog-display :lang="lang"  />
+      <blog-navbar :lang="lang"  />
+      <div class="blog-container">
+        <div v-html="welcome"/>
+      </div>
     </div>
 
   </div>
@@ -18,14 +21,17 @@
 
 <script>
 import bgimg from '@/static/blog-background.png'
+import source from '@/assets/markdown-sample.md'
 
-import BlogDisplay from "@/components/BlogDisplay.vue";
+import BlogNavbar from "@/components/BlogNavbar.vue";
 import BlogFooter from "@/components/BlogFooter.vue";
 import instance from "@/utils/request";
+import md from "@/markdownParser";
+
 export default {
   name: "MyBlogs",
   components: {
-    BlogDisplay,
+    BlogNavbar,
     BlogFooter,
   },
   props:['getlang'],
@@ -36,6 +42,7 @@ export default {
       sentlang: '',
       blogdata: {},
       BlogId: '',
+      welcome: '',
     }
   },
   watch:{
@@ -61,6 +68,9 @@ export default {
     } catch (error) {
       console.error(error);
     }
+  },
+  created() {
+    this.welcome = md.render(source);
   },
 }
 </script>
@@ -100,5 +110,15 @@ export default {
   flex-direction: row;
   justify-items: center;
   align-items: start;
+}
+.blog-container {
+  background-color: #222222;
+  color: #f0f0f0;
+  width: 75%;
+  padding: 15px;
+  margin-top: 3vh;
+  float: left;
+  border: 2px solid #222222;
+  border-radius: 10px;
 }
 </style>
