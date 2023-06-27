@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="fc600cf9-3991-40bd-831c-c46c6852684e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2_5eel7Ke.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2_5eel7Ke.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3_hgcjhLV.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3_hgcjhLV.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/mysite/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/mysite/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/components/BlogNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/components/BlogNavbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/components/BlogWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/components/BlogWindow.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/components/sitebanner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/components/sitebanner.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/views/BlogPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/views/BlogPost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/views/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/views/HomePage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/views/MyBlogs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/views/MyBlogs.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,15 +26,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Personal Website/mysite&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="mysite" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="mysite" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -49,7 +82,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1687901315760</updated>
-      <workItem from="1687901319295" duration="447000" />
+      <workItem from="1687901319295" duration="732000" />
+      <workItem from="1687902121273" duration="288000" />
     </task>
     <servers />
   </component>
