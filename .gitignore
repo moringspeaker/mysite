@@ -35,3 +35,4 @@ backend/mysite/.env
 
 *.env
 .idea
+**/__pycache__/
