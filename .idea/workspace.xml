@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fc600cf9-3991-40bd-831c-c46c6852684e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/mysite/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2_5eel7Ke.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/2_5eel7Ke.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3_hgcjhLV.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/media/medias/blogs/3_hgcjhLV.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/components/BlogNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/components/BlogNavbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/components/BlogWindow.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/components/BlogWindow.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/components/sitebanner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/components/sitebanner.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/views/BlogPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/views/BlogPost.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/views/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/views/HomePage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/myfront/src/views/MyBlogs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/myfront/src/views/MyBlogs.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Ro0pVskeysIveyxaVJLf2HOLHL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc600cf9-3991-40bd-831c-c46c6852684e" name="Changes" comment="" />
+      <created>1687901315760</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687901315760</updated>
+      <workItem from="1687901319295" duration="447000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
