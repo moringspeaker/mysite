@@ -34,5 +34,4 @@ backend/mysite/db.sqlite3
 backend/mysite/.env
 
 *.env
-
 .idea
