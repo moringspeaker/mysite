@@ -62,7 +62,7 @@ export default {
   },
   async mounted() {
     try {
-      const response = await instance.get('http://localhost:8000/blogs/api/blogs/');
+      const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}blogs/api/blogs/`);
       this.blogdata = response.data;
       console.log(this.blogdata);
     } catch (error) {

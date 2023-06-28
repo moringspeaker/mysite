@@ -8,54 +8,52 @@
          text-color="#fff"
          active-text-color="#ffd04b"
          background-color="#222222"
+
      >
        <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub" v-show="lang==='EN'">
-         <template #title>{{ category }}</template>
-         <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index" class="blog-group" >
+         <template #title>{{ category }}</template>    <!-- this is the categories's names-->
+         <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index.toString()" class="blog-group" >
             <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
-           <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
+              <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
             </router-link>
          </el-menu-item-group>
-         <div class="title-container">
-           <p class="collection-title">Blog Collections</p> <!-- Add your custom title here -->
-         </div>
-          <el-menu-item-group v-for="(items, collect) in collection_list" :key="collect" :index="collect" class="collection-group" v-show="collect===category">
-              <el-sub-menu v-for="(blogs, key) in items" :key="key" :index="key" class="collection-sub"
-                           text-color="#fff"
-                           active-text-color="#ffd04b"
-              >
-                <template #title>{{ key }}</template>
-                <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index" class="blogs-collection">
-                  <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
-                    <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
-                  </router-link>
-                </el-menu-item>
-              </el-sub-menu>
-          </el-menu-item-group>
        </el-sub-menu>
+       <div class="title-container" v-show="lang==='EN'">
+         <p class="collection-title">Blog Collections</p>
+       </div>
+       <el-sub-menu v-for="(items, collect) in collection_list" :key="collect" :index="collect" class="collection-group" v-show="lang==='EN'">
+         <template #title>{{ collect }}</template>
+         <el-sub-menu v-for="(blogs, key) in items" :key="key" :index="key" class="collection-sub"  text-color="#fff" active-text-color="#ffd04b" >
+           <template #title>{{ key }}</template>
+           <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index.toString()" class="blogs-collection">
+                          <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
+                            <el-menu-item class="my-custom-menu-item">{{ blog.ENtitle }}</el-menu-item>
+                          </router-link>
+           </el-menu-item>
+         </el-sub-menu>
+       </el-sub-menu>
+
        <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub" v-show="lang!=='EN'">
-         <template #title>{{ category }}</template>
-         <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index" class="blog-group" >
+         <template #title>{{ category }}</template>    <!-- this is the categories's names-->
+         <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index.toString()" class="blog-group" >
            <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
              <el-menu-item>{{ blog.CHtitle }}</el-menu-item>
            </router-link>
          </el-menu-item-group>
-         <div class="title-container">
-           <p class="collection-title">Blog Collections</p> <!-- Add your custom title here -->
-         </div>
-         <el-menu-item-group v-for="(items, collect) in collection_list" :key="collect" :index="collect" class="collection-group" v-show="collect===category">
-           <el-sub-menu v-for="(blogs, key) in items" :key="key" :index="key" class="collection-sub"
-                        text-color="#fff"
-                        active-text-color="#ffd04b"
-           >
-             <template #title>{{ key }}</template>
-             <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index" class="blogs-collection">
-               <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
-                 <el-menu-item>{{ blog.CHtitle }}</el-menu-item>
-               </router-link>
-             </el-menu-item>
-           </el-sub-menu>
-         </el-menu-item-group>
+       </el-sub-menu>
+       <div class="title-container" v-show="lang!=='EN'">
+         <p class="collection-title">Blog Collections</p>
+       </div>
+       <el-sub-menu v-for="(items, collect) in collection_list" :key="collect" :index="collect" class="collection-group" v-show="lang!=='EN'">
+         <template #title>{{ collect }}</template>
+         <el-sub-menu v-for="(blogs, key) in items" :key="key" :index="key" class="collection-sub"  text-color="#fff" active-text-color="#ffd04b" >
+           <template #title>{{ key }}</template>
+           <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index.toString()" class="blogs-collection">
+             <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
+               <el-menu-item class="my-custom-menu-item">{{ blog.CHtitle }}</el-menu-item>
+             </router-link>
+           </el-menu-item>
+         </el-sub-menu>
        </el-sub-menu>
      </el-menu>
   </template>
@@ -86,19 +84,16 @@
       methods: {
         getImageUrl(imageSrc) {
           // Modify the image source URL here
-          console.log(`http://127.0.0.1:8000${imageSrc}`);
-          return `http://127.0.0.1:8000${imageSrc}`;
+          return `${process.env.VUE_APP_BACKEND_URL}${imageSrc}`;
         },
       },
       async mounted() {
         try {
-          const response = await instance.get('http://localhost:8000/blogs/api/blogs/');
+          const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}blogs/api/blogs/`);
           this.blogdata = response.data;
           let collections = {};
           collections = this.blogdata.collection;
           delete  collections.default;
-          console.log(this.collection_list);
-
           let newDictionary = {};   //Collate the obtained collection data
 
           for (let collection in collections) {
@@ -108,7 +103,6 @@
             }
             newDictionary[category][collection] = collections[collection];
           }
-          console.log(newDictionary);
           this.collection_list = newDictionary;
         } catch (error) {
           console.error(error);
@@ -120,13 +114,11 @@
 
   <style scoped >
   .side-bar {
-
     min-height: 40%;
     margin-top: 3vh;
     width: 25%;
     border-radius: 10px;
     background-color: #222222;
-    font-size: 1rem;
     display: flex;
     flex-direction: column;
   }
@@ -162,5 +154,9 @@
   background-color: #222222;
   height:1px;
 }
+  .my-custom-menu-item {
+    font-size: 0.8rem !important;
+    padding: 5px !important;
+  }
   </style>
 

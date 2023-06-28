@@ -62,9 +62,8 @@ export default {
   methods:{
     getblog(blogUrl) {
   // Modify the image source URL here
-  console.log(`http://127.0.0.1:8000${blogUrl}`);
-  return `http://127.0.0.1:8000${blogUrl}`;
-      },
+      return `${process.env.VUE_APP_BACKEND_URL}${blogUrl}`;
+    },
   },
   async mounted() {
     try {
@@ -77,7 +76,6 @@ export default {
         let blogmdUrl = this.getblog(this.blogcontent.ENcontent);
         console.log(blogmdUrl);
         const blogmd  = await instance.get(blogmdUrl);
-        console.log(blogmd.data);
         this.markdownContent = md.render(blogmd.data);
       }
       else {

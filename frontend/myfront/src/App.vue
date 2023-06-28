@@ -9,7 +9,7 @@
       <VantaBirds>
         <div id="content" class="container-padding full-height" >
           <div id="inner-content-wrapper" class="site-content x">
-            <router-view :getlang="getlang"></router-view>
+            <router-view :getlang="getlang" :key="$route.fullPath"></router-view>
           </div>
         </div>
       </VantaBirds>
