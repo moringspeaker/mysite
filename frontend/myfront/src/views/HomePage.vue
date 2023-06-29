@@ -29,7 +29,7 @@
   <div class="content-wrapper">
     <blog-window :lang="lang" :blogs="blogs"/>
     <about-me :lang="lang" />
-    <AudioPlayer/>
+<!--    <AudioPlayer/>-->
   </div>
 
 </template>
@@ -55,7 +55,7 @@ import 'swiper/css/autoplay'
 //import other components
 import BlogWindow from "@/components/BlogWindow.vue";
 import AboutMe from "@/components/AboutMe.vue";
-import AudioPlayer from "@/components/AudioPlayer.vue";
+// import AudioPlayer from "@/components/AudioPlayer.vue";
 
 import NoImg from "@/static/no-image.png"
 // import swipe from "bootstrap/js/src/util/swipe";
@@ -68,7 +68,7 @@ export default {
     Swiper,
     SwiperSlide,
     AboutMe,
-    AudioPlayer,
+    // AudioPlayer,
   },
   props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
   methods: {

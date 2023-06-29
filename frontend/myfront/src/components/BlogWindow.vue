@@ -20,12 +20,12 @@
           </div> 
            <div class="blog-meta" v-show="lang==='EN'">
              <p class="authorname"> Created by:<span class="badge bg-secondary authortag">{{ blog.ENauthor }}</span></p>
-             <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
+             <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category_name }}</span></p>
             <button class="btn btn-outline-light jump-button btn-sm" @click="goToBlogPage(blog.id)">Read...</button>
           </div>
           <div class="blog-meta" v-show="lang!=='EN'">
             <p class="authorname"> Created by:<span class="badge bg-secondary authortag" >{{ blog.CHauthor }}</span></p>
-              <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category }}</span></p>
+              <p class="tags">tags:<span class="badge bg-secondary category"> {{ blog.category_name }}</span></p>
             <button class="btn btn-outline-light jump-button btn-sm" @click="goToBlogPage(blog.id)">打开...</button>
           </div> 
         </div>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router'
+
 import placeholder from '@/static/placeholder.png';
 
 import bg1 from '@/static/blog-box/p1.png';
@@ -46,10 +48,6 @@ export default {
   name: "BlogWindow",
 
   props: {
-    lang: {
-      type: String,
-      default: "EN",
-    },
     blogs: {
       type: Array, // Update the type to Array
       default: function () {
@@ -57,7 +55,20 @@ export default {
       },
     },
   },
+  setup() {
+    const router = useRouter();
 
+    const goToBlogPage = (id) => {
+      router.push(`/blogs/${id}`);
+    };
+
+    return {
+      goToBlogPage,
+    };
+  },
+  mounted() {
+    console.log(this.blogs);
+  },
   data() {
     return {
       placeholder: placeholder,
@@ -65,15 +76,15 @@ export default {
       bgs:[bg1,bg2,bg3,bg4,bg5],
     };
   },
-
-  async mounted() {
-    console.log(this.blogs); // Access and use the 'blogs' prop
+  computed: {
+    // Use Vuex state as a computed property
+    lang() {
+      return this.$store.state.lang;
+    }
   },
-
   methods: {
     getImageUrl(imageSrc) {
       // Modify the image source URL here
-      console.log(`${process.env.VUE_APP_BACKEND_URL}${imageSrc}`);
       return `${process.env.VUE_APP_BACKEND_URL}${imageSrc}`;
 
     },

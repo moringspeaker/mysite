@@ -9,7 +9,7 @@
       <VantaBirds>
         <div id="content" class="container-padding full-height" >
           <div id="inner-content-wrapper" class="site-content x">
-            <router-view :getlang="getlang" :key="$route.fullPath"></router-view>
+            <router-view :getlang="lang" :key="$route.fullPath"></router-view>
           </div>
         </div>
       </VantaBirds>
@@ -28,15 +28,19 @@ export default {
   name: 'App',
   data(){
     return{
-      lang:"EN",
       cn: null,
       getlang:'',     //  if parent component want to emit a var to child components, it should declare the method first
     }
   },
   methods:{
     getLanguage(data){
-      this.lang = data;
-      this.getlang = data; //  and pass the var to the declared method, using the same method to receive it in child components
+      this.$store.commit('setLanguage', data);
+    }
+  },
+  computed: {
+    // Use Vuex state as a computed property
+    lang() {
+      return this.$store.state.lang;
     }
   },
   components: {

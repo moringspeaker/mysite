@@ -67,11 +67,11 @@
       components:{
         // Markdown,
       },
-      props: {
-        lang: {
-          type: String,
-          default: "EN",
-        },
+      computed: {
+        // Use Vuex state as a computed property
+        lang() {
+          return this.$store.state.lang;
+        }
       },
       data() {
         return {
@@ -116,7 +116,7 @@
   .side-bar {
     min-height: 40%;
     margin-top: 3vh;
-    width: 25%;
+    width: 15%;
     border-radius: 10px;
     background-color: #222222;
     display: flex;

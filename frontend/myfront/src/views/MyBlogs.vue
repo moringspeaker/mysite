@@ -1,5 +1,5 @@
 <template>
-  <div class="banner-wrapper">
+  <div class="blogcontent-wrapper">
     <div class="img-wrapper" v-show="lang==='EN'" :style="getbgimg">
       <h2 class="position1">Now you are at:</h2>
       <h2 class="position2">/Blog Page</h2>
@@ -38,17 +38,11 @@ export default {
   data(){
     return{
       bgimg:bgimg,
-      lang: 'EN',
       sentlang: '',
       blogdata: {},
       BlogId: '',
       welcome: '',
     }
-  },
-  watch:{
-    getlang: function (data){
-      this.lang = data;
-    },
   },
   computed:{
     getbgimg(){
@@ -59,6 +53,9 @@ export default {
         backgroundPosition: 'center'
       }
     },
+    lang() {
+      return this.$store.state.lang;
+    }
   },
   async mounted() {
     try {
@@ -76,7 +73,7 @@ export default {
 </script>
 
 <style scoped>
-.banner-wrapper{
+.blogcontent-wrapper{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -114,7 +111,7 @@ export default {
 .blog-container {
   background-color: #222222;
   color: #f0f0f0;
-  width: 75%;
+  width: 85%;
   padding: 15px;
   margin-top: 3vh;
   float: left;

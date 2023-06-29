@@ -13,6 +13,12 @@
       <div class="blog-container">
         <div v-html="markdownContent"/>
       </div>
+      <markdown-toc :markdown="rawmarkdown" @clickItem="handleItemClick"
+                    @headers-computed="headers = $event"
+                    :scrollTo="scrollTo"
+                    :style="{ postion:'fixed', top: tocx + 'px', left: tocy + 'px' }"
+      >
+      </markdown-toc>
     </div>
 
   </div>
@@ -25,28 +31,25 @@ import md from '@/markdownParser';
 import BlogFooter from "@/components/BlogFooter.vue";
 import instance from "@/utils/request";
 import BlogNavbar from "@/components/BlogNavbar.vue";
+import MarkdownToc from "@/components/markdownTOC.vue";
 export default {
   name: "MyBlogs",
   components: {
     BlogNavbar,
     BlogFooter,
+    MarkdownToc,
   },
   props:['getlang','id'],
   data(){
     return{
       bgimg:bgimg,
-      lang: 'EN',
       blogid: '',
       blogcontent: '',
       markdownContent: '',
-    }
-  },
-  watch:{
-    getlang: function (data){
-      this.lang = data;
-    },
-    id: function (data){
-      this.blogid = data;
+      rawmarkdown: '',
+      currentHeaderIndex: '',
+      tocx: '',
+      tocy:'',
     }
   },
   computed:{
@@ -58,11 +61,29 @@ export default {
         backgroundPosition: 'center'
       }
     },
+    lang() {
+      return this.$store.state.lang;
+    },
   },
   methods:{
+    scrollToAnchor(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    },
     getblog(blogUrl) {
   // Modify the image source URL here
       return `${process.env.VUE_APP_BACKEND_URL}${blogUrl}`;
+    },
+    handleItemClick(e) {
+      this.currentHeaderIndex = e.index;
+      console.log("id========");
+      console.log(e.item.id);
+      this.scrollToAnchor(e.item.id);
     },
   },
   async mounted() {
@@ -76,6 +97,7 @@ export default {
         let blogmdUrl = this.getblog(this.blogcontent.ENcontent);
         console.log(blogmdUrl);
         const blogmd  = await instance.get(blogmdUrl);
+        this.rawmarkdown = blogmd.data;
         this.markdownContent = md.render(blogmd.data);
       }
       else {
@@ -84,7 +106,17 @@ export default {
     } catch (error) {
       console.error(error);
     }
+    //get the blog-container's position
+    const blogContainer = document.querySelector('.blog-container');
+    const blogContainerRect = blogContainer.getBoundingClientRect();
+    const contentWrapper = document.querySelector('.content-wrapper');
+    const contentWrapperRect = contentWrapper.getBoundingClientRect();
+
+    this.tocx = blogContainerRect.top - contentWrapperRect.top
+    this.tocy = blogContainerRect.right + 20;
+
   },
+
 }
 </script>
 
@@ -127,7 +159,7 @@ export default {
 .blog-container {
   background-color: #222222;
   color: #f0f0f0;
-  width: 75%;
+  width: 65%;
   padding: 15px;
   margin-top: 3vh;
   float: left;
