@@ -1,19 +1,62 @@
 from .models import Blog
 from .models import Category
 from .models import Collection
-from rest_framework import generics
+from rest_framework import generics,status
 from collections import defaultdict
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Blog
 from .serializers import BlogsSerializer
-
+from rest_framework.parsers import MultiPartParser, FormParser
 class BlogDetailView(APIView):
     def get(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
         serializer = BlogsSerializer(blog)
         return Response(serializer.data)
+class BlogCreateView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        category_name = request.data.get('category')
+        category, created = Category.objects.get_or_create(
+                name=category_name,
+            )
+        # Get or create the Collection only if provided
+        collection_name = request.data.get('collection')
+        print(collection_name)
+        collection = None
+
+        if collection_name:
+            collection, created = Collection.objects.get_or_create(
+                name=category_name,
+                category=category,
+            )
+            # If the Collection already exists but its category is different from the current category, set the blog's category to the collection's category.
+            if collection.category != category:
+                category = collection.category
+
+        blog_data = {
+            'ENtitle': request.data.get('ENtitle'),
+            # 'ENcontent': request.data.get('ENcontent'),
+            'ENauthor': request.data.get('ENauthor'),
+            'ENsummary': request.data.get('ENsummary'),
+            'CHtitle': request.data.get('CHtitle'),
+            # 'CHcontent': request.data.get('CHcontent'),
+            'CHauthor': request.data.get('CHauthor'),
+            'CHsummary': request.data.get('CHsummary'),
+            'cover': request.data.get('cover'),
+            'collection': collection.id,
+            'category': category.id,
+        }
+
+        serializer = BlogsSerializer(data=blog_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # return Response("ok")
 
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()

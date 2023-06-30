@@ -93,15 +93,16 @@ export default {
       console.log()
       const response = await instance.get(`${backendUrl}blogs/api/blogs/${blogId}`);
       this.blogcontent = response.data;
+
       if (this.lang==='EN'){
-        let blogmdUrl = this.getblog(this.blogcontent.ENcontent);
-        console.log(blogmdUrl);
-        const blogmd  = await instance.get(blogmdUrl);
-        this.rawmarkdown = blogmd.data;
-        this.markdownContent = md.render(blogmd.data);
+        const blogmd = this.blogcontent.ENcontent;
+        this.rawmarkdown = blogmd;
+        this.markdownContent = md.render(blogmd);
       }
       else {
-        this.markdownContent = md.render(this.blogcontent.CHcontent);
+        const blogmd = this.blogcontent.CHcontent;
+        this.rawmarkdown = blogmd;
+        this.markdownContent = md.render(blogmd);
       }
     } catch (error) {
       console.error(error);

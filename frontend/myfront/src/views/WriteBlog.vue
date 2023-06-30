@@ -166,13 +166,13 @@ export default {
         // Add other properties as needed
         // ...
         date: this.date,
-        category: this.selectedCategory,
-        collection: this.selectedCollection
+        category: this.selectedCategory.toString(),
+        collection: this.selectedCollection.toString(),
       };
       console.log(blogData);
       try {
         // Submit the blog
-        const response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/blog/write`, blogData, {
+        const response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}blogs/api/blogwrite`, blogData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

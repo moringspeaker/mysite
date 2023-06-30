@@ -23,12 +23,12 @@ class Blog(models.Model):
     id = models.AutoField(primary_key=True)
 
     ENtitle = models.CharField(max_length=200,blank=True)
-    ENcontent = models.FileField(upload_to='medias/blogs/',blank=True)
+    ENcontent = models.TextField(blank=True)
     ENauthor = models.CharField(max_length=200,default='ChenYu')
     ENsummary = models.CharField(max_length=200,default='The weak is the recognition of love, just as giving up is the antidote of noise')
 
     CHtitle = models.CharField(max_length=200,blank=True)
-    CHcontent = models.FileField(upload_to='medias/blogs/',blank=True)
+    CHcontent = models.TextField(blank=True)
     CHauthor = models.CharField(max_length=200,default='尘语')
     CHsummary = models.CharField(max_length=200,default='惟柔弱是爱愿的识别，正如放弃是喧嚣的解剂')
 
