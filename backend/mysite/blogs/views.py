@@ -55,3 +55,18 @@ class BlogListView(generics.ListAPIView):
 
         return Response(data)
 
+class CategoryListView(APIView):
+    def get(self, request):
+        categories = Category.objects.all()
+        data = []
+        for category in categories:
+            data.append(category.name)
+        return Response(data)
+
+class CollectionListView(APIView):
+    def get(self, request):
+        collections = Collection.objects.all()
+        data = []
+        for collection in collections:
+            data.append(collection.name)
+        return Response(data)

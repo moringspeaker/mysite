@@ -87,7 +87,7 @@ export default {
   border-top: 2px solid antiquewhite;
   color: #f0f0f0;
   padding: 10px;
-  background: url("@/static/audio.jpg") center; /* Customize your background image */
+  background: url("@/static/avatar.jpg") center; /* Customize your background image */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

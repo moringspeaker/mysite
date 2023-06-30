@@ -55,10 +55,9 @@ import 'swiper/css/autoplay'
 //import other components
 import BlogWindow from "@/components/BlogWindow.vue";
 import AboutMe from "@/components/AboutMe.vue";
-// import AudioPlayer from "@/components/AudioPlayer.vue";
 
 import NoImg from "@/static/no-image.png"
-// import swipe from "bootstrap/js/src/util/swipe";
+
 
 import { formatDatetime } from '@/utils/datetimeUtils';
 
@@ -122,9 +121,6 @@ export default {
     return {
       onSwiper,
       onSlideChange,
-      // onAutoplayTimeLeft,
-      // progressCircle,
-      // progressContent,
       modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
     };
   },

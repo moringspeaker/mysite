@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "user",
     'corsheaders',
     'rest_framework',
+    'knox', #  pip install django-rest-knox
 ]
 
 MIDDLEWARE = [

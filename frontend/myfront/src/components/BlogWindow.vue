@@ -61,7 +61,6 @@ export default {
     const goToBlogPage = (id) => {
       router.push(`/blogs/${id}`);
     };
-
     return {
       goToBlogPage,
     };
