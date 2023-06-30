@@ -23,7 +23,6 @@ const routes = [
                 component: HomePage,
                 props: route => ({ lang: route.query.lang })
             },
-            // ... all other routes that should be inside DefaultLayout
             {
                 path: "/myinfo",
                 name: "myinfo",

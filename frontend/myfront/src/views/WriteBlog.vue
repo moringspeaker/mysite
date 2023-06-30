@@ -18,7 +18,8 @@
         <textarea class="content-input" v-model="blog.ENcontent" placeholder="Write your blog in markdown" v-if="lang==='EN'"></textarea>
         <textarea class="content-input" v-model="blog.CHcontent" placeholder="这是中文的博客编写页面" v-if="lang!=='EN'"></textarea>
         <button class="compile btn btn-danger btn-md" @click="switchlang()" >更换语言（当前：{{lang}}）</button>
-        <button class="compile btn btn-dark btn-md" @click="compile()">Compile</button>
+        <button class="compile btn btn-primary btn-md" @click="compile()">Compile</button>
+        <button class="compile btn btn-dark btn-md" @click="backhomepage">BackHome</button>
       </div>
       <div class="right" >
         <div  class="preview" v-html="markdown"/>
@@ -71,6 +72,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import md from '@/markdownParser';
 import DatePicker from "@/components/DatePicker.vue";
+import { useRouter } from 'vue-router'
 export default {
   data(){
     return{
@@ -105,10 +107,11 @@ export default {
         return;
       blog.value.cover = files[0];
     }
-
+    const router = useRouter();
     return {
       blog,
       onFileChange,
+      router
     }
   },
   methods: {
@@ -136,6 +139,10 @@ export default {
     },
     compile() {
       this.markdown = md.render(this.blog.ENcontent);
+    },
+    backhomepage() {
+
+      this.router.push(`/blogs/`);
     },
     switchlang(){
       if (this.lang==='EN'){
