@@ -26,7 +26,6 @@
       <li class="footer-link">
         <img :src="paypalicon" alt="PayPal" @click="togglePaypalQR" />
         <span>Buy the author a coffee</span>
-
       </li>
     </ul>
   </div>

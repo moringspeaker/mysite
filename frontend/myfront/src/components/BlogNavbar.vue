@@ -49,7 +49,7 @@
          <el-sub-menu v-for="(blogs, key) in items" :key="key" :index="key" class="collection-sub"  text-color="#fff" active-text-color="#ffd04b" >
            <template #title>{{ key }}</template>
            <el-menu-item v-for="(blog, index) in blogs" :key="index" :index="index.toString()" class="blogs-collection">
-             <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
+             <router-link :to="`/blogs/${blog.id}`" :key="$route.fullPath" style="text-decoration: none;">
                <el-menu-item class="my-custom-menu-item">{{ blog.CHtitle }}</el-menu-item>
              </router-link>
            </el-menu-item>

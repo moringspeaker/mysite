@@ -72,14 +72,7 @@ a{
   overflow: hidden;
   box-sizing: border-box;
 }
-/* .banner:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5); 
-} */
+
 .banner:before {
   content: "";
   position: fixed;
@@ -88,6 +81,7 @@ a{
   bottom: 0; /* This ensures the mask's height matches the banner's height */
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }
 
 #title{

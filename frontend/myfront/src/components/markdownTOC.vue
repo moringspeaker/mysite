@@ -27,8 +27,6 @@ export default {
   },
   props: {
     markdown: null,
-    tocx:null,
-    tocy:null
   },
   watch:{
     markdown(){
@@ -59,11 +57,9 @@ export default {
 
 <style scoped>
 .sider{
-  position: sticky;
-
   padding: 15px;
   /*float: left;*/
-  width:20%;
+  width:20rem;
   background-color: #fff;
   border-radius: 10px;
   margin-top: 3vh;

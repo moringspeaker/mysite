@@ -48,7 +48,6 @@ export default {
   justify-content: center;
   background-color: #222222;
   border-radius: 10px;
-  margin-top: 3vh;
   grid-row: 1 / 3;
   grid-column: 2 / 3;
 }

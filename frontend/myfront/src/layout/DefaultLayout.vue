@@ -1,17 +1,15 @@
 <template>
-  <div ia="app">
+  <div >
     <header>
       <site-banner :lang="lang"/>
       <nav-bar @SelectLan="getLanguage"/>
     </header>
 
     <main>
-      <VantaBirds>
-        <div id="content" class="container-padding full-height" >
+      <VantaBirds class="background">
           <div id="inner-content-wrapper" class="site-content x">
-            <router-view :getlang="lang" :key="$route.fullPath"></router-view>
+            <router-view :getlang="lang" :key="$route.fullPath"/>
           </div>
-        </div>
       </VantaBirds>
     </main>
   </div>
@@ -57,23 +55,27 @@ export default {
 main {
   flex-grow: 1;
 }
-
-.full-height {
-  height: 100%;
-}
-
-#content {
-
-  padding: 20px;
-
+.background{
+  height: 100vh;
+  width: 100%;
+  /*position: fixed;*/
+  overflow: auto;
+  display: grid;
+  grid-template-rows: 1fr;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }
 
 #inner-content-wrapper{
-
+  grid-row: 1/1;
+  margin-top: 20px;
+  position:relative ;
+  height:100%;
+  width: 100rem;
+  overflow: auto;
   border: 1px solid #ccc;
   padding: 10px;
-  margin: auto;
-  display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 15px 15px #cccccc;

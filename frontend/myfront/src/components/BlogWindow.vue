@@ -39,11 +39,12 @@ import { useRouter } from 'vue-router'
 
 import placeholder from '@/static/placeholder.png';
 
-import bg1 from '@/static/blog-box/p1.png';
-import bg2 from '@/static/blog-box/p2.png';
-import bg3 from '@/static/blog-box/p3.png';
-import bg4 from '@/static/blog-box/p4.png';
-import bg5 from '@/static/blog-box/p5.png';
+import bg1 from '@/static/blog-box/1.png';
+import bg2 from '@/static/blog-box/2.png';
+import bg3 from '@/static/blog-box/3.png';
+import bg4 from '@/static/blog-box/4.png';
+import bg5 from '@/static/blog-box/5.png';
+import bg6 from '@/static/blog-box/6.png';
 export default {
   name: "BlogWindow",
 
@@ -72,7 +73,7 @@ export default {
     return {
       placeholder: placeholder,
       // Remove the 'blogs' data property since it's now received as a prop
-      bgs:[bg1,bg2,bg3,bg4,bg5],
+      bgs:[bg1,bg2,bg3,bg4,bg5,bg6],
     };
   },
   computed: {
@@ -103,13 +104,13 @@ export default {
 .latest-release {
   grid-column: 1/2;
   grid-row: 1/5;
-  background-color: #222222;
   padding: 15px;
-  margin-top: 3vh;
   float: left;
-  /*height:100vh;*/
   border: 2px solid #222222;
   border-radius: 10px;
+  display: grid;
+  grid-template-rows: 2% 98%;
+  background: transparent;
 }
 .latest-release h2 {
   margin-bottom: 1rem;
@@ -119,13 +120,15 @@ export default {
 }
 
 .blog-container{
-  height:100%;
-  width: 100%;
+
+  grid-row: 2/3;
+  box-sizing: border-box;
   display:grid;
-  grid-template-rows: repeat(5, 18%);
+  grid-template-rows: repeat(6, 16.3%);
   grid-template-columns: repeat(3, 32.5%);
   grid-auto-flow: column dense;
   grid-gap: 10px;
+  margin-bottom: 0px;
 }
 
 .latest-release .blog-item {
@@ -138,7 +141,7 @@ export default {
 .latest-release .blog-item .blog-box{
   height: 100%;
   width: 100%;
-  display: inline-grid;
+  display: grid;
   grid-template-columns: 40% 40% 20%;
   overflow: hidden;
   box-sizing: border-box;
@@ -166,15 +169,7 @@ export default {
   padding: 10px;
   border: 2px dashed #f0f0f0;
 }
-/*.img-wrapper:after{*/
-/*  content: "";*/
-/*  position: absolute;*/
-/*  right: 0; !* changed this from -20px to 0 *!       */
-/*  top: 0;            */
-/*  height: 100%;      */
-/*  width: 2px;         */
-/*  background: whitesmoke;    */
-/*}*/
+
 .blog-content {
   grid-column: 2;
   margin-left: 4%;
@@ -224,14 +219,6 @@ h4{
 .tags .category{
   color: burlywood;
 }
-.btn-primary.jump-button {
-  background-color: lightblue; 
-  padding: 15px 25px;
-  font-size: 18px; 
-  border: none; 
-}
-
-
 .latest-release .blog-item .blog-meta .jump-button:hover {
   background-color: #e0e0e0;
 }

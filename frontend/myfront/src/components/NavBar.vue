@@ -74,7 +74,7 @@ export default {
         {id: 6, name: "Gallery", link:"/gallery"},
         {id: 7, name: "Login", link:"/login"}
       ];
-      let   navitems2=[
+      let navitems2=[
         { id: 1, name: "主页", link:"/" },
         { id: 2, name: "博客", link:"/blogs" },
         { id: 3, name: "出版" , link:"/publications"},

@@ -36,12 +36,6 @@ const routes = [
                 props: route => ({ lang: route.query.lang })
             },
             {
-                path: "/blogs/:id",
-                name: "blogpost",
-                component: BlogPost,
-                props: route => ({ id: route.params.id, lang: route.query.lang })
-            },
-            {
                 path: "/gallery",
                 name: "gallery",
                 component: Gallery,
@@ -60,6 +54,12 @@ const routes = [
                 props: route => ({ query: route.query.lang })
             },
         ]
+    },
+    {
+        path: "/blogs/:id",
+        name: "blogpost",
+        component: BlogPost,
+        props: route => ({ id: route.params.id, lang: route.query.lang })
     },
     {
         path: '/login',

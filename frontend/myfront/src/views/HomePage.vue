@@ -1,37 +1,38 @@
 <template>
-  <swiper
-      class="my-swiper"
-      :modules="modules"
-      :slides-per-view="1"
-      :space-between="0"
-      :autoplay="{
+  <div class="inner-wrapper">
+    <swiper
+        class="my-swiper"
+        :modules="modules"
+        :slides-per-view="1"
+        :space-between="0"
+        :autoplay="{
       delay: 2500,
       disableOnInteraction: false,
     }"
-      :loop=true
-      navigation
-      :pagination="{ clickable: true }"
-      :scrollbar="{ draggable: true }"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-      @autoplayTimeLeft="onAutoplayTimeLeft"
-  >
-    <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
-      <img :src="getImageUrl(img.src)" :alt="noimg">
-      <div class="subtitle" v-show="lang==='EN'">
-        {{ img.ENtitle }}
+        :loop=true
+        navigation
+        :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }"
+        @swiper="onSwiper"
+        @slideChange="onSlideChange"
+        @autoplayTimeLeft="onAutoplayTimeLeft"
+    >
+      <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
+        <img :src="getImageUrl(img.src)" :alt="noimg">
+        <div class="subtitle" v-show="lang==='EN'">
+          {{ img.ENtitle }}
+        </div>
+        <div class="subtitle" v-show="lang!=='EN'">
+          {{ img.CHtitle }}
+        </div>
+      </swiper-slide>
+    </swiper>
+      <div class="components-container">
+        <blog-window :lang="lang" :blogs="blogs" class="content-wrapper"/>
+        <about-me :lang="lang" class="about-me"/>
       </div>
-      <div class="subtitle" v-show="lang!=='EN'">
-        {{ img.CHtitle }}
-      </div>
-    </swiper-slide>
-  </swiper>
-  <div class="content-wrapper">
-    <blog-window :lang="lang" :blogs="blogs"/>
-    <about-me :lang="lang" />
-<!--    <AudioPlayer/>-->
+      <!--    <AudioPlayer/>-->
   </div>
-
 </template>
 
 
@@ -128,9 +129,20 @@ export default {
 </script>
 
 <style>
+.inner-wrapper{
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 25% 75%;
+  grid-row-gap: 10px;
+  grid-template-columns: 74% 24.5% 1.5%;
+  grid-column-gap: 10px;
+  padding: 20px;
+}
 .my-swiper {
-  width: 60%;
-  height:40vh;
+  grid-row: 1/2;
+  grid-column: 1/3;
+  width: 100%;
 }
 
 .swiper-slide {
@@ -139,12 +151,10 @@ export default {
   background: #2E4F4F;
 
   /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border-radius: 10px;
 }
 
 .swiper-slide img {
@@ -152,25 +162,26 @@ export default {
   width: 100%;
   height: 85%;
   object-fit: cover;
-
+  border-radius: 10px;
 }
 .subtitle {
   /* Styles for the subtitle */
   font-size: 25px;
   color: white;
   font-family: FiraSan;
-
 }
-
-.content-wrapper{
-  height: 140vh;
-  width: 95%;
-  justify-content: flex-start;
+.components-container{
+  grid-column: 1/3;
   display: grid;
   grid-template-columns: 75% 25%;
   grid-column-gap: 10px;
-  grid-auto-rows: minmax(8rem, auto);
-  grid-auto-flow: column dense;
+  justify-content: flex-start;
+}
+.content-wrapper{
+  height:60%;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
 }
 </style>
 
