@@ -43,7 +43,8 @@
     "vue-loader": "^17.2.2",
     "vue-router": "^4.2.2",
     "vue3-markdown-it": "^1.0.10",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

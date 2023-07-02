@@ -5,9 +5,9 @@
          :collapse="isCollapse"
          @open="handleOpen"
          @close="handleClose"
-         text-color="#fff"
+         text-color="#f0f0f0"
          active-text-color="#ffd04b"
-         background-color="#222222"
+         background-color="#333333"
 
      >
        <el-sub-menu v-for="(content, category) in blogdata.category" :key="category" :index="category" class="category-sub" v-show="lang==='EN'">
@@ -118,15 +118,15 @@
     margin-top: 3vh;
     width: 15%;
     border-radius: 10px;
-    background-color: #222222;
+    background-color: #333333;
     display: flex;
     flex-direction: column;
   }
   .category-sub{
-    background-color: #222222;
+    background-color: #333333;
   }
   .blog-group{
-    background-color: #222222;
+    background-color: #333333;
   }
   .blogs-collection .el-menu-item {
     font-size: 20px; /* set your desired font size here */
@@ -141,17 +141,17 @@
 .collection-title{
   font-size: 1rem;
   text-align: center;
-  background-color: #222222;
+  background-color:#333333;
   color: wheat;
 }
 .collection-group{
-  background-color: #222222;
+  background-color: #333333;
 }
 .collection-sub{
-  background-color: #222222;
+  background-color: #333333;
 }
 .blogs-collection{
-  background-color: #222222;
+  background-color:#333333;
   height:1px;
 }
   .my-custom-menu-item {

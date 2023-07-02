@@ -66,9 +66,6 @@ export default {
       goToBlogPage,
     };
   },
-  mounted() {
-    console.log(this.blogs);
-  },
   data() {
     return {
       placeholder: placeholder,

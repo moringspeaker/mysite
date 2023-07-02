@@ -1,19 +1,30 @@
 <template>
   <div class="page-wrapper">
+
     <div class="img-wrapper" v-show="lang==='EN'" :style="getbgimg">
-      <h2 class="position1">Now you are at:</h2>
-      <h2 class="position2">/Blog Page</h2>
+      <transition >
+        <h2 class="position1" v-if="pageLoaded">Now you are at:</h2>
+      </transition>
+      <transition >
+      <h2 class="position2" v-if="pageLoaded">/Blog Page: {{blogcontent.ENtitle}}</h2>
+      </transition>
     </div>
+
     <div class="img-wrapper" v-show="lang!=='EN'" :style="getbgimg">
-      <h2 class="position1">你的位置是:</h2>
-      <h2 class="position2">/我的博客</h2>
+      <transition >
+      <h2 class="position1" v-if="pageLoaded">你的位置是:</h2>
+      </transition>
+      <transition >
+      <h2 class="position2" v-if="pageLoaded">/我的博客: {{blogcontent.CHtitle}}</h2>
+      </transition >
     </div>
+
     <NavBar/>
         <div class="content-wrapper">
           <div class="inner-wrapper">
             <blog-navbar :lang="lang" class="blog-nav" />
-            <div class="blog-container">
-              <div v-html="markdownContent"/>
+            <div class="blog-container" id="blog-render">
+              <div v-html="markdownContent" ref="blogContainer"/>
             </div>
             <markdown-toc :markdown="rawmarkdown" @clickItem="handleItemClick"
                           @headers-computed="headers = $event"
@@ -27,6 +38,8 @@
 </template>
 
 <script>
+import { onMounted, ref, watch } from 'vue'
+import { useStore } from 'vuex'
 import bgimg from '@/static/blog-background.png'
 import md from '@/markdownParser';
 import instance from "@/utils/request";
@@ -39,9 +52,45 @@ export default {
     BlogNavbar,
     MarkdownToc,
     NavBar,
-
   },
   props:['getlang','id'],
+  setup() {
+    const store = useStore()
+    const blogContainer = ref("blogContainer")
+    const currentHeader = ref('') // add this to your data
+
+    // Function to handle scroll event
+    const handleScroll = () => {  //monitor user's scrolling
+      let headers = blogContainer.value.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      let currentHeaderId = '';
+      console.log("headers="+headers);
+      for (let i = 0; i < headers.length; i++) {
+        let bounding = headers[i].getBoundingClientRect();
+
+        if (bounding.top > 0 && bounding.top < window.innerHeight) {
+          currentHeaderId = headers[i].id;
+          break;
+        }
+      }
+      currentHeader.value = currentHeaderId;
+      console.log('Current Header ID:', currentHeaderId); // log the current header ID
+    }
+
+    // add scroll event listener on component mounted
+    onMounted(() => {
+      var blogContainer = document.getElementById("blog-render");
+      blogContainer.addEventListener('scroll', handleScroll);     //add an EventListener to your blog container
+    })
+
+    watch(currentHeader, (newVal) => {
+      store.commit('setCurrentHeaderIndex', newVal)
+    })
+
+    return {
+      blogContainer,
+      currentHeader
+    }
+  },
   data(){
     return{
       bgimg:bgimg,
@@ -52,10 +101,9 @@ export default {
       currentHeaderIndex: '',
       tocx: '',
       tocy:'',
-      hei:null,
+      hei: null,
+      pageLoaded: false,
     }
-  },
-  setup(){
   },
   computed:{
     getbgimg(){
@@ -82,21 +130,18 @@ export default {
     },
     handleItemClick(e) {
       this.currentHeaderIndex = e.index;
-      console.log("id========");
-      console.log(e.item.id);
       this.scrollToAnchor(e.item.id);
     },
   },
 
   async mounted() {
-
+    this.pageLoaded = true;
     try {
       const blogId = this.$route.params.id;
       let backendUrl = process.env.VUE_APP_BACKEND_URL;
-      console.log()
       const response = await instance.get(`${backendUrl}blogs/api/blogs/${blogId}`);
       this.blogcontent = response.data;
-
+      console.log(this.blogcontent)
       if (this.lang==='EN'){
         const blogmd = this.blogcontent.ENcontent;
         this.markdownContent = md.render(blogmd);
@@ -121,6 +166,19 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: scroll;
+  background-image: url("@/static/bg.gif");
+  background-repeat: no-repeat;
+  background-size: cover ;
+  background-attachment: fixed;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 .img-wrapper{
   height: 20vh;
@@ -153,10 +211,10 @@ export default {
 .inner-wrapper{
   width: 100rem;
   display: grid;
-  grid-template-columns: 15% 65% 20%;
+  grid-template-columns: 15% 70% 15%;
   grid-gap: 10px;
-  background-color: #2E4F4F;
   grid-template-rows: 1fr 1fr 1fr;
+  background: transparent;
 }
 .blog-nav{
   grid-column: 1/2;

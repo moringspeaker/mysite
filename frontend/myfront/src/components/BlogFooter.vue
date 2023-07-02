@@ -1,8 +1,8 @@
 <template>
-  <div v-if="showWechatQR">
+  <div v-if="showWechatQR" class="codedisplay">
     <img :src="wechatcode" alt="WeChat QR Code" class="begge" />
   </div>
-  <div v-if="showPaypalQR">
+  <div v-if="showPaypalQR" class="codedisplay">
     <img :src="paypalcode" alt="PayPal QR Code"  class="begge"/>
   </div>
   <div class="footer">
@@ -67,7 +67,14 @@ export default {
 }
 </script>
 
+
+
 <style scoped>
+.codedisplay{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 a {
   text-decoration: none;
   color: #88ffcc;

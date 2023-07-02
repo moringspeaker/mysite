@@ -57,9 +57,13 @@ export default {
     selectLanguage(language) {
       if(language === "EN"){
         this.selectedLanguage = "EN";
+        console.log('ttttttttttt');
+        this.$store.commit('setLanguage', 'EN');
+        console.log(this.$store.lang);
       }
       else{
         this.selectedLanguage = "中文";
+        this.$store.commit('setLanguage', 'CH');
       }
       //send this language selection to whole project
       this.$emit("SelectLan",this.selectedLanguage);

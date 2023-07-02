@@ -19,17 +19,17 @@
     >
       <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
         <img :src="getImageUrl(img.src)" :alt="noimg">
-        <div class="subtitle" v-show="lang==='EN'">
+        <div class="subtitle" v-show="currentLanguage.value==='EN'">
           {{ img.ENtitle }}
         </div>
-        <div class="subtitle" v-show="lang!=='EN'">
+        <div class="subtitle" v-show="currentLanguage.value!=='EN'">
           {{ img.CHtitle }}
         </div>
       </swiper-slide>
     </swiper>
       <div class="components-container">
-        <blog-window :lang="lang" :blogs="blogs" class="content-wrapper"/>
-        <about-me :lang="lang" class="about-me"/>
+        <blog-window :lang="currentLanguage.value" :blogs="blogs" class="content-wrapper"/>
+        <about-me :lang="currentLanguage.value" class="about-me"/>
       </div>
       <!--    <AudioPlayer/>-->
   </div>
@@ -45,6 +45,7 @@ import { Navigation, Pagination, Scrollbar, A11y, Autoplay, } from 'swiper';
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
+import { mapGetters } from 'vuex';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -94,6 +95,11 @@ export default {
       // this.sentlang = data;
     },
 
+  },
+  computed: {
+    ...mapGetters([
+      'currentLanguage',  // add this line
+    ])
   },
 
   async mounted() {

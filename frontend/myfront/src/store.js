@@ -1,16 +1,22 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate'  // <-- Import the plugin
 
 export default createStore({
+    plugins: [createPersistedState()], // <-- Use the plugin
     state: {
         lang: 'EN',
-        user: null, // stores the logged in user data
+        user: null,
         token: localStorage.getItem('token') || '',
-        status: '', // stores authentication status
+        status: '',
         cn: null,
         isLoggedIn: false,
+        currentHeaderIndex: null,
     },
     mutations: {
+        setCurrentHeaderIndex(state, currentHeaderIndex) {
+            state.currentHeaderIndex = currentHeaderIndex;
+        },
         setLanguage(state, lang) {
             state.lang = lang;
         },
@@ -23,13 +29,13 @@ export default createStore({
             state.user = user
         },
         auth_error(state) {
-            state.status = 'error'  // further can have a fake logged in page and allow user to try to write blogs but discard whatever they write
+            state.status = 'error'
         },
         logout(state) {
             state.status = ''
             state.token = ''
         },
-        set_isLoggedIn(state, status) { // <== ADD THIS MUTATION
+        set_isLoggedIn(state, status) {
             state.isLoggedIn = status
         },
     },
@@ -42,8 +48,8 @@ export default createStore({
                 console.log(token);
                 localStorage.setItem('token', token)
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-                commit('auth_success', token) // auth_success mutation updates the state with the token
-                commit('set_isLoggedIn', true) // <== ADD THIS LINE
+                commit('auth_success', token)
+                commit('set_isLoggedIn', true)
             } catch (error) {
                 commit('auth_error')
                 localStorage.removeItem('token')
@@ -60,6 +66,7 @@ export default createStore({
         },
     },
     getters: {
+        currentLanguage: state => state.lang,
         isLoggedIn: state => state.isLoggedIn,
         authStatus: state => state.status,
     }

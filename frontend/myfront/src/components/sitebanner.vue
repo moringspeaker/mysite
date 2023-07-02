@@ -9,8 +9,9 @@
       <div class="flex-column justify-content-center" style="position: relative" >
           <div id="title" class= "text-center mt-auto">
             <h1 class="site-title ">
-              <a id="webtitle" href="App.vue">{{ Title }}
-              </a>
+              <transition>
+                <a id="webtitle" href="App.vue" v-if="pageloaded">{{ Title }}</a>
+              </transition>
             </h1>
             <h4 id="slogan" class="slogan">{{ slogan }}</h4>
           </div>
@@ -34,6 +35,7 @@ export default {
       Title:"Chenyu Gu's Website",
       slogan: "Live life. Learn lessons. Liberate yourself.",
       imageUrl: BannerImage,
+      pageloaded:false,
     }
   },
   watch:{
@@ -50,11 +52,25 @@ export default {
             "大可忽略不计。";
       }
     }
+  },
+  mounted() {
+    this.pageloaded = true;
   }
 }
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+
 a{
   text-decoration: none;
 }
