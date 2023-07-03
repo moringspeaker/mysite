@@ -91,6 +91,7 @@ export default {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
+        gridRow: `${index + 1} / ${index + 2}`
       }
     },
   },
@@ -137,6 +138,7 @@ export default {
 
 .latest-release .blog-item .blog-box{
   height: 100%;
+  min-height: 200px;
   width: 100%;
   display: grid;
   grid-template-columns: 40% 40% 20%;

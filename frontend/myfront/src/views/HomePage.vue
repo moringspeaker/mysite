@@ -139,7 +139,7 @@ export default {
   height: 100vh;
   width: 100%;
   display: grid;
-  grid-template-rows: 25% 75%;
+  grid-template-rows: 30% 70%;
   grid-row-gap: 10px;
   grid-template-columns: 74% 24.5% 1.5%;
   grid-column-gap: 10px;
@@ -148,7 +148,7 @@ export default {
 .my-swiper {
   grid-row: 1/2;
   grid-column: 1/3;
-  width: 100%;
+  width: 60%;
 }
 
 .swiper-slide {

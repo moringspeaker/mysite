@@ -140,7 +140,12 @@ export default {
       }
     },
     compile() {
-      this.markdown = md.render(this.blog.ENcontent);
+     if (this.lang==='EN'){
+       this.markdown = md.render(this.blog.ENcontent);
+     }
+     else {
+       this.markdown = md.render(this.blog.CHcontent);
+     }
     },
     backhomepage() {
 
