@@ -8,7 +8,7 @@
         <h2 calss="title"> Write Your Blog</h2>
         <p>Choose your blog cover</p>
         <input type="file" class="coverimg" @change="onFileChange">
-        <date-picker @onEvent="handleDateChange" />
+
       </div>
       <input class="ch-title-input" v-model="blog.CHtitle" placeholder="中文标题" />
       <textarea class="ch-summary-input" v-model="blog.CHsummary" placeholder="完成中文的总结"></textarea>
@@ -60,6 +60,7 @@
            />
          </el-select>
          <p>==>category</p>
+         <date-picker @onEvent="handleDateChange" />
          <button class="submit-btn btn btn-light btn-lg" @click="submitBlog" >submit</button>
        </div>
       </div>
@@ -73,6 +74,7 @@ import axios from 'axios'
 import md from '@/markdownParser';
 import DatePicker from "@/components/DatePicker.vue";
 import { useRouter } from 'vue-router'
+
 export default {
   data(){
     return{
@@ -179,7 +181,7 @@ export default {
         });
 
         // If successful, reset the blog form data
-        if (response.status === 200) {
+        if (response.status === 201) {
           this.blog.value = {
             ENtitle: '',
             ENcontent: '',
@@ -195,6 +197,7 @@ export default {
           };
 
           alert('Blog submitted successfully')
+          await this.router.push(`/blogs/`);
         }
       } catch (err) {
         console.error(err)
@@ -213,7 +216,7 @@ export default {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: 20% 80% ;
+  grid-template-rows: 15% 85% ;
   background-image: url("@/static/starrynight.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -335,6 +338,7 @@ export default {
   flex-direction: column;
 }
 .preview{
+  overflow: scroll;
   width: 100%;
   height: 90%;
 }
