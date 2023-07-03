@@ -48,7 +48,6 @@ export default {
   justify-content: center;
   background-color: #222222;
   border-radius: 10px;
-  margin-top: 3vh;
   grid-row: 1 / 3;
   grid-column: 2 / 3;
 }
@@ -87,7 +86,7 @@ export default {
   border-top: 2px solid antiquewhite;
   color: #f0f0f0;
   padding: 10px;
-  background: url("@/static/audio.jpg") center; /* Customize your background image */
+  background: url("@/static/avatar.jpg") center; /* Customize your background image */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

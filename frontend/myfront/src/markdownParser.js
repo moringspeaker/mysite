@@ -10,6 +10,9 @@ import anchor from 'markdown-it-anchor';
 import footnote from 'markdown-it-footnote';
 import ins from 'markdown-it-ins';
 import deflist from 'markdown-it-deflist';
+import latexfy from  'markdown-it-latex';
+import mark from 'markdown-it-mark';
+import sup from 'markdown-it-sup';
 
 const md = new MarkdownIt({
     html: true,
@@ -25,9 +28,8 @@ const md = new MarkdownIt({
                 console.error(error);
             }
         }
-
         return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
     }
-}).use(emoji).use(sub).use(abbr).use(anchor).use(footnote).use(ins).use(deflist);
+}).use(emoji).use(sub).use(abbr).use(anchor).use(footnote).use(ins).use(deflist).use(mark).use(latexfy).use(sup);
 
 export default md;

@@ -1,0 +1,39 @@
+frontend/myfront/.DS_Store
+frontend/myfront/node_modules
+frontend/myfront/dist
+
+
+# local env files
+frontend/myfront/.env.local
+frontend/myfront/.env.*.local
+
+# Log files
+frontend/myfront/npm-debug.log*
+frontend/myfront/yarn-debug.log*
+frontend/myfront/yarn-error.log*
+pfrontend/myfront/npm-debug.log*
+
+# Editor directories and files
+frontend/myfront/.idea
+frontend/myfront/.vscode
+frontend/myfront/*.suo
+frontend/myfront/*.ntvs*
+frontend/myfront/*.njsproj
+frontend/myfront/*.sln
+frontend/myfront/*.sw?
+frontend/myfront/assets/QRcode/
+
+
+#backend
+backend/mysite/media
+backend/.idea/
+backend/mysite/*.pyc
+backend/mysite/homepage/*.pyc
+backend/mysite/blogs/*.pyc
+backend/mysite/db.sqlite3
+backend/mysite/.env
+
+*.env
+.idea
+**/__pycache__/
+media/

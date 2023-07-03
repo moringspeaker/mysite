@@ -1,71 +1,69 @@
 from .models import Blog
 from .models import Category
 from .models import Collection
-from rest_framework.pagination import LimitOffsetPagination
-from .serializers import BlogsSerializer
-from rest_framework import generics
-from rest_framework.response import Response
+from rest_framework import generics,status
 from collections import defaultdict
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Blog
+from .serializers import BlogsSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
+class BlogDetailView(APIView):
+    def get(self, request, pk):
+        blog = get_object_or_404(Blog, pk=pk)
+        serializer = BlogsSerializer(blog)
+        return Response(serializer.data)
+class BlogCreateView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
 
+    def post(self, request, *args, **kwargs):
+        category_name = request.data.get('category')
+        category, created = Category.objects.get_or_create(
+                name=category_name,
+            )
+        # Get or create the Collection only if provided
+        collection_name = request.data.get('collection')
+        print(collection_name)
+        collection = None
 
+        if collection_name:
+            collection, created = Collection.objects.get_or_create(
+                name=category_name,
+                category=category,
+            )
+            # If the Collection already exists but its category is different from the current category, set the blog's category to the collection's category.
+            if collection.category != category:
+                category = collection.category
 
-class BlogsAPIView(generics.ListAPIView):
-    queryset = Blog.objects.all()
-    serializer_class = BlogsSerializer
-    pagination_class = LimitOffsetPagination
-    pagination_class.default_limit = 5
+        blog_data = {
+            'ENtitle': request.data.get('ENtitle'),
+            # 'ENcontent': request.data.get('ENcontent'),
+            'ENauthor': request.data.get('ENauthor'),
+            'ENsummary': request.data.get('ENsummary'),
+            'CHtitle': request.data.get('CHtitle'),
+            # 'CHcontent': request.data.get('CHcontent'),
+            'CHauthor': request.data.get('CHauthor'),
+            'CHsummary': request.data.get('CHsummary'),
+            'cover': request.data.get('cover'),
+            'collection': collection.id,
+            'category': category.id,
+        }
 
-    def format_created_date(self, blog):
-        return blog.formatted_created_date()
-
-    def list(self, request, *args, **kwargs):
-        blogs = self.paginate_queryset(self.queryset)
-
-        formatted_blogs = []
-        for blog in blogs:
-            formatted_blog = self.format_created_date(blog)
-            formatted_blogs.append(formatted_blog)
-
-        serializer = self.get_serializer(formatted_blogs, many=True)
-        return self.get_paginated_response(serializer.data)
-
-
-
+        serializer = BlogsSerializer(data=blog_data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # return Response("ok")
 
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogsSerializer  # replace this with your actual serializer
 
-    # def list(self, request):
-    #     data = {}
-    #
-    #     categories = Category.objects.all()
-    #     data_category={}
-    #     for category in categories:
-    #         categroy_blogs = []
-    #         data_category[category.name] = defaultdict(list)  # Create a default dictionary with category name
-    #         blogs = Blog.objects.filter(category=category)
-    #         for blog in blogs:
-    #           if blog.collection is None:   # If the blog does not belong to any collection, add it to the category
-    #             categroy_blogs.append(blog)
-    #         data_category[category.name] = categroy_blogs
-    #
-    #     collections = Collection.objects.all()
-    #     data_collection={}
-    #     for collection in collections:
-    #         collection_blog = []
-    #         data_collection[collection.name] = defaultdict(list)
-    #         blogs = Blog.objects.filter(collection=collection)
-    #         for blog in blogs:
-    #             collection_blog.append(blog)
-    #         data_collection[collection.name] = collection_blog
-    #
-    #     data['category'] = data_category
-    #     data['collection'] = data_collection
-    #
-    #     return Response(data)
-
     def list(self, request):
+
         data = {}
 
         categories = Category.objects.all()
@@ -100,3 +98,18 @@ class BlogListView(generics.ListAPIView):
 
         return Response(data)
 
+class CategoryListView(APIView):
+    def get(self, request):
+        categories = Category.objects.all()
+        data = []
+        for category in categories:
+            data.append(category.name)
+        return Response(data)
+
+class CollectionListView(APIView):
+    def get(self, request):
+        collections = Collection.objects.all()
+        data = []
+        for collection in collections:
+            data.append(collection.name)
+        return Response(data)

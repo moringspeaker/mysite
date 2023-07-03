@@ -1,37 +1,38 @@
 <template>
-  <swiper
-      class="my-swiper"
-      :modules="modules"
-      :slides-per-view="1"
-      :space-between="0"
-      :autoplay="{
+  <div class="inner-wrapper">
+    <swiper
+        class="my-swiper"
+        :modules="modules"
+        :slides-per-view="1"
+        :space-between="0"
+        :autoplay="{
       delay: 2500,
       disableOnInteraction: false,
     }"
-      :loop=true
-      navigation
-      :pagination="{ clickable: true }"
-      :scrollbar="{ draggable: true }"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-      @autoplayTimeLeft="onAutoplayTimeLeft"
-  >
-    <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
-      <img :src="getImageUrl(img.src)" :alt="noimg">
-      <div class="subtitle" v-show="lang==='EN'">
-        {{ img.ENtitle }}
+        :loop=true
+        navigation
+        :pagination="{ clickable: true }"
+        :scrollbar="{ draggable: true }"
+        @swiper="onSwiper"
+        @slideChange="onSlideChange"
+        @autoplayTimeLeft="onAutoplayTimeLeft"
+    >
+      <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
+        <img :src="getImageUrl(img.src)" :alt="noimg">
+        <div class="subtitle" v-show="currentLanguage.value==='EN'">
+          {{ img.ENtitle }}
+        </div>
+        <div class="subtitle" v-show="currentLanguage.value!=='EN'">
+          {{ img.CHtitle }}
+        </div>
+      </swiper-slide>
+    </swiper>
+      <div class="components-container">
+        <blog-window :lang="currentLanguage.value" :blogs="blogs" class="content-wrapper"/>
+        <about-me :lang="currentLanguage.value" class="about-me"/>
       </div>
-      <div class="subtitle" v-show="lang!=='EN'">
-        {{ img.CHtitle }}
-      </div>
-    </swiper-slide>
-  </swiper>
-  <div class="content-wrapper">
-    <blog-window :lang="lang" :blogs="blogs"/>
-    <about-me :lang="lang" />
-    <AudioPlayer/>
+      <!--    <AudioPlayer/>-->
   </div>
-
 </template>
 
 
@@ -44,6 +45,7 @@ import { Navigation, Pagination, Scrollbar, A11y, Autoplay, } from 'swiper';
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
+import { mapGetters } from 'vuex';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -55,10 +57,9 @@ import 'swiper/css/autoplay'
 //import other components
 import BlogWindow from "@/components/BlogWindow.vue";
 import AboutMe from "@/components/AboutMe.vue";
-import AudioPlayer from "@/components/AudioPlayer.vue";
 
 import NoImg from "@/static/no-image.png"
-// import swipe from "bootstrap/js/src/util/swipe";
+
 
 import { formatDatetime } from '@/utils/datetimeUtils';
 
@@ -68,14 +69,14 @@ export default {
     Swiper,
     SwiperSlide,
     AboutMe,
-    AudioPlayer,
+    // AudioPlayer,
   },
   props:['getlang'],  // the same method declared in parent component, which is App.vue in this project
   methods: {
     getImageUrl(imageSrc) {
       // Modify the image source URL here
-      console.log(`http://127.0.0.1:8000${imageSrc}`);
-      return `http://127.0.0.1:8000${imageSrc}`;
+      console.log(`${process.env.VUE_APP_BACKEND_URL}${imageSrc}`);
+      return `${process.env.VUE_APP_BACKEND_URL}${imageSrc}`;
     },
   },
   data(){
@@ -95,10 +96,15 @@ export default {
     },
 
   },
+  computed: {
+    ...mapGetters([
+      'currentLanguage',  // add this line
+    ])
+  },
 
   async mounted() {
     try {
-      const response = await instance.get('http://localhost:8000/api/homepage/');
+      const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/homepage/`);
       this.homedata = response.data;
       this.swipers = this.homedata.swipers; // Make sure to use lowercase 'swipers'
       this.blogs = this.homedata.blogs;
@@ -122,9 +128,6 @@ export default {
     return {
       onSwiper,
       onSlideChange,
-      // onAutoplayTimeLeft,
-      // progressCircle,
-      // progressContent,
       modules: [Navigation, Pagination, Scrollbar, A11y, Autoplay],
     };
   },
@@ -132,9 +135,20 @@ export default {
 </script>
 
 <style>
+.inner-wrapper{
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 30% 70%;
+  grid-row-gap: 10px;
+  grid-template-columns: 74% 24.5% 1.5%;
+  grid-column-gap: 10px;
+  padding: 20px;
+}
 .my-swiper {
+  grid-row: 1/2;
+  grid-column: 1/3;
   width: 60%;
-  height:40vh;
 }
 
 .swiper-slide {
@@ -143,12 +157,10 @@ export default {
   background: #2E4F4F;
 
   /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border-radius: 10px;
 }
 
 .swiper-slide img {
@@ -156,25 +168,26 @@ export default {
   width: 100%;
   height: 85%;
   object-fit: cover;
-
+  border-radius: 10px;
 }
 .subtitle {
   /* Styles for the subtitle */
   font-size: 25px;
   color: white;
   font-family: FiraSan;
-
 }
-
-.content-wrapper{
-  height: 140vh;
-  width: 95%;
-  justify-content: flex-start;
+.components-container{
+  grid-column: 1/3;
   display: grid;
   grid-template-columns: 75% 25%;
   grid-column-gap: 10px;
-  grid-auto-rows: minmax(8rem, auto);
-  grid-auto-flow: column dense;
+  justify-content: flex-start;
+}
+.content-wrapper{
+  height:60%;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
 }
 </style>
 

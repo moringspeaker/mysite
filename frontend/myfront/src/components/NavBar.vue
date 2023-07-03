@@ -48,7 +48,8 @@ export default {
         { id: 3, name: "Publications" , link:"/publications"},
         { id: 4, name: "My Resource", link:"/resources"},
         { id: 5, name: "MyInfo", link:"/myinfo"},
-        {id: 6, name: "Gallery", link:"/gallery"}
+        {id: 6, name: "Gallery", link:"/gallery"},
+        {id: 7, name: "Login", link:"/login"}
       ],
     };
   },
@@ -56,9 +57,13 @@ export default {
     selectLanguage(language) {
       if(language === "EN"){
         this.selectedLanguage = "EN";
+        console.log('ttttttttttt');
+        this.$store.commit('setLanguage', 'EN');
+        console.log(this.$store.lang);
       }
       else{
         this.selectedLanguage = "中文";
+        this.$store.commit('setLanguage', 'CH');
       }
       //send this language selection to whole project
       this.$emit("SelectLan",this.selectedLanguage);
@@ -70,15 +75,17 @@ export default {
         { id: 3, name: "Publications" , link:"/publications"},
         { id: 4, name: "My Resource", link:"/resources"},
         { id: 5, name: "MyInfo", link:"/myinfo"},
-        {id: 6, name: "Gallery", link:"/gallery"}
+        {id: 6, name: "Gallery", link:"/gallery"},
+        {id: 7, name: "Login", link:"/login"}
       ];
-      let   navitems2=[
+      let navitems2=[
         { id: 1, name: "主页", link:"/" },
         { id: 2, name: "博客", link:"/blogs" },
         { id: 3, name: "出版" , link:"/publications"},
         { id: 4, name: "我的资源", link:"/resources"},
         { id: 5, name: "关于我", link:"/myinfo"},
-        {id: 6, name: "我的瞬间", link:"/gallery"}
+        {id: 6, name: "我的瞬间", link:"/gallery"},
+        {id: 7, name: "登录", link:"/login"}
       ];
       if(this.selectedLanguage === "EN"){
         this.navitems = navitems1
