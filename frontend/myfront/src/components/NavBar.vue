@@ -15,7 +15,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li v-for="item in navitems" :key="item.id" class="nav-item" >
-          <router-link :to="item.link" class="nav-link" >{{ item.name }}</router-link>
+
+          <router-link :to="item.link" class="nav-link" ><i :class="item.icon"></i>  {{ item.name }}</router-link>
         </li>
       </ul>
     </div>
@@ -43,13 +44,13 @@ export default {
       languages: ['EN', '中文'], // Replace with your desired language options
       selectedLanguage: 'EN' ,  // Set the default selected language
       navitems:[
-        { id: 1, name: "Home Page", link:"/" },
-        { id: 2, name: "Blogs", link:"/blogs" },
-        { id: 3, name: "Publications" , link:"/publications"},
-        { id: 4, name: "My Resource", link:"/resources"},
-        { id: 5, name: "MyInfo", link:"/myinfo"},
-        {id: 6, name: "Gallery", link:"/gallery"},
-        {id: 7, name: "Login", link:"/login"}
+        { id: 1, name: "Home Page", link:"/", icon: "bi bi-house-door" },
+        { id: 2, name: "Blogs", link:"/blogs", icon: "bi bi-file-text" },
+        { id: 3, name: "Publications" , link:"/publications", icon: "bi bi-journal-text" },
+        { id: 4, name: "My Resource", link:"/resources", icon: "bi bi-folder" },
+        { id: 5, name: "MyInfo", link:"/myinfo", icon: "bi bi-person-circle" },
+        { id: 6, name: "Gallery", link:"/gallery", icon: "bi bi-images" },
+        { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ],
     };
   },
@@ -70,22 +71,22 @@ export default {
 
       this.isDropdownOpen = false;
       let navitems1=[
-        { id: 1, name: "Home Page", link:"/" },
-        { id: 2, name: "Blogs", link:"/blogs" },
-        { id: 3, name: "Publications" , link:"/publications"},
-        { id: 4, name: "My Resource", link:"/resources"},
-        { id: 5, name: "MyInfo", link:"/myinfo"},
-        {id: 6, name: "Gallery", link:"/gallery"},
-        {id: 7, name: "Login", link:"/login"}
+        { id: 1, name: "Home Page", link:"/", icon: "bi bi-house-door" },
+        { id: 2, name: "Blogs", link:"/blogs", icon: "bi bi-file-text" },
+        { id: 3, name: "Publications" , link:"/publications", icon: "bi bi-journal-text" },
+        { id: 4, name: "My Resource", link:"/resources", icon: "bi bi-folder" },
+        { id: 5, name: "MyInfo", link:"/myinfo", icon: "bi bi-person-circle" },
+        { id: 6, name: "Gallery", link:"/gallery", icon: "bi bi-images" },
+        { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
       let navitems2=[
-        { id: 1, name: "主页", link:"/" },
-        { id: 2, name: "博客", link:"/blogs" },
-        { id: 3, name: "出版" , link:"/publications"},
-        { id: 4, name: "我的资源", link:"/resources"},
-        { id: 5, name: "关于我", link:"/myinfo"},
-        {id: 6, name: "我的瞬间", link:"/gallery"},
-        {id: 7, name: "登录", link:"/login"}
+        { id: 1, name: "主页", link:"/", icon: "bi bi-house-door" },
+        { id: 2, name: "博客", link:"/blogs", icon: "bi bi-file-text" },
+        { id: 3, name: "出版" , link:"/publications", icon: "bi bi-journal-text" },
+        { id: 4, name: "我的资源", link:"/resources", icon: "bi bi-folder" },
+        { id: 5, name: "关于我", link:"/myinfo", icon: "bi bi-images" },
+        {id: 6, name: "我的瞬间", link:"/gallery", icon: "bi bi-house-door"},
+        {id: 7, name: "登录", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
       if(this.selectedLanguage === "EN"){
         this.navitems = navitems1
