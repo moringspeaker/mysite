@@ -4,23 +4,22 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blogs', '0003_auto_20230623_0242'),
+        ("blogs", "0003_auto_20230623_0242"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='blog',
-            name='belong_to_collection',
+            model_name="blog",
+            name="belong_to_collection",
             field=models.BooleanField(default=False),
         ),
         migrations.AlterField(
-            model_name='blog',
-            name='collection',
+            model_name="blog",
+            name="collection",
             field=models.CharField(blank=True, max_length=200),
         ),
         migrations.DeleteModel(
-            name='Collection',
+            name="Collection",
         ),
     ]

@@ -1,7 +1,7 @@
 from .models import Blog
 from .models import Category
 from .models import Collection
-from rest_framework import generics,status
+from rest_framework import generics, status
 from collections import defaultdict
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
@@ -9,21 +9,27 @@ from rest_framework.response import Response
 from .models import Blog
 from .serializers import BlogsSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
+
+
 class BlogDetailView(APIView):
     def get(self, request, pk):
         blog = get_object_or_404(Blog, pk=pk)
         serializer = BlogsSerializer(blog)
         return Response(serializer.data)
+
+
 class BlogCreateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
     def post(self, request, *args, **kwargs):
-        category_name = request.data.get('category')
+        category_name = request.data.get("category")
         category, created = Category.objects.get_or_create(
-                name=category_name,
-            )
+            name=category_name,
+        )
+
+        print(category)
         # Get or create the Collection only if provided
-        collection_name = request.data.get('collection')
+        collection_name = request.data.get("collection")
         print(collection_name)
         collection = None
 
@@ -37,18 +43,21 @@ class BlogCreateView(APIView):
                 category = collection.category
 
         blog_data = {
-            'ENtitle': request.data.get('ENtitle'),
-            # 'ENcontent': request.data.get('ENcontent'),
-            'ENauthor': request.data.get('ENauthor'),
-            'ENsummary': request.data.get('ENsummary'),
-            'CHtitle': request.data.get('CHtitle'),
-            # 'CHcontent': request.data.get('CHcontent'),
-            'CHauthor': request.data.get('CHauthor'),
-            'CHsummary': request.data.get('CHsummary'),
-            'cover': request.data.get('cover'),
-            'collection': collection.id,
-            'category': category.id,
+            "ENtitle": request.data.get("ENtitle"),
+            "ENcontent": request.data.get("ENcontent"),
+            "ENauthor": request.data.get("ENauthor"),
+            "ENsummary": request.data.get("ENsummary"),
+            "CHtitle": request.data.get("CHtitle"),
+            "CHcontent": request.data.get("CHcontent"),
+            "CHauthor": request.data.get("CHauthor"),
+            "CHsummary": request.data.get("CHsummary"),
+            "cover": request.data.get("cover"),
+            "category": category.id,
         }
+
+        # Only include 'collection' in blog_data if a collection exists
+        if collection is not None:
+            blog_data["collection"] = collection.id
 
         serializer = BlogsSerializer(data=blog_data)
         if serializer.is_valid():
@@ -56,14 +65,13 @@ class BlogCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        # return Response("ok")
+
 
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogsSerializer  # replace this with your actual serializer
 
     def list(self, request):
-
         data = {}
 
         categories = Category.objects.all()
@@ -91,12 +99,13 @@ class BlogListView(generics.ListAPIView):
                 serialized_blog = BlogsSerializer(blog).data
                 collection_blogs.append(serialized_blog)
             data_collection[collection.name] = collection_blogs
-            data_collection[collection.name].append(collection.category.name)   #
+            data_collection[collection.name].append(collection.category.name)  #
 
-        data['category'] = data_category
-        data['collection'] = data_collection
+        data["category"] = data_category
+        data["collection"] = data_collection
 
         return Response(data)
+
 
 class CategoryListView(APIView):
     def get(self, request):
@@ -105,6 +114,7 @@ class CategoryListView(APIView):
         for category in categories:
             data.append(category.name)
         return Response(data)
+
 
 class CollectionListView(APIView):
     def get(self, request):

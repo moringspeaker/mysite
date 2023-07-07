@@ -5,20 +5,27 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blogs', '0002_auto_20230623_0206'),
+        ("blogs", "0002_auto_20230623_0206"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='collection',
-            name='category',
-            field=models.ForeignKey(default='Life', on_delete=django.db.models.deletion.CASCADE, to='blogs.category', to_field='name'),
+            model_name="collection",
+            name="category",
+            field=models.ForeignKey(
+                default="Life",
+                on_delete=django.db.models.deletion.CASCADE,
+                to="blogs.category",
+                to_field="name",
+            ),
         ),
         migrations.AlterField(
-            model_name='collection',
-            name='ENsummary',
-            field=models.CharField(default='Lorem Ipsum is simply dummy text of the printing and typesetting industry.', max_length=200),
+            model_name="collection",
+            name="ENsummary",
+            field=models.CharField(
+                default="Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                max_length=200,
+            ),
         ),
     ]

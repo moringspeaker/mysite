@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -42,13 +42,13 @@ INSTALLED_APPS = [
     "blogs",
     "homepage",
     "user",
-    'corsheaders',
-    'rest_framework',
-    'knox', #  pip install django-rest-knox
+    "corsheaders",
+    "rest_framework",
+    "knox",  #  pip install django-rest-knox
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -82,18 +82,18 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config("SECRET_KEY")
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
-        'OPTIONS': {
-            'charset': 'utf8mb4',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+        "PORT": config("DB_PORT"),
+        "OPTIONS": {
+            "charset": "utf8mb4",
         },
     }
 }
@@ -142,20 +142,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # config for corsheaders
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = ('*')
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_HTTPONLY = False
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "http://your_server_ip_or_domain_name",
+    "http://localhost",
+]
 
 
 # 允许所有 域名/IP 跨域
 CORS_ALLOW_ALL_ORIGINS = True
 # 配置可跨域访问的 域名/IP
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8080',
+    "http://127.0.0.1:8000",
+    "http://localhost:8080",
 ]
 # 使用正则表达式匹配允许访问的 域名/IP
 # CORS_ALLOWED_ORIGIN_REGEXES = [
@@ -164,13 +164,13 @@ CORS_ALLOWED_ORIGINS = [
 
 # 配置允许的请求方式
 CORS_ALLOW_METHODS = [
-    '*', # * 表示允许全部请求头
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS'
+    "*",  # * 表示允许全部请求头
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -186,7 +186,10 @@ CORS_ALLOW_HEADERS = [
 ]
 
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media").replace(
+    "\\", "/"
+)  # 设置静态文件路径为主目录下的media文件夹
+MEDIA_URL = "/media/"
 
+import os
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')  # 设置静态文件路径为主目录下的media文件夹
-MEDIA_URL = '/media/'

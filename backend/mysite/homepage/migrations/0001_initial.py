@@ -4,20 +4,23 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Swiper',
+            name="Swiper",
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('ENtitle', models.CharField(blank=True, max_length=200)),
-                ('CHtitle', models.CharField(blank=True, max_length=200)),
-                ('src', models.ImageField(default='static/no-img.jpg', upload_to='medias/swipers/')),
+                ("id", models.AutoField(primary_key=True, serialize=False)),
+                ("ENtitle", models.CharField(blank=True, max_length=200)),
+                ("CHtitle", models.CharField(blank=True, max_length=200)),
+                (
+                    "src",
+                    models.ImageField(
+                        default="static/no-img.jpg", upload_to="medias/swipers/"
+                    ),
+                ),
             ],
         ),
     ]

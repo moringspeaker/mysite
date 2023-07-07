@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blogs', '0006_remove_blog_belong_to_collection'),
+        ("blogs", "0006_remove_blog_belong_to_collection"),
     ]
 
     operations = [
         migrations.AlterUniqueTogether(
-            name='collection',
-            unique_together={('name', 'category')},
+            name="collection",
+            unique_together={("name", "category")},
         ),
     ]

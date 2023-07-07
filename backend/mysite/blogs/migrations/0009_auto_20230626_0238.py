@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blogs', '0008_auto_20230623_0602'),
+        ("blogs", "0008_auto_20230623_0602"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='blog',
-            name='CHcontent',
-            field=models.FileField(blank=True, upload_to='medias/blogs/'),
+            model_name="blog",
+            name="CHcontent",
+            field=models.FileField(blank=True, upload_to="medias/blogs/"),
         ),
         migrations.AlterField(
-            model_name='blog',
-            name='ENcontent',
-            field=models.FileField(blank=True, upload_to='medias/blogs/'),
+            model_name="blog",
+            name="ENcontent",
+            field=models.FileField(blank=True, upload_to="medias/blogs/"),
         ),
     ]
