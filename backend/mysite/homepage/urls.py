@@ -5,5 +5,5 @@ urlpatterns = [
     # path("", views.index_view, name="homepage"),
     # path('login/', login_view, name='login'),
     # path('register/', register, name='register'),
-    path("api/homepage/", views.homepage, name="homepage_api"),
+    #path("api/homepage/", views.homepage, name="homepage_api"),
 ]
