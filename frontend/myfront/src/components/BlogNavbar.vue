@@ -89,7 +89,7 @@
       },
       async mounted() {
         try {
-          const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}blogs/api/blogs/`);
+          const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/blogs/`);
           this.blogdata = response.data;
           let collections = {};
           collections = this.blogdata.collection;
