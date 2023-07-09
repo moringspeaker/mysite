@@ -29,7 +29,7 @@
     </swiper>
       <div class="components-container">
         <blog-window :lang="currentLanguage.value" :blogs="blogs" class="content-wrapper"/>
-        <about-me :lang="currentLanguage.value" class="about-me"/>
+        <about-me :lang="currentLanguage.value" class="aboutme"/>
       </div>
       <!--    <AudioPlayer/>-->
   </div>
@@ -187,7 +187,12 @@ export default {
   height:60%;
   width: 100%;
   display: flex;
+  flex-direction: row;
   align-items: stretch;
+}
+.aboutme{
+  height:45%;
+  margin-top: 4rem;
 }
 </style>
 
