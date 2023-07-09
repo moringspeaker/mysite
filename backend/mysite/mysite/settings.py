@@ -27,7 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', '137.184.192.173','localhost']
+
 
 
 # Application definition
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'knox', #  pip install django-rest-knox
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -142,13 +145,16 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # config for corsheaders
-
-CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_HEADERS = ('*')
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_HTTPONLY = False
+CORS_ORIGIN_ALLOW_ALL = False # This should be False for credentials to work
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:8000',
+  'http://localhost:8080',
+)
+CORS_ALLOWED_ORIGINS = [
+    '127.0.0.1','137.184.192.173','localhost'
+]
 
 
 # 允许所有 域名/IP 跨域
@@ -158,12 +164,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8080',
 ]
-# 使用正则表达式匹配允许访问的 域名/IP
-# CORS_ALLOWED_ORIGIN_REGEXES = [
-#     r"^https://\w+\.example\.com$",
-# ]
 
-# 配置允许的请求方式
 CORS_ALLOW_METHODS = [
     '*', # * 表示允许全部请求头
     'GET',
@@ -185,9 +186,6 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
-
-
-
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')  # 设置静态文件路径为主目录下的media文件夹
 MEDIA_URL = '/media/'
