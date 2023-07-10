@@ -58,8 +58,8 @@ jobs:
 
       - run: docker pull moringspeaker/frontend:latest
 #      - run: docker pull moringspeaker/backend:latest
-      - run: ssh ${{ steps.ssh.outputs.SERVER }} pwd
-      - run: ls -a
+      - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}  pwd
+      - run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} ls -a
       - run: find / -name test 2>/dev/null
 #      - run: docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest
 #      - run: docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest
