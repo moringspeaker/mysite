@@ -32,10 +32,10 @@ jobs:
           push: true
           tags: |
             moringspeaker/frontend:latest
-#            moringspeaker/backend:latest
+            moringspeaker/backend:latest
           file: |
             ./frontend/Dockerfile
-#            ./backend/mysite/Dockerfile
+            ./backend/mysite/Dockerfile
 
   deploy:
     needs: build_and_push
