@@ -48,11 +48,14 @@ jobs:
 
     steps:
       - name: Deploy to Droplet
-        run: |
-          ssh -i ${{ secrets.DROPLET_SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
-          docker pull moringspeaker/frontend:latest
-          docker pull moringspeaker/backend:latest
-          ls -a
+        uses: D3rHase/ssh-command-action@{version}
+        with:
+          host: ${{ secrets.SSH_HOST }} # Remote server address / ip - required
+          port: ${{ secrets.SSH_PORT }} # Remote server port -  Default: 22 - optional
+          user: ${{ secrets.SSH_USER }} # Remote server user - required
+          private_key: ${{ secrets.DROPLET_SSH_KEY }} # Private ssh key registered on the remote server - required
+
+          command: echo 'hello world' && ls -a
 #          docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest
 #          docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest
 #          # more commands
