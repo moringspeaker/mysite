@@ -34,8 +34,8 @@ jobs:
             moringspeaker/frontend:latest
             moringspeaker/backend:latest
           file: |
-            ./frontend/frontdocker
-            ./backend/Dockerfile
+            ../../frontend/frontdocker
+            ../../backend/Dockerfile
 
   deploy:
     needs: build_and_push
