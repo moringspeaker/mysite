@@ -35,7 +35,7 @@ jobs:
             moringspeaker/backend:latest
           file: |
             ./frontend/Dockerfile
-            ./backend/Dockerfile
+            ./backend/mysite/Dockerfile
 
   deploy:
     needs: build_and_push
