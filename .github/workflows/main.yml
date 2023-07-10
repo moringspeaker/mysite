@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Deploy to Droplet
-        uses: D3rHase/ssh-command-action@v0.22
+        uses: D3rHase/ssh-command-action@v0.2.2
         with:
           host: ${{ secrets.SSH_HOST }} # Remote server address / ip - required
           port: ${{ secrets.SSH_PORT }} # Remote server port -  Default: 22 - optional
