@@ -31,7 +31,7 @@ jobs:
           context: "{{defaultContext}}:frontend"
           push: true
           tags: moringspeaker/frontend:latest
-          file: frontdocker
+          file: Dockerfile
 
 
   deploy:
