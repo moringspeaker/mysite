@@ -47,14 +47,9 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.2
-        with:
-          ssh-private-key: ${{ secrets.DROPLET_SSH_KEY }}
-
       - name: Deploy to Droplet
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
+          ssh -i ${{ secrets.DROPLET_SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<'ENDSSH'
           docker pull moringspeaker/frontend:latest
           docker pull moringspeaker/backend:latest
           ls -a
