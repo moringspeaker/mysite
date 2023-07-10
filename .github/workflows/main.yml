@@ -58,6 +58,8 @@ jobs:
           command: |
             echo 'hello world' 
             ls -a 
+            docker pull moringspeaker/frontend:latest
+            docker pull moringspeaker/backend:latest
             docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest
             docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest
             echo 'finish container running'
