@@ -13,7 +13,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '^/api': {
-        target: 'http://localhost:8000', // Replace with your Django backend URL
+        target: 'http://localhost:8000', // Replace with your Django backdocker URL
         ws: true,
         changeOrigin: true
       }

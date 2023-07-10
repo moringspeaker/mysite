@@ -24,7 +24,7 @@ frontend/myfront/*.sw?
 frontend/myfront/assets/QRcode/
 
 
-#backend
+#backdocker
 backend/mysite/media
 backend/.idea/
 backend/mysite/*.pyc
@@ -32,8 +32,10 @@ backend/mysite/homepage/*.pyc
 backend/mysite/blogs/*.pyc
 backend/mysite/db.sqlite3
 backend/mysite/.env
+backend/mysite/ca-certificate.crt
 
 *.env
 .idea
 **/__pycache__/
 media/
+frontend/nginx/

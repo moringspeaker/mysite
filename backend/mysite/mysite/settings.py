@@ -98,6 +98,9 @@ DATABASES = {
         'PORT': config('DB_PORT'),
         'OPTIONS': {
             'charset': 'utf8mb4',
+            'ssl': {
+                'ca': '../mysite/ca-certificate.crt',
+            },
         },
     }
 }
