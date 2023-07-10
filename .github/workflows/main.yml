@@ -28,10 +28,10 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: "{{defaultContext}}:frontend"
           push: true
           tags: moringspeaker/frontend:latest
-          file: ./frontend/frontdocker
+          file: frontdocker
 
 
   deploy:
