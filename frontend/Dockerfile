@@ -8,7 +8,8 @@ RUN npm run build
 
 # Stage 2 - the production environment
 FROM nginx:1.24.0-alpine
-COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
+RUN ls -la /usr/src/app/
+COPY --from=build-deps /usr/src/app/dist /usr/share/nginx/html
 
 # Copy the Nginx configuration file
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
