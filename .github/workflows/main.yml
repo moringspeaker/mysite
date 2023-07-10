@@ -30,12 +30,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: |
-            moringspeaker/frontend:latest
-            moringspeaker/backend:latest
-          file: |
-            frontend/frontdocker
-            backend/Dockerfile
+          tags: moringspeaker/frontend:latest
+          file: ./frontend/frontdocker
+
 
   deploy:
     needs: build_and_push
