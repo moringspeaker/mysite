@@ -57,7 +57,7 @@ jobs:
           SSH_KEY: ${{ secrets.DROPLET_SSH_KEY }}
 
       - run: docker pull moringspeaker/frontend:latest
-      - run: docker pull moringspeaker/backend:latest
+#      - run: docker pull moringspeaker/backend:latest
       - run: pwd
       - run: ls -a
 #      - run: docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest
