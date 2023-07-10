@@ -53,8 +53,8 @@ jobs:
           host: ${{ secrets.SSH_HOST }} # Remote server address / ip - required
           port: ${{ secrets.SSH_PORT }} # Remote server port -  Default: 22 - optional
           user: ${{ secrets.SSH_USER }} # Remote server user - required
-          private_key: ${{ secrets.DROPLET_SSH_KEY }} # Private ssh key registered on the remote server - required
-
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }} # Private ssh key registered on the remote server - required
+          host_fingerprint: ${{secrets.SSH_PUB}}
           command: echo 'hello world' && ls -a && pwd
 #          docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest
 #          docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest
