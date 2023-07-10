@@ -57,7 +57,7 @@ jobs:
           SSH_KEY: ${{ secrets.DROPLET_SSH_KEY }}
 
       - run: docker pull moringspeaker/frontend:latest
-             docker pull moringspeaker/backend:latest
-             docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest
-             docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest
-             docker exec -it my_backend python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${{ secrets.DJANGO_SUPERUSER_USERNAME }}', '${{ secrets.DJANGO_SUPERUSER_EMAIL }}', '${{ secrets.DJANGO_SUPERUSER_PASSWORD }}')"
+      - run: docker pull moringspeaker/backend:latest
+      - run: docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest
+      - run: docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest
+      - run: docker exec -it my_backend python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${{ secrets.DJANGO_SUPERUSER_USERNAME }}', '${{ secrets.DJANGO_SUPERUSER_EMAIL }}', '${{ secrets.DJANGO_SUPERUSER_PASSWORD }}')"
