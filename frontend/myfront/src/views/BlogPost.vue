@@ -15,7 +15,7 @@
       <h2 class="position1" v-if="pageLoaded">你的位置是:</h2>
       </transition>
       <transition >
-      <h2 class="position2" v-if="pageLoaded">/我的博客: {{blogcontent.ENtitle}}</h2>
+      <h2 class="position2" v-if="pageLoaded">/我的博客: {{blogcontent.CHtitle}}</h2>
       </transition >
     </div>
 
