@@ -74,15 +74,3 @@ jobs:
             docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest &&
             echo 'container running'
 
-      - name: Execute Backend Commands
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{ secrets.SSH_HOST }} # Remote server address / ip - required
-          port: ${{ secrets.SSH_PORT }} # Remote server port -  Default: 22 - optional
-          user: ${{ secrets.SSH_USER }} # Remote server user - required
-          private_key: ${{ secrets.SSH_PRIVATE_KEY }} # Private ssh key registered on the remote server - required
-          host_fingerprint: ${{secrets.SSH_PUB}}
-          command: |
-            echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('${{ secrets.DJANGO_SUPERUSER_USERNAME }}', '${{ secrets.DJANGO_SUPERUSER_EMAIL }}', '${{ secrets.DJANGO_SUPERUSER_PASSWORD }}')" | docker exec -i my_backend python manage.py shell &&
-            echo 'Superuser created'
-            
