@@ -161,12 +161,12 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # 允许所有 域名/IP 跨域
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 # 配置可跨域访问的 域名/IP
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8080',
-    '164.90.253.90'
+    "http://164.90.253.90",
 ]
 
 CORS_ALLOW_METHODS = [
