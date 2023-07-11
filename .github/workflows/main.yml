@@ -57,7 +57,7 @@ jobs:
           host_fingerprint: ${{secrets.SSH_PUB}}
           command: |
             docker kill $(docker ps -q) || true &&
-            docker rm -f $(docker ps -a -q) &&
+            docker rm -f $(docker ps -a -q) || true &&
             docker pull moringspeaker/frontend:latest && 
             docker run -d --name my_frontend -p 80:80 moringspeaker/frontend:latest 
 
