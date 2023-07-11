@@ -23,7 +23,7 @@ COPY ./mysite /app/
 
 
 # CMD will run when the container is launched
-CMD python mysite/scripts/create_superuser.py && gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
+CMD gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
 #CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
 
 

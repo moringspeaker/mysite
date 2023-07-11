@@ -44,7 +44,7 @@ export default {
         router.push(`/writeblog`)
       } catch (err) {
         // If there was an error in login, this block will be executed
-        console.log(err)
+        alert('Wrong Password');
       }
     }
 
