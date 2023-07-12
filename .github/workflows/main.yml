@@ -59,7 +59,7 @@ jobs:
             docker kill $(docker ps -q) || true &&
             docker rm -f $(docker ps -a -q) || true &&
             docker pull moringspeaker/frontend:latest && 
-            docker run -d --name my_frontend -p 80:80 moringspeaker/frontend:latest 
+            docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest 
 
       - name: Deploy Backend to Droplet
         uses: D3rHase/ssh-command-action@v0.2.2
