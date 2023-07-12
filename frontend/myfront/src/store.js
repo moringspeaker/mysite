@@ -43,7 +43,7 @@ export default createStore({
         async login({ commit }, user) {
             commit('auth_request')
             try {
-                let response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}user/api/superuser_login/`, user)
+                let response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/superuser_login/`, user)
                 const token = response.data.token
                 console.log(token);
                 localStorage.setItem('token', token)

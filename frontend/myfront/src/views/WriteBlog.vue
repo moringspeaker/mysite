@@ -123,7 +123,7 @@ export default {
     },
     async fetchCollections() {
       try {
-        const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}blogs/api/collections`);
+        const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/collections`);
         this.collections = response.data;
         console.log(this.collections);
       } catch (err) {
@@ -132,7 +132,7 @@ export default {
     },
     async fetchCategories() {
       try {
-        const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}blogs/api/categories`);
+        const response = await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/categories`);
         this.categories = response.data;
         console.log(this.categories);
       } catch (err) {
@@ -179,7 +179,7 @@ export default {
       console.log(blogData);
       try {
         // Submit the blog
-        const response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}blogs/api/blogwrite`, blogData, {
+        const response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/blogwrite`, blogData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
