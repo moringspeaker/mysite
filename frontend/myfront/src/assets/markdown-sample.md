@@ -1,157 +1,71 @@
-An h1 header
-============
+#  Chenyu's Personal Website
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=moringspeaker.visitor-badge) ![Static Badge](https://img.shields.io/badge/python-3.8-blue) [![npm](https://img.shields.io/npm/v/vue.svg)](https://www.npmjs.com/package/vue)
 
-Paragraphs are separated by a blank line.
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 
-2nd paragraph. *Italic*, **bold**, and `monospace`. Itemized lists
-look like:
-
-  * this one
-  * that one
-  * the other one
-
-Note that --- not considering the asterisk --- the actual text
-content starts at 4-columns in.
-
-> Block quotes are
-> written like so.
->
-> They can span multiple paragraphs,
-> if you like.
-
-Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex., "it's all
-in chapters 12--14"). Three dots ... will be converted to an ellipsis.
-Unicode is supported. ☺
+ ---
+> Welcome to my secret space! :blush: Here are my techblogs and life lessons, and of course, some really cool stuff waiting for you to explore! :sunglasses:
 
 
+### Go to [My Site](http://164.90.253.90:80)
 
-An h2 header
-------------
-
-Here's a numbered list:
-
- 1. first item
- 2. second item
- 3. third item
-
-Note again how the actual text starts at 4 columns in (4 characters
-from the left side). Here's a code sample:
-
-    # Let me re-iterate ...
-    for i in 1 .. 10 { do-something(i) }
-
-As you probably guessed, indented 4 spaces. By the way, instead of
-indenting the block, you can use delimited blocks, if you like:
-
-~~~
-define foobar() {
-    print "Welcome to flavor country!";
-}
-~~~
-
-(which makes copying & pasting easier). You can optionally mark the
-delimited block for Pandoc to syntax highlight it:
-
-~~~python
-import time
-# Quick, count to ten!
-for i in range(10):
-    # (but not *too* quick)
-    time.sleep(0.5)
-    print i
-~~~
+This project builds a personal webiste which supports a ==fully CI/CD method==. Easy and comfortable deployment by using two docker containers on the front and backend For my frontend part, I choose [Vue3](https://github.com/vuejs/core) as my frontend framework. For my backend part, I choose to use [Django](https://github.com/django/django) with [Mysql](https://www.mysql.com/) to implemente backend functionalities.
 
 
+---
+# Features
 
-### An h3 header ###
+This site support a markdown file blog reading and writting
+![Imgur](https://i.imgur.com/5TFPNag.png)
 
-Now a nested list:
+---
+# Setup
+To run this project, you need to runboth frontend and back-nd, as well as the database to make sure this project works.
 
- 1. First, get these ingredients:
+### Frontend
+First add a ==.env== file under forntend/myfront direcotry:
+```shell
+cd frontend/myfront/
+vim .env
+```
+Your ==.env== file should be like this:
+```
+VUE_APP_API_KEY=""
+VUE_APP_BACKEND_URL=http://localhost:8000/
+```
+Then run following commands:
+```shell
+npm install
+npm run serve
+```
 
-      * carrots
-      * celery
-      * lentils
+### Backend
+First let's add a ==.env== file under backend/mysite direcotry as well:
+```shell
+cd backend/mysite/
+vim .env
+```
+Your backend ==.env== file should be like this:
+```
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=127.0.0.1
+DB_PORT=3306
+SECRET_KEY=''
+```
+Then run following commands:
+```shell
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
 
- 2. Boil some water.
+**Don't forget to run your Mysql database at the same time!**
 
- 3. Dump everything in the pot and follow
-    this algorithm:
+Then you can visit http://localhost:8080/ to see this project! :smile:
 
-        find wooden spoon
-        uncover pot
-        stir
-        cover pot
-        balance wooden spoon precariously on pot handle
-        wait 10 minutes
-        goto first step (or shut off burner when done)
+### Deployment
 
-    Do not bump wooden spoon or it will fall.
-
-Notice again how text always lines up on 4-space indents (including
-that last line which continues item 3 above).
-
-Here's a link to [a website](http://foo.bar), to a [local
-doc](local-doc.html), and to a [section heading in the current
-doc](#an-h2-header). Here's a footnote [^1].
-
-[^1]: Footnote text goes here.
-
-Tables can look like this:
-
-size  material      color
-----  ------------  ------------
-9     leather       brown
-10    hemp canvas   natural
-11    glass         transparent
-
-Table: Shoes, their sizes, and what they're made of
-
-(The above is the caption for the table.) Pandoc also supports
-multi-line tables:
-
---------  -----------------------
-keyword   text
---------  -----------------------
-red       Sunsets, apples, and
-          other red or reddish
-          things.
-
-green     Leaves, grass, frogs
-          and other things it's
-          not easy being.
---------  -----------------------
-
-A horizontal rule follows.
-
-***
-
-Here's a definition list:
-
-apples
-  : Good for making applesauce.
-oranges
-  : Citrus!
-tomatoes
-  : There's no "e" in tomatoe.
-
-Again, text is indented 4 spaces. (Put a blank line between each
-term/definition pair to spread things out more.)
-
-Here's a "line block":
-
-| Line one
-|   Line too
-| Line tree
-
-and images can be specified like so:
-
-![example image](example-image.jpg "An exemplary image")
-
-Inline math equations go in like so: $\omega = d\phi / dt$. Display
-math should get its own line and be put in in double-dollarsigns:
-
-$$I = \int \rho R^{2} dV$$
-
-And note that you can backslash-escape any punctuation characters
-which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
+You need to setup this project's github workflow file, adding corresponding git repo secrets. Once you're done, the git action will automatically build dockers and deploy it to a given sever. 
