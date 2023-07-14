@@ -1,0 +1,5 @@
+**/.env
+../backend/.idea
+./frontend/myfront/node_modules/
+./frontend/myfront/dist/
+**/.gitignore

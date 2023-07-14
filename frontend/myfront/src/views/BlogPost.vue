@@ -139,7 +139,7 @@ export default {
     try {
       const blogId = this.$route.params.id;
       let backendUrl = process.env.VUE_APP_BACKEND_URL;
-      const response = await instance.get(`${backendUrl}blogs/api/blogs/${blogId}`);
+      const response = await instance.get(`${backendUrl}api/blogs/${blogId}`);
       this.blogcontent = response.data;
       console.log(this.blogcontent)
       if (this.lang==='EN'){
