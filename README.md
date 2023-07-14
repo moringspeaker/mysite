@@ -9,13 +9,13 @@
 
 ### Go to [My Site](http://164.90.253.90:80)
 
-This project builds a personal webiste which supports a ==fully CI/CD method==. Easy and comfortable deployment by using two docker containers on the front and backend For my frontend part, I choose [Vue3](https://github.com/vuejs/core) as my frontend framework. For my backend part, I choose to use [Django](https://github.com/django/django) with [Mysql](https://www.mysql.com/) to implemente backend functionalities.
+This project builds a personal webiste which supports a **fully CI/CD method**. Easy and comfortable deployment by using two docker containers on the front and backend For my frontend part, I choose [Vue3](https://github.com/vuejs/core) as my frontend framework. For my backend part, I choose to use [Django](https://github.com/django/django) with [Mysql](https://www.mysql.com/) to implemente backend functionalities.
 
 
 ---
 # Features
 
-This site support a markdown file blog reading and writting
+This site support a markdown file blog reading and writing
 ![Imgur](https://i.imgur.com/5TFPNag.png)
 
 ---
@@ -23,7 +23,7 @@ This site support a markdown file blog reading and writting
 To run this project, you need to runboth frontend and back-nd, as well as the database to make sure this project works.
 
 ### Frontend
-First add a ==.env== file under forntend/myfront direcotry:
+First add a ==.env== file under forntend/myfront directory:
 ```shell
 cd frontend/myfront/
 vim .env
@@ -56,6 +56,9 @@ SECRET_KEY=''
 ```
 Then run following commands:
 ```shell
+cd ..
+pip install -r requirements.txt
+cd backend/mysite/
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser

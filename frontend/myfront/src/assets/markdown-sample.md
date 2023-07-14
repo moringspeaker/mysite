@@ -4,20 +4,31 @@
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 
  ---
-> Welcome to my secret space! :blush: Here are my techblogs and life lessons, and of course, some really cool stuff waiting for you to explore! :sunglasses:
+## Welcome to my secret space! :blush: 
+Here are my techblogs and life lessons, and of course, some really cool stuff waiting for you to explore! :sunglasses:
 
-
-### Go to [My Site](http://164.90.253.90:80)
+[Github Repo:](https://github.com/moringspeaker/mysite)
 
 This project builds a personal webiste which supports a ==fully CI/CD method==. Easy and comfortable deployment by using two docker containers on the front and backend For my frontend part, I choose [Vue3](https://github.com/vuejs/core) as my frontend framework. For my backend part, I choose to use [Django](https://github.com/django/django) with [Mysql](https://www.mysql.com/) to implemente backend functionalities.
 
 
 ---
-# Features
+# Introduction
+In this site, you can see:
+- ### My Blogs 
+    Blogs with different collections and tags
+- ### My Info 
+    My CV and other personal information, please feel free to contact me for any cool and meaningful ideas that you want to share with me
+- ### My Info
+    This is the part I plan to put my academic achievements and publications, but for now it's empty... :sob: :sob: :sob:
+- ### My Resources
+    I put some really cool and helpful websites or programming tools here. Also, I'm considering adding some fun movies or books here.
+- ### My Gallery:
+    I'm planning to put some of my photographs here. Maybe adding some interesting memes in the future... :think:
+- ### Login:
+    It's totally a meaningless for visitors... I created it just for adding and editing my website's contents more convenient. :sweat_smile:
 
-This site support a markdown file blog reading and writting
-![Imgur](https://i.imgur.com/5TFPNag.png)
-
+## 
 ---
 # Setup
 To run this project, you need to runboth frontend and back-nd, as well as the database to make sure this project works.
@@ -56,6 +67,9 @@ SECRET_KEY=''
 ```
 Then run following commands:
 ```shell
+cd ..
+pip install -r requirements.txt
+cd backend/mysite/
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
