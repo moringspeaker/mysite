@@ -191,7 +191,7 @@ export default {
   align-items: stretch;
 }
 .aboutme{
-  height:45%;
+  height:50%;
   margin-top: 4rem;
 }
 </style>
