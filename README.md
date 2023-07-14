@@ -16,7 +16,7 @@ This project builds a personal webiste which supports a ==fully CI/CD method==. 
 # Features
 
 This site support a markdown file blog reading and writting
-![Imgur](https://imgur.com/5TFPNag)
+![Imgur](https://i.imgur.com/5TFPNag.png)
 
 ---
 # Setup
