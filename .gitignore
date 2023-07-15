@@ -33,7 +33,7 @@ backend/mysite/blogs/*.pyc
 backend/mysite/db.sqlite3
 backend/mysite/ca-certificate.crt
 backend/.env
-backend/**.env
+backend/mysite/.env
 
 .idea
 **/__pycache__/
