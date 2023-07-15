@@ -11,8 +11,6 @@ import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
 import store from './store'
 
-
-
 const app = createApp(App);
 
 app.use(router);

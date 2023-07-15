@@ -10,7 +10,8 @@
           <div id="title" class= "text-center mt-auto">
             <h1 class="site-title ">
               <transition>
-                <a id="webtitle" href="App.vue" v-if="pageloaded">{{ Title }}</a>
+                <a id="webtitle" :style="{ fontFamily: webTitleFontFamily }" href="App.vue" v-if="pageloaded">{{ Title }}</a>
+
               </transition>
             </h1>
             <h4 id="slogan" class="slogan">{{ slogan }}</h4>
@@ -21,22 +22,42 @@
 
 <script>
 
-import BannerImage from '@/assets/BgImg/banner.jpg';
+// import BannerImage from '@/assets/BgImg/banner.jpg';
 export default {
   name: "site-banner",
   data(){
     return {
-      Title:"Chenyu Gu's Website",
-      slogan: "Live life. Learn lessons. Liberate yourself.",
-      imageUrl: BannerImage,
+      // Title:"Chenyu Gu's Website",
+      // slogan: "Live life. Learn lessons. Liberate yourself.",
+      // imageUrl: BannerImage,
       pageloaded:false,
     }
   },
   computed:{
     lang(){
       return this.$store.state.lang;
-    }
+    },
+    webTitleFontFamily() {
+      return this.lang === "EN" ? "OribitronM" : "WY";
+    },
+    Title() {
+      return this.lang === "EN"
+          ? "Chenyu's Website"
+          : "尘语的网站";
+    },
+    slogan() {
+      return this.lang === "EN"
+          ? "Live life. Learn lessons. Liberate yourself."
+          : "宇宙以其不息的欲望将一个歌舞炼为永恒，\n这欲望有怎样一个人间的姓名，\n大可忽略不计。";
+    },
+    imageUrl() {
+      return require('@/assets/BgImg/banner.jpg');
+    },
   },
+  mounted() {
+    this.pageloaded = true;
+  },
+
   watch:{
     lang(newLang){
       console.log('111111111'+newLang);
@@ -53,9 +74,7 @@ export default {
       }
     }
   },
-  mounted() {
-    this.pageloaded = true;
-  }
+
 }
 </script>
 

@@ -54,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    if(this.lang === 'EN')
+    if(this.lang === 'EN' )
     this.selectedLanguage = this.lang;
     else
       this.selectedLanguage = '中文';
