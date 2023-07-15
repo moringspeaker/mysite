@@ -1,21 +1,38 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import createPersistedState from 'vuex-persistedstate'  // <-- Import the plugin
+import createPersistedState from 'vuex-persistedstate'
 
 export default createStore({
-    plugins: [createPersistedState()], // <-- Use the plugin
+    plugins: [
+        createPersistedState({
+            paths: ['lang']  // Here we specify we only want to store 'lang' permanently
+        }),
+        createPersistedState({storage: window.sessionStorage})  // The rest of the state is stored in the session storage and will be cleared after the session ends
+    ],
     state: {
         lang: 'EN',
         user: null,
-        token: localStorage.getItem('token') || '',
+        token: '',
         status: '',
         cn: null,
         isLoggedIn: false,
         currentHeaderIndex: null,
+        navitems: [
+            { id: 1, name: "Home Page", link:"/", icon: "bi bi-house-door" },
+            { id: 2, name: "Blogs", link:"/blogs", icon: "bi bi-file-text" },
+            { id: 3, name: "Publications" , link:"/publications", icon: "bi bi-journal-text" },
+            { id: 4, name: "My Resource", link:"/resources", icon: "bi bi-folder" },
+            { id: 5, name: "MyInfo", link:"/myinfo", icon: "bi bi-person-circle" },
+            { id: 6, name: "Gallery", link:"/gallery", icon: "bi bi-images" },
+            { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
+        ],
     },
     mutations: {
         setCurrentHeaderIndex(state, currentHeaderIndex) {
             state.currentHeaderIndex = currentHeaderIndex;
+        },
+        setNavItems(state, items) {
+            state.navitems = items;
         },
         setLanguage(state, lang) {
             state.lang = lang;
@@ -27,6 +44,7 @@ export default createStore({
             state.status = 'success'
             state.token = token
             state.user = user
+            state.isLoggedIn = true // Set isLoggedIn true here
         },
         auth_error(state) {
             state.status = 'error'
@@ -34,9 +52,7 @@ export default createStore({
         logout(state) {
             state.status = ''
             state.token = ''
-        },
-        set_isLoggedIn(state, status) {
-            state.isLoggedIn = status
+            state.isLoggedIn = false // Set isLoggedIn false here
         },
     },
     actions: {
@@ -45,21 +61,16 @@ export default createStore({
             try {
                 let response = await axios.post(`http://164.90.253.90:8000/api/superuser_login/`, user)
                 const token = response.data.token
-                console.log(token);
-                localStorage.setItem('token', token)
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-                commit('auth_success', token)
-                commit('set_isLoggedIn', true)
+                commit('auth_success', { token, user: user }) // Pass user info here
             } catch (error) {
                 commit('auth_error')
-                localStorage.removeItem('token')
                 throw error
             }
         },
         logout({ commit }) {
             return new Promise((resolve) => {
                 commit('logout')
-                localStorage.removeItem('token')
                 delete axios.defaults.headers.common['Authorization']
                 resolve()
             })

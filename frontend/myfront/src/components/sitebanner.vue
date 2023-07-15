@@ -24,12 +24,6 @@
 import BannerImage from '@/assets/BgImg/banner.jpg';
 export default {
   name: "site-banner",
-  props:{
-    lang:{
-      type:String,
-      default:"EN"
-    }
-  },
   data(){
     return {
       Title:"Chenyu Gu's Website",
@@ -38,8 +32,14 @@ export default {
       pageloaded:false,
     }
   },
+  computed:{
+    lang(){
+      return this.$store.state.lang;
+    }
+  },
   watch:{
     lang(newLang){
+      console.log('111111111'+newLang);
       if (newLang === "EN") {
         document.getElementById("webtitle").style.fontFamily="OribitronM";
         this.Title = "Chenyu's Website";

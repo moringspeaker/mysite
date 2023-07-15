@@ -43,33 +43,24 @@ export default {
       isDropdownOpen: false, // Track the dropdown state
       languages: ['EN', '中文'], // Replace with your desired language options
       selectedLanguage: 'EN' ,  // Set the default selected language
-      navitems:[
-        { id: 1, name: "Home Page", link:"/", icon: "bi bi-house-door" },
-        { id: 2, name: "Blogs", link:"/blogs", icon: "bi bi-file-text" },
-        { id: 3, name: "Publications" , link:"/publications", icon: "bi bi-journal-text" },
-        { id: 4, name: "My Resource", link:"/resources", icon: "bi bi-folder" },
-        { id: 5, name: "MyInfo", link:"/myinfo", icon: "bi bi-person-circle" },
-        { id: 6, name: "Gallery", link:"/gallery", icon: "bi bi-images" },
-        { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
-      ],
     };
+  },
+  computed:{
+    lang(){
+      return this.$store.state.lang;
+    },
+    navitems() {
+      return this.$store.state.navitems;
+    }
+  },
+  mounted() {
+    if(this.lang === 'EN')
+    this.selectedLanguage = this.lang;
+    else
+      this.selectedLanguage = '中文';
   },
   methods: {
     selectLanguage(language) {
-      if(language === "EN"){
-        this.selectedLanguage = "EN";
-        console.log('ttttttttttt');
-        this.$store.commit('setLanguage', 'EN');
-        console.log(this.$store.lang);
-      }
-      else{
-        this.selectedLanguage = "中文";
-        this.$store.commit('setLanguage', 'CH');
-      }
-      //send this language selection to whole project
-      this.$emit("SelectLan",this.selectedLanguage);
-
-      this.isDropdownOpen = false;
       let navitems1=[
         { id: 1, name: "Home Page", link:"/", icon: "bi bi-house-door" },
         { id: 2, name: "Blogs", link:"/blogs", icon: "bi bi-file-text" },
@@ -88,12 +79,23 @@ export default {
         {id: 6, name: "我的瞬间", link:"/gallery", icon: "bi bi-house-door"},
         {id: 7, name: "登录", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
-      if(this.selectedLanguage === "EN"){
-        this.navitems = navitems1
+      if(language === "EN"){
+        this.selectedLanguage = "EN";
+        this.$store.commit('setLanguage', 'EN');
+        this.$store.commit('setNavItems', navitems1);
+        console.log(this.$store.lang);
       }
       else{
-        this.navitems = navitems2
+        this.selectedLanguage = "中文";
+        this.$store.commit('setLanguage', 'CH');
+        this.$store.commit('setNavItems', navitems2);
       }
+      //send this language selection to whole project
+      // this.$emit("SelectLan",this.selectedLanguage);
+
+      this.isDropdownOpen = false;
+
+
     },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen; // Toggle the dropdown state

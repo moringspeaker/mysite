@@ -5,18 +5,25 @@
 
  ---
 ## Welcome to my secret space! :blush: 
-Here are my techblogs and life lessons, and of course, some really cool stuff waiting for you to explore! :sunglasses:
+Here are my tech blogs and life sharing, and of course, some really cool stuff waiting for you to explore! :sunglasses:
 
-[Github Repo:](https://github.com/moringspeaker/mysite)
+[GitHub Repo:](https://github.com/moringspeaker/mysite)
 
-This project builds a personal webiste which supports a ==fully CI/CD method==. Easy and comfortable deployment by using two docker containers on the front and backend For my frontend part, I choose [Vue3](https://github.com/vuejs/core) as my frontend framework. For my backend part, I choose to use [Django](https://github.com/django/django) with [Mysql](https://www.mysql.com/) to implemente backend functionalities.
+This project builds a personal website which supports a ==fully CI/CD method==. Easy and comfortable deployment by using two docker containers on the front and backend For my frontend part, I choose [Vue3](https://github.com/vuejs/core) as my frontend framework. For my backend part, I choose to use [Django](https://github.com/django/django) with [Mysql](https://www.mysql.com/) to implemente backend functionalities.
 
 
 ---
 # Introduction
 In this site, you can see:
 - ### My Blogs 
-    Blogs with different collections and tags
+   
+Blogs with different collections and tags, each collection has its own category:
+
+![imgur](https://i.imgur.com/eLrTbFr.png "Blogs navigation bar")
+
+And on the right side there's a realtime TOC(Table of Content) to highlight the reading header, By clicking the header you want to go to, you can quickly jump to the corresponding chapter:
+![imgur](https://i.imgur.com/oTI4xZB.png)
+
 - ### My Info 
     My CV and other personal information, please feel free to contact me for any cool and meaningful ideas that you want to share with me
 - ### My Info
@@ -24,17 +31,17 @@ In this site, you can see:
 - ### My Resources
     I put some really cool and helpful websites or programming tools here. Also, I'm considering adding some fun movies or books here.
 - ### My Gallery:
-    I'm planning to put some of my photographs here. Maybe adding some interesting memes in the future... :think:
+  I'm going to make this into a photo album documenting my life, and maybe I'll add some interesting memes in the future... :think:
 - ### Login:
-    It's totally a meaningless for visitors... I created it just for adding and editing my website's contents more convenient. :sweat_smile:
+    It's totally a meaningless for visitors... I created it just for adding and editing my website's contents more convenient, of course, feel free to dispose of my site if you can guess my login password and account number LOL. :sweat_smile:
 
-## 
+
 ---
 # Setup
-To run this project, you need to runboth frontend and back-nd, as well as the database to make sure this project works.
+To run this project, you need to run both frontend and back-nd, as well as the database to make sure this project works.
 
 ### Frontend
-First add a ==.env== file under forntend/myfront direcotry:
+First add a ==.env== file under frontend/myfront directory:
 ```shell
 cd frontend/myfront/
 vim .env

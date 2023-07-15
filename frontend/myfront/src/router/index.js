@@ -33,7 +33,7 @@ const routes = [
                 path: "/blogs",
                 name: "Myblogs",
                 component: MyBlogs,
-                props: route => ({ lang: route.query.lang })
+                // props: route => ({ lang: route.query.lang })
             },
             {
                 path: "/gallery",

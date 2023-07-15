@@ -11,7 +11,7 @@
     <div class="content-wrapper">
       <blog-navbar :lang="lang" class="blognav" />
       <div class="blog-container">
-        <div v-html="welcome"/>
+        <div v-html="welcome" />
       </div>
     </div>
   </div>
@@ -19,8 +19,8 @@
 
 <script>
 import bgimg from '@/static/blog-background.png'
-import source from '@/assets/markdown-sample.md'
-
+import source1 from '@/assets/markdown-sample.md'
+import source2 from '@/assets/markdown-ch-sample.md'
 import BlogNavbar from "@/components/BlogNavbar.vue";
 import instance from "@/utils/request";
 import md from "@/markdownParser";
@@ -38,6 +38,7 @@ export default {
       blogdata: {},
       BlogId: '',
       welcome: '',
+      currentsource: '',
     }
   },
   computed:{
@@ -49,8 +50,24 @@ export default {
         backgroundPosition: 'center'
       }
     },
-    lang() {
-      return this.$store.state.lang;
+    lang(){
+      return this.$store.state.lang
+    }
+  },
+  watch: {
+    lang(newLang, oldLang) {
+      if (newLang !== oldLang) {
+        this.fetchData(); // Refresh your component's data
+      }
+    },
+  },
+  methods:{
+    fetchData(){
+      if (this.currentsource === 'source1') {
+        this.welcome = md.render(source2);
+      } else {
+        this.welcome =  md.render(source1);
+      }
     }
   },
   async mounted() {
@@ -63,7 +80,15 @@ export default {
     }
   },
   created() {
-    this.welcome = md.render(source);
+    console.log(this.lang);
+   if(this.lang==='EN'){
+     this.welcome = md.render(source1);
+     this.currentsource = 'source1'     //set  a current source enable later source change
+   }
+   else {
+     this.welcome = md.render(source2);
+     this.currentsource = 'source2'
+   }
   },
 }
 </script>
