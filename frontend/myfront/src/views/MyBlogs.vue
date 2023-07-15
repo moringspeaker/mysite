@@ -65,8 +65,10 @@ export default {
     fetchData(){
       if (this.currentsource === 'source1') {
         this.welcome = md.render(source2);
+        this.currentsource = 'source2';
       } else {
         this.welcome =  md.render(source1);
+        this.currentsource = 'source1';   //everytime switch source, need to change currentsource
       }
     }
   },

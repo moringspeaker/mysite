@@ -22,7 +22,7 @@ Blogs with different collections and tags, each collection has its own category:
 ![imgur](https://i.imgur.com/eLrTbFr.png "Blogs navigation bar")
 
 And on the right side there's a realtime TOC(Table of Content) to highlight the reading header, By clicking the header you want to go to, you can quickly jump to the corresponding chapter:
-![imgur](https://i.imgur.com/oTI4xZB.png)
+![imgur](https://i.imgur.com/LiNrGWM.png)
 
 - ### My Info 
     My CV and other personal information, please feel free to contact me for any cool and meaningful ideas that you want to share with me
@@ -30,9 +30,9 @@ And on the right side there's a realtime TOC(Table of Content) to highlight the 
     This is the part I plan to put my academic achievements and publications, but for now it's empty... :sob: :sob: :sob:
 - ### My Resources
     I put some really cool and helpful websites or programming tools here. Also, I'm considering adding some fun movies or books here.
-- ### My Gallery:
+- ### My Gallery
   I'm going to make this into a photo album documenting my life, and maybe I'll add some interesting memes in the future... :think:
-- ### Login:
+- ### Login
     It's totally a meaningless for visitors... I created it just for adding and editing my website's contents more convenient, of course, feel free to dispose of my site if you can guess my login password and account number LOL. :sweat_smile:
 
 

@@ -59,7 +59,7 @@ export default createStore({
         async login({ commit }, user) {
             commit('auth_request')
             try {
-                let response = await axios.post(`http://164.90.253.90:8000/api/superuser_login/`, user)
+                let response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/superuser_login/`, user)
                 const token = response.data.token
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
                 commit('auth_success', { token, user: user }) // Pass user info here

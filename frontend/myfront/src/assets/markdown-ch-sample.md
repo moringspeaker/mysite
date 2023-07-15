@@ -21,17 +21,17 @@
 ![imgur](https://i.imgur.com/eLrTbFr.png "Blogs navigation bar")
 
 并且在右边有一个实时的内容树（TOC），其中您正在阅读的部分会被高亮显示，同时，您也可以通过点击对应的章节名跳转到对应的章节：
-![imgur](https://i.imgur.com/oTI4xZB.png)
+![imgur](https://i.imgur.com/LiNrGWM.png)
 
-- ### My Info
+- ### 我的简介
   我的 CV 以及其他的一些个人信息， 如果您有任何有趣、有意义的想法，欢迎和我交流联系。
-- ### My Info
+- ### 我的出版物
   这部分我打算放我的学术成就和出版物，但现在它是空的...... :sob: :sob: :sob:
-- ### My Resources
+- ### 我的资源
   在这里我放了一些非常酷又很有用的网站或者是编程工具，另外，我也会考虑在这里加一点喜欢的书和电影什么的。。。
-- ### My Gallery:
+- ### 我的相册
   我准备把这里做成一个记录我生活的相册，当然，或许未来会加些梗图什么的也说不定。。。 :think:
-- ### Login:
+- ### 登录
  这个板块对于访问者来说是完全无效的。。。 我创造这个接口的目的其实就是为了方便我在前端可以写博客和管理自己的网站内容，当然，如果你能猜到我的登录密码和账号的话，请随意处置我的网站哈哈 :sweat_smile:
 
 
@@ -39,7 +39,7 @@
 # 运行设置
 要运行该项目，您需要同时运行前端和后端以及数据库，以确保该项目能够正常运行。
 
-### Frontend
+### 前端
 首先添加一个 ==.env== 文件在frontend/myfront 目录下:
 ```shell
 cd frontend/myfront/
@@ -56,7 +56,7 @@ npm install
 npm run serve
 ```
 
-### Backend
+### 后端
 同样地，让我们先在ackend/mysite目录下添加==.env==文件:
 ```shell
 cd backend/mysite/
@@ -86,6 +86,6 @@ python manage.py runserver
 
 之后你就可以访问 http://localhost:8080/ 来看看效果啦 :smile:
 
-### Deployment
+### 部署
 
 你需要设置这个项目的gitHub工作流文件，添加相应的git repo secrets。完成后，git操作将自动构建dockers并部署到指定的服务器上。
