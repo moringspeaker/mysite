@@ -41,7 +41,6 @@ jobs:
           tags: moringspeaker/backend:latest
           file: Dockerfile
 
-
   deploy:
     needs: build_and_push
     runs-on: ubuntu-22.04
@@ -58,8 +57,8 @@ jobs:
           command: |
             docker kill $(docker ps -q) || true &&
             docker rm -f $(docker ps -a -q) || true &&
-            docker pull moringspeaker/frontend:latest && 
-            docker run -d --name my_frontend --env-file ./.env -p 80:80 moringspeaker/frontend:latest 
+            docker pull moringspeaker/frontend:latest &&
+            docker run -d --name my_frontend --env-file ./.env -p 80:80 --mount source=media,target=/usr/src/app/media moringspeaker/frontend:latest
 
       - name: Deploy Backend to Droplet
         uses: D3rHase/ssh-command-action@v0.2.2
@@ -71,6 +70,6 @@ jobs:
           host_fingerprint: ${{secrets.SSH_PUB}}
           command: |
             docker pull moringspeaker/backend:latest &&
-            docker run -d --name my_backend --env-file ./.env -p 8000:8000 moringspeaker/backend:latest &&
+            docker run -d --name my_backend --env-file ./.env -p 8000:8000 --mount source=media,target=/app/media moringspeaker/backend:latest &&
             echo 'container running'
 
