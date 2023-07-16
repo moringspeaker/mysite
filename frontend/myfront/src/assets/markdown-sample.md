@@ -22,8 +22,8 @@ Blogs with different collections and tags, each collection has its own category:
 ![imgur](https://i.imgur.com/eLrTbFr.png "Blogs navigation bar")
 
 And on the right side there's a realtime TOC(Table of Content) to highlight the reading header, By clicking the header you want to go to, you can quickly jump to the corresponding chapter:
-![imgur](https://i.imgur.com/LiNrGWM.png){:width=80%}
-<img src=https://i.imgur.com/LiNrGWM.png" style= "width:200px;"/>
+![imgur](https://i.imgur.com/xBMulmO.png)
+
 - ### My Info 
     My CV and other personal information, please feel free to contact me for any cool and meaningful ideas that you want to share with me
 - ### My Info
