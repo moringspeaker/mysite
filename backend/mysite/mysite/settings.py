@@ -25,9 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '137.184.192.173','164.90.253.90','localhost']
+ALLOWED_HOSTS = [
+    '127.0.0.1', '137.184.192.173','164.90.253.90','localhost'
+]
 
 
 
@@ -151,11 +153,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = False # This should be False for credentials to work
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ORIGIN_WHITELIST = (
-  'http://localhost',
-  'http://127.0.0.1',
-  'http://164.90.253.90',
-)
+# CORS_ORIGIN_WHITELIST = (
+#   'http://localhost',
+#   'http://127.0.0.1',
+#   'http://164.90.253.90',
+# )
 
 # 允许所有 域名/IP 跨域
 # CORS_ALLOW_ALL_ORIGINS = True
