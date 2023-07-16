@@ -103,6 +103,9 @@ export default {
   },
 
   async mounted() {
+    const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/homepage/`);
+    console.log('000000000');
+    console.log(response);
     try {
       const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/homepage/`);
       this.homedata = response.data;
@@ -110,9 +113,8 @@ export default {
       this.blogs = this.homedata.blogs;
       this.blogs.forEach(blog => {
         blog.created_date = formatDatetime(blog.created_date,"YYYY-MM-DD");
-        console.log(blog.created_date);
       });
-
+      console.log(this.swipers);
     } catch (error) {
       console.error(error);
     }
