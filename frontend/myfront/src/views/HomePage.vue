@@ -75,7 +75,7 @@ export default {
   methods: {
     getImageUrl(imageSrc) {
       // Modify the image source URL here
-      return `http://127.0.0.1${imageSrc}`;
+      return `http://164.90.253.90${imageSrc}`;
     },
   },
   data(){
@@ -102,11 +102,11 @@ export default {
   },
 
   async mounted() {
-    const response = await instance.get('http://127.0.0.1:8000/api/homepage/');
+    const response = await instance.get('http://164.90.253.90:8000/api/homepage/');
     console.log('000000000');
     console.log(response);
     try {
-      const response = await instance.get('http://127.0.0.1:8000/api/homepage/');
+      const response = await instance.get('http://164.90.253.90:8000/api/homepage/');
       this.homedata = response.data;
       this.swipers = this.homedata.swipers; // Make sure to use lowercase 'swipers'
       this.blogs = this.homedata.blogs;
