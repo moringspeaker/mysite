@@ -152,8 +152,8 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = False # This should be False for credentials to work
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ORIGIN_WHITELIST = (
-  'http://localhost:8000',
-  'http://localhost:8080',
+  'http://localhost:80',
+  'http://127.0.0.1:80',
 )
 CORS_ALLOWED_ORIGINS = [
     '127.0.0.1','137.184.192.173','164.90.253.90','localhost'
