@@ -75,7 +75,7 @@ export default {
   methods: {
     getImageUrl(imageSrc) {
       // Modify the image source URL here
-      return `http://164.90.253.90${imageSrc}`;
+      return `${process.env.NGINX_STATIC_URL}${imageSrc}`;
     },
   },
   data(){
@@ -102,11 +102,8 @@ export default {
   },
 
   async mounted() {
-    const response = await instance.get('http://164.90.253.90:8000/api/homepage/');
-    console.log('000000000');
-    console.log(response);
     try {
-      const response = await instance.get('http://164.90.253.90:8000/api/homepage/');
+      const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/homepage/`);
       this.homedata = response.data;
       this.swipers = this.homedata.swipers; // Make sure to use lowercase 'swipers'
       this.blogs = this.homedata.blogs;
