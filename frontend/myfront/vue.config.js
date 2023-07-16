@@ -21,17 +21,6 @@ module.exports = defineConfig({
       }
     }
   },
-  configureWebpack: {
-    optimization: {
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            compress: { drop_console: false },
-          },
-        }),
-      ],
-    },
-  },
   chainWebpack: config => {
     config.module
         .rule('md')
