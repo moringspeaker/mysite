@@ -75,7 +75,7 @@ export default {
   methods: {
     getImageUrl(imageSrc) {
       // Modify the image source URL here
-      return `${process.env.NGINX_STATIC_URL}${imageSrc}`;
+      return `http://164.90.253.90:80${imageSrc}`;
     },
   },
   data(){
