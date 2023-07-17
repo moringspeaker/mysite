@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,9 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    '127.0.0.1', '137.184.192.173','164.90.253.90','localhost'
-]
+ALLOWED_HOSTS =  config('ALLOWED_HOSTS', cast=Csv())
 
 
 
@@ -98,12 +96,6 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
         'PORT': config('DB_PORT'),
-        # 'OPTIONS': {
-        #     'charset': 'utf8mb4',
-        #     'ssl': {
-        #         'ca': '../mysite/ca-certificate.crt',
-        #     },
-        # },
     }
 }
 
@@ -157,14 +149,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 # 允许所有 域名/IP 跨域
 # CORS_ALLOW_ALL_ORIGINS = True
 # 配置可跨域访问的 域名/IP
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8080',
-    "http://164.90.253.90",
-    'http://127.0.0.1:80',
-    'http://164.90.253.90:80',
-
-]
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', cast=Csv())
 
 CORS_ALLOW_METHODS = [
     '*', # * 表示允许全部请求头
