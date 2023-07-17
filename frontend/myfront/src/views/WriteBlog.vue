@@ -59,7 +59,7 @@
                :value="item"
            />
          </el-select>
-         <p>==>category</p>
+         <p>==>collections</p>
          <date-picker @onEvent="handleDateChange" />
          <button class="submit-btn btn btn-light btn-lg" @click="submitBlog" >submit</button>
        </div>

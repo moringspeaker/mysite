@@ -24,12 +24,6 @@ const routes = [
                 props: route => ({ lang: route.query.lang })
             },
             {
-                path: "/myinfo",
-                name: "myinfo",
-                component: AboutMe,
-                props: route => ({ lang: route.query.lang })
-            },
-            {
                 path: "/blogs",
                 name: "Myblogs",
                 component: MyBlogs,
@@ -71,6 +65,11 @@ const routes = [
         name: 'WriteBlog',
         component: WriteBlog,
         meta: { requiresAuth: true },
+    },
+    {
+        path: "/myinfo",
+        name: "myinfo",
+        component: AboutMe,
     },
 ]
 

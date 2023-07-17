@@ -75,8 +75,8 @@ export default {
         { id: 2, name: "博客", link:"/blogs", icon: "bi bi-file-text" },
         { id: 3, name: "出版" , link:"/publications", icon: "bi bi-journal-text" },
         { id: 4, name: "我的资源", link:"/resources", icon: "bi bi-folder" },
-        { id: 5, name: "关于我", link:"/myinfo", icon: "bi bi-images" },
-        {id: 6, name: "我的瞬间", link:"/gallery", icon: "bi bi-house-door"},
+        { id: 5, name: "关于我", link:"/myinfo", icon: "bi bi-person-circle" },
+        {id: 6, name: "我的瞬间", link:"/gallery", icon: "bi bi-images"},
         {id: 7, name: "登录", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
       if(language === "EN"){
