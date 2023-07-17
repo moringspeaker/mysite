@@ -58,7 +58,7 @@ jobs:
             docker kill $(docker ps -q) || true &&
             docker rm -f $(docker ps -a -q) || true &&
             docker pull moringspeaker/frontend:latest &&
-            docker run -d --name my_frontend --env-file ./.env -p 80:80 --mount source=media,target=/usr/src/app/media moringspeaker/frontend:latest
+            docker run -d --name my_frontend --env-file ./.env -p 80:80 --network=mynetwork --mount source=media,target=/usr/src/app/media moringspeaker/frontend:latest
 
       - name: Deploy Backend to Droplet
         uses: D3rHase/ssh-command-action@v0.2.2
@@ -70,7 +70,7 @@ jobs:
           host_fingerprint: ${{secrets.SSH_PUB}}
           command: |
             docker pull moringspeaker/backend:latest &&
-            docker run -d --name my_backend --env-file ./.env -p 55673:8000 --mount source=media,target=/app/media moringspeaker/backend:latest &&
+            docker run -d --name my_backend  --env-file ./.env -p 55673:8000 --network=mynetwork --mount source=media,target=/app/media moringspeaker/backend:latest &&
             sleep 20s && 
             docker exec my_backend python manage.py makemigrations &&
             docker exec my_backend python manage.py migrate &&
