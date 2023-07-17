@@ -46,19 +46,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Deploy Frontend to Droplet
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{ secrets.SSH_HOST }} # Remote server address / ip - required
-          port: ${{ secrets.SSH_PORT }} # Remote server port -  Default: 22 - optional
-          user: ${{ secrets.SSH_USER }} # Remote server user - required
-          private_key: ${{ secrets.SSH_PRIVATE_KEY }} # Private ssh key registered on the remote server - required
-          host_fingerprint: ${{secrets.SSH_PUB}}
-          command: |
-            docker kill $(docker ps -q) || true &&
-            docker rm -f $(docker ps -a -q) || true &&
-            docker pull moringspeaker/frontend:latest &&
-            docker run -d --name my_frontend --env-file ./.env -p 80:80 --network=mynetwork --mount source=media,target=/usr/src/app/media moringspeaker/frontend:latest
 
       - name: Deploy Backend to Droplet
         uses: D3rHase/ssh-command-action@v0.2.2
@@ -76,3 +63,16 @@ jobs:
             docker exec my_backend python manage.py migrate &&
             echo 'container running'
 
+      - name: Deploy Frontend to Droplet
+        uses: D3rHase/ssh-command-action@v0.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }} # Remote server address / ip - required
+          port: ${{ secrets.SSH_PORT }} # Remote server port -  Default: 22 - optional
+          user: ${{ secrets.SSH_USER }} # Remote server user - required
+          private_key: ${{ secrets.SSH_PRIVATE_KEY }} # Private ssh key registered on the remote server - required
+          host_fingerprint: ${{secrets.SSH_PUB}}
+          command: |
+            docker kill $(docker ps -q) || true &&
+            docker rm -f $(docker ps -a -q) || true &&
+            docker pull moringspeaker/frontend:latest &&
+            docker run -d --name my_frontend --env-file ./.env -p 80:80 --network=mynetwork --mount source=media,target=/usr/src/app/media moringspeaker/frontend:latest
