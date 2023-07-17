@@ -70,7 +70,7 @@ jobs:
           host_fingerprint: ${{secrets.SSH_PUB}}
           command: |
             docker pull moringspeaker/backend:latest &&
-            docker run -d --name my_backend --env-file ./.env -p 8000:8000 --mount source=media,target=/app/media moringspeaker/backend:latest &&
+            docker run -d --name my_backend --env-file ./.env -p 55673:8000 --mount source=media,target=/app/media moringspeaker/backend:latest &&
             sleep 20s && 
             docker exec my_backend python manage.py makemigrations &&
             docker exec my_backend python manage.py migrate &&
