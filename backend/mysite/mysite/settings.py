@@ -12,12 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-env = Config()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -28,13 +26,8 @@ env = Config()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS =  env('ALLOWED_HOSTS', cast=Csv())
-#
-# FOREST = {
-#    'FOREST_URL': 'https://api.forestadmin.com',
-#    'FOREST_ENV_SECRET': 'fa39a75383300e406147917f688ce04b7c1c2ad1093e8185e5f4fecfabef4fac',
-#    'FOREST_AUTH_SECRET': '866c9048863f814def890b742ea9dd9da99b91ec5a5b4984'
-# }
+ALLOWED_HOSTS =  config('ALLOWED_HOSTS', cast=Csv())
+
 # APPEND_SLASH=False
 
 # Application definition
@@ -97,11 +90,11 @@ SECRET_KEY = config('SECRET_KEY')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
@@ -155,7 +148,7 @@ CORS_ALLOW_ALL_ORIGINS = False
 # 允许所有 域名/IP 跨域
 # CORS_ALLOW_ALL_ORIGINS = True
 # 配置可跨域访问的 域名/IP
-CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS', cast=Csv())
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', cast=Csv())
 
 CORS_ALLOW_METHODS = [
     '*', # * 表示允许全部请求头
