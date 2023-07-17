@@ -1,4 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
+const TerserPlugin = require('terser-webpack-plugin')
+
 module.exports = defineConfig({
   assetsDir: 'static',
   pwa: {
@@ -19,7 +21,6 @@ module.exports = defineConfig({
       }
     }
   },
-
   chainWebpack: config => {
     config.module
         .rule('md')
@@ -29,4 +30,3 @@ module.exports = defineConfig({
         .end()
   }
 })
-

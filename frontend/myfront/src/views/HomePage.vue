@@ -19,17 +19,17 @@
     >
       <swiper-slide class="swiper-slide" v-for="(img, index) in swipers" :key="index">
         <img :src="getImageUrl(img.src)" :alt="noimg">
-        <div class="subtitle" v-show="currentLanguage.value==='EN'">
+        <div class="subtitle" v-show="lang==='EN'">
           {{ img.ENtitle }}
         </div>
-        <div class="subtitle" v-show="currentLanguage.value!=='EN'">
+        <div class="subtitle" v-show="lang!=='EN'">
           {{ img.CHtitle }}
         </div>
       </swiper-slide>
     </swiper>
       <div class="components-container">
-        <blog-window :lang="currentLanguage.value" :blogs="blogs" class="content-wrapper"/>
-        <about-me :lang="currentLanguage.value" class="aboutme"/>
+        <blog-window :lang="lang" :blogs="blogs" class="content-wrapper"/>
+        <about-me :lang="lang" class="aboutme"/>
       </div>
       <!--    <AudioPlayer/>-->
   </div>
@@ -58,7 +58,7 @@ import 'swiper/css/autoplay'
 import BlogWindow from "@/components/BlogWindow.vue";
 import AboutMe from "@/components/AboutMe.vue";
 
-import NoImg from "@/static/no-image.png"
+import NoImg from "@/assets/no-image.png"
 
 
 import { formatDatetime } from '@/utils/datetimeUtils';
@@ -75,8 +75,7 @@ export default {
   methods: {
     getImageUrl(imageSrc) {
       // Modify the image source URL here
-      console.log(`${process.env.VUE_APP_BACKEND_URL}${imageSrc}`);
-      return `${process.env.VUE_APP_BACKEND_URL}${imageSrc}`;
+      return `${process.env.VUE_APP_NGINX_STATIC}${imageSrc}`;
     },
   },
   data(){
@@ -84,19 +83,14 @@ export default {
       noimg: NoImg,
       homedata: [],
       swipers: [],
-      lang: 'EN',
       sentlang: '',
       blogs:[],
     }
   },
-  watch:{
-    getlang: function (data){
-      this.lang = data;
-      // this.sentlang = data;
-    },
-
-  },
   computed: {
+    lang(){
+      return this.$store.state.lang;
+    },
     ...mapGetters([
       'currentLanguage',  // add this line
     ])
@@ -110,9 +104,8 @@ export default {
       this.blogs = this.homedata.blogs;
       this.blogs.forEach(blog => {
         blog.created_date = formatDatetime(blog.created_date,"YYYY-MM-DD");
-        console.log(blog.created_date);
       });
-
+      console.log(this.swipers);
     } catch (error) {
       console.error(error);
     }

@@ -21,7 +21,7 @@
 ![imgur](https://i.imgur.com/eLrTbFr.png "Blogs navigation bar")
 
 并且在右边有一个实时的内容树（TOC），其中您正在阅读的部分会被高亮显示，同时，您也可以通过点击对应的章节名跳转到对应的章节：
-![imgur](https://i.imgur.com/LiNrGWM.png)
+![imgur](https://i.imgur.com/xBMulmO.png)
 
 - ### 我的简介
   我的 CV 以及其他的一些个人信息， 如果您有任何有趣、有意义的想法，欢迎和我交流联系。
