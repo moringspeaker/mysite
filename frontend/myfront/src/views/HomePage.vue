@@ -167,7 +167,7 @@ export default {
   /* Styles for the subtitle */
   font-size: 1.5rem;
   color: white;
-  height: 2rem;
+  height: 3rem;
   font-family: FiraSan;
 }
 .components-container{
