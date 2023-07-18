@@ -165,8 +165,9 @@ export default {
 }
 .subtitle {
   /* Styles for the subtitle */
-  font-size: 25px;
+  font-size: 1.5rem;
   color: white;
+  height: 2rem;
   font-family: FiraSan;
 }
 .components-container{
