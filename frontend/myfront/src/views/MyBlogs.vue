@@ -142,4 +142,8 @@ export default {
   border: 2px solid #222222;
   border-radius: 10px;
 }
+.blognav{
+  min-height: 40%;
+  padding: 25px;
+}
 </style>
