@@ -133,7 +133,20 @@ export default {
       this.scrollToAnchor(e.item.id);
     },
   },
-
+  watch:{
+    lang(newLang){
+      if (newLang==='EN'){
+        const blogmd = this.blogcontent.ENcontent;
+        this.markdownContent = md.render(blogmd);
+        this.rawmarkdown = blogmd;
+      }
+      else {
+        const blogmd = this.blogcontent.CHcontent;
+        this.rawmarkdown = blogmd;
+        this.markdownContent = md.render(blogmd);
+      }
+    }
+  },
   async mounted() {
     this.pageLoaded = true;
     try {

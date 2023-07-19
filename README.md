@@ -16,7 +16,7 @@ This project builds a personal website which supports a **fully CI/CD method**. 
 # Features
 
 This site support a markdown file blog reading and writing
-![Imgur](https://i.imgur.com/oTI4xZB.png)
+![Imgur](https://i.imgur.com/HopSSxl.png)
 
 ---
 # Setup

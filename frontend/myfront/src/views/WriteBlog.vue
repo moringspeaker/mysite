@@ -26,9 +26,11 @@
        <div class="submit">
          <el-select
              v-model="selectedCategory"
-             multiple
-             filterable
+             :multiple="false"
+             :filterable="true"
              allow-create
+             :remote="true"
+             :fit-input-width="true"
              default-first-option
              :reserve-keyword="false"
              placeholder="categories"
@@ -44,13 +46,15 @@
          <p>==>category</p>
          <el-select
              v-model="selectedCollection"
-             multiple
-             filterable
+             :multiple="false"
+             :filterable="true"
              allow-create
+             :fit-input-width="true"
              default-first-option
+             :remote="true"
              :reserve-keyword="false"
              placeholder="collections"
-             v-if="categories"
+             v-if="collections"
          >
            <el-option
                v-for="(item,index) in collections"
@@ -59,7 +63,7 @@
                :value="item"
            />
          </el-select>
-         <p>==>category</p>
+         <p>==>collections</p>
          <date-picker @onEvent="handleDateChange" />
          <button class="submit-btn btn btn-light btn-lg" @click="submitBlog" >submit</button>
        </div>
@@ -136,7 +140,7 @@ export default {
         this.categories = response.data;
         console.log(this.categories);
       } catch (err) {
-        console.error(err);
+        console.log(err);
       }
     },
     compile() {
@@ -179,33 +183,30 @@ export default {
       console.log(blogData);
       try {
         // Submit the blog
-        const response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/blogwrite`, blogData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
+        //check data at first:
+        if(this.selectedCategory === null || this.selectedCategory === "" || this.selectedCollection=== null || this.selectedCollection === ""){
+          alert('Please include valid category or collection!');
+        }
+        else{
+          const response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/blogwrite/`, blogData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          // If successful, reset the blog form data
+          if (response.status === 201) {
+            alert('Blog submitted successfully')
+            await this.router.push(`/blogs/`);
           }
-        });
-
-        // If successful, reset the blog form data
-        if (response.status === 201) {
-          this.blog.value = {
-            ENtitle: '',
-            ENcontent: '',
-            ENauthor: 'Chenyu',
-            ENsummary: '',
-            CHtitle: '',
-            CHcontent: '',
-            CHauthor: '尘语',
-            CHsummary: '',
-            cover: null,
-            collection: null, // you need to provide collection id
-            category: null, // you need to provide category id
-          };
-
-          alert('Blog submitted successfully')
-          await this.router.push(`/blogs/`);
         }
       } catch (err) {
         console.error(err)
+        if (err.response && err.response.data) {
+          // Assuming the backend error is in the 'message' key of the response data
+          alert(err.response.data.message || 'An error occurred.');
+        } else {
+          alert('An unknown error occurred.');
+        }
       }
     },
   },

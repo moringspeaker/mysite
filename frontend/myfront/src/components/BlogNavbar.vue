@@ -14,7 +14,7 @@
          <template #title>{{ category }}</template>    <!-- this is the categories's names-->
          <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index.toString()" class="blog-group" >
             <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
-              <el-menu-item>{{ blog.ENtitle }}</el-menu-item>
+              <el-menu-item class="my-custom-menu-item">{{ blog.ENtitle }}</el-menu-item>
             </router-link>
          </el-menu-item-group>
        </el-sub-menu>
@@ -37,7 +37,7 @@
          <template #title>{{ category }}</template>    <!-- this is the categories's names-->
          <el-menu-item-group  v-for="(blog,index) in content" :key="blog" :index="index.toString()" class="blog-group" >
            <router-link :to="`/blogs/${blog.id}`" style="text-decoration: none;">
-             <el-menu-item>{{ blog.CHtitle }}</el-menu-item>
+             <el-menu-item class="my-custom-menu-item">{{ blog.CHtitle }}</el-menu-item>
            </router-link>
          </el-menu-item-group>
        </el-sub-menu>
@@ -155,8 +155,14 @@
   height:1px;
 }
   .my-custom-menu-item {
-    font-size: 0.8rem !important;
+    font-size: 0.6rem !important;
     padding: 5px !important;
+    justify-content: center !important;
+    white-space: normal !important;      /*to change element-plus's built in css, need to use !important*/
+    word-break: break-word !important;
+    text-overflow: ellipsis !important;
+    /*max-width: 100% !important;*/
+    line-height: 1.2em !important;
   }
   </style>
 
