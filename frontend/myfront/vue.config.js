@@ -1,5 +1,4 @@
 const { defineConfig } = require('@vue/cli-service')
-const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = defineConfig({
   assetsDir: 'static',
@@ -15,7 +14,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '^/api': {
-        target: 'http://localhost:8000', // Replace with your Django backdocker URL
+        target: 'http://localhost:8000',
         ws: true,
         changeOrigin: true
       }
