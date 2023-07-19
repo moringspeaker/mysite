@@ -21,17 +21,21 @@ class BlogDetailView(APIView):
 class BlogCreateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
+    def check_blog_data(self,data):
+        for key, value in data.items():
+            if value is None or value == "":
+                return False, key  # Returning the key as well to know which attribute was null
+        return True, None
+
     def post(self, request, *args, **kwargs):
         category_name = request.data.get("category")
         category, created = Category.objects.get_or_create(
             name=category_name,
         )
-
-        print(category)
         # Get or create the Collection only if provided
         collection_name = request.data.get("collection")
-        print(collection_name)
         collection = None
+        print(collection_name)
 
         if collection_name:
             collection, created = Collection.objects.get_or_create(
@@ -55,16 +59,26 @@ class BlogCreateView(APIView):
             "category": category.id,
         }
 
-        # Only include 'collection' in blog_data if a collection exists
-        if collection is not None:
-            blog_data["collection"] = collection.id
-
-        serializer = BlogsSerializer(data=blog_data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # check the data
+        is_valid, invalid_key = self.check_blog_data(blog_data)
+        print('1111111111')
+        if not is_valid:
+            print('invalid data')
+            return response.Response(
+                data={"message": f"Invalid data: {invalid_key} is null"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            if collection is not None:
+                blog_data["collection"] = collection.id
+
+            serializer = BlogsSerializer(data=blog_data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                print('invalid serializer')
+                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class BlogListView(generics.ListAPIView):
