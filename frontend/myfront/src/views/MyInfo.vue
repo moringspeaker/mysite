@@ -64,13 +64,13 @@ export default {
   background-attachment: fixed;
 }
 .p1{
-  background-image: url("@/assets/BgImg/sunrise.png");
-}
-.p2{
   background-image: url("@/assets/BgImg/morning.png");
 }
+.p2{
+  background-image: url("@/assets/BgImg/wave2.png");
+}
 .p3{
-  background-image: url("@/assets/BgImg/noon.png");
+  background-image: url("@/assets/BgImg/sunrise.png");
 }
 .p4{
   background-image: url("@/assets/BgImg/night.png");
