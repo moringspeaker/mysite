@@ -10,7 +10,7 @@
           <div id="title" class= "text-center mt-auto">
             <h1 class="site-title ">
               <transition>
-                <a id="webtitle" :style="{ fontFamily: webTitleFontFamily }" href="App.vue" v-if="pageloaded">{{ Title }}</a>
+                <a id="webtitle" :style="{ fontFamily: webTitleFontFamily }" href="homepage" v-if="pageloaded">{{ Title }}</a>
 
               </transition>
             </h1>
@@ -27,9 +27,6 @@ export default {
   name: "site-banner",
   data(){
     return {
-      // Title:"Chenyu Gu's Website",
-      // slogan: "Live life. Learn lessons. Liberate yourself.",
-      // imageUrl: BannerImage,
       pageloaded:false,
     }
   },
