@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - test
+      - deploy
 
 jobs:
   build_and_push:
@@ -73,4 +74,4 @@ jobs:
           host_fingerprint: ${{secrets.SSH_PUB}}
           command: |
             docker pull moringspeaker/frontend:latest &&
-            docker run -d --name my_frontend --env-file ./.env -p 80:80 --network=mynetwork --mount source=media,target=/usr/src/app/media moringspeaker/frontend:latest
+            docker run -d --name my_frontend --env-file ./.env -p 443:443 --network=mynetwork --mount source=media,target=/usr/src/app/media moringspeaker/frontend:latest
