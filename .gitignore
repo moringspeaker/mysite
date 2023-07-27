@@ -39,3 +39,8 @@ backend/mysite/.env
 **/__pycache__/
 media/
 frontend/nginx/
+./node_modules/
+.DS_Store
+.prettierrc
+./package-lock.json
+./package.json
