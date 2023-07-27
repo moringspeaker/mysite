@@ -14,6 +14,10 @@
   </div>
     <div class="lower-container">
       <h2 class="myname">Chenyu</h2>
+      <div class="phase-container">
+        <p>Gatsby believed in the green light, the orgastic future that year by year recedes before us. It eluded us then, but that’s no matter—tomorrow we will run faster, stretch out our arms farther.... And one fine morning—— So we beat on, boats against the current, borne back ceaselessly into the past.</p>
+        <p>在人生的每个阶段，我们都对漫漫前程抱着一份激动的希望，以为奇迹就在前方。然而，人生只是一个个梦想不断破灭的过程。而当我们走出所有曲折的日子时才发现，真正的美好与神奇，已经永远地留在了背后。</p>
+      </div>
       <ul id="icon-list">
         <li v-for="icon in icons" :key="icon.id" class="icon-item">
           <a :href="icon.link" target="_blank" rel="noopener noreferrer">
@@ -25,6 +29,9 @@
         <a href="/CV/ENCV.pdf" download="My_CV.pdf" class="download-button">Download my CV</a>
         <a href="/CV/ENCV.pdf" download="我的简历.pdf" class="download-button">下载我的简历</a>
       </div>
+    </div>
+    <div class="arrow-down">
+      <img :src="downarrow" class="arrows" :style="{ opacity: svgOpacity }" @click="DownScroll" ref="arrowsvg">
     </div>
   </div>
 </template>
@@ -38,6 +45,7 @@ import qq from '@/assets/icons/qq.svg'
 import wechat from '@/assets/icons/wechat.svg'
 import email from '@/assets/icons/email.svg'
 import linkedin from '@/assets/icons/linkedin.svg'
+import downarrow from '@/assets/icons/down-arrow.svg'
 
 export default {
   name: "site-banner",
@@ -48,7 +56,7 @@ export default {
     return {
       showBorder: false,
       pageloaded:false,
-
+      downarrow,
       avatar,
       github,
       qq,
@@ -71,9 +79,12 @@ export default {
         { id: 6, name: "EN/中文", method:this.SetLang},
       ],
       borderOpacity: 0.8,
+      svgOpacity:1,
       direction:-1,
       borderWidth: 0, // start with 10px, adjust if necessary
+      blink:-1,
       currentLang:'EN',
+      animationInterval: null,
     }
   },
   setup(){
@@ -97,7 +108,7 @@ export default {
       const stepInterval = 20; // How often to update the opacity, adjust if necessary
       const stepO = stepInterval / duration;
       const stepW = stepInterval / duration * 60;
-      setInterval(()=>{
+      this.animationInterval = setInterval(()=>{
         this.borderOpacity += stepO * this.direction;
         this.borderWidth += -1 * stepW * this.direction
         this.setBorderOpacityAndWidth();
@@ -106,6 +117,12 @@ export default {
           this.borderWidth = 0;
         }
       },30);
+       this.blinkInterval = setInterval(()=>{
+        this.svgOpacity += 0.2 * this.blink;
+        if(this.svgOpacity <=0  || this.svgOpacity >=1){
+          this.blink = -1 * this.blink;
+        }
+      },150);
     },
     setBorderOpacityAndWidth(){
       let validOpacity = this.borderOpacity;
@@ -146,6 +163,10 @@ export default {
         this.currentLang = 'EN';
       }
     },
+    DownScroll(){
+      const newMessage = 'Education';
+      this.$emit('updateMessage', newMessage);
+    },
   },
   watch:{
     lang(newLang){
@@ -172,7 +193,7 @@ export default {
     }
   },
   beforeUnmount() {
-    clearInterval(this.startAnimation());
+    clearInterval(this.animationInterval);
   }
 
 }
@@ -195,11 +216,10 @@ a{
 
 #banner-wrapper {
   display: grid;
-  grid-template-rows: 15% 60% 25%;
+  grid-template-rows: 10% 35% 45% 10%;
   width: 100%; /* Assuming you want the banner to span the full width of its container */
-  height: 40vh; /* Assuming you want the banner to span the full viewport height */
+  height: 100vh; /* Assuming you want the banner to span the full viewport height */
   background-image: url("@/assets/BgImg/beach.png");
-
   /* Center and scale the background image */
   background-position: center;
   background-repeat: no-repeat;
@@ -223,7 +243,7 @@ a{
   margin: 0; /* To remove any default margin */
 }
 #nav-ul li:first-child {
-  margin-right: 50rem;
+  margin-right: 30vw;
 }
 .nav-item {
   list-style-type: none; /* To remove bullet points */
@@ -237,7 +257,7 @@ a{
   cursor: pointer;
   padding: 0.5rem 1rem; /* You can adjust this value to control button padding */
   color: #f0f0f0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin: 0 15px;  /* Adding horizontal margin for more spacing between buttons */
   transition: background-color 0.3s ease; /* Smooth transition for hover effect */
   font-weight: bolder;
@@ -272,10 +292,11 @@ a{
   box-sizing: content-box;
 }
 .lower-container{
+  /* margin-top: 2rem; */
   grid-row: 3/4;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: stretch;
   align-content: center;
   justify-items: center;
   align-items: center;
@@ -284,10 +305,17 @@ a{
   margin-top: 0px;
  color: #f0f0f0;
 }
+.phase-container{
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #f0f0f0;
+}
 #icon-list {
   display: flex;
   justify-content: center;
-  gap: 1rem; /* Adjust the gap as needed */
+  gap: 2rem; /* Adjust the gap as needed */
   padding: 0;
   margin: 0.3rem 0 0; /* Add some top margin to separate from the avatar */
 }
@@ -306,7 +334,7 @@ a{
   opacity: 0.7; /* Opacity effect on hover */
 }
 .download-container{
-  margin-top: 5px;
+  margin-top: 3%;
   margin-bottom: 10px;
 }
 .download-button{
@@ -318,5 +346,21 @@ a{
   border: 2px solid #323232;
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.1);
   padding: 3px;
+}
+.arrow-down{
+  grid-row: 4/5;
+  background-color: #323232;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+.arrows{
+  height: 80%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom center;
+  background-size: cover;
 }
 </style>
