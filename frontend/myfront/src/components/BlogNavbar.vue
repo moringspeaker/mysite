@@ -155,14 +155,14 @@
   height:1px;
 }
   .my-custom-menu-item {
-    font-size: 0.6rem !important;
+    font-size: 0.65rem !important;
     padding: 5px !important;
     justify-content: center !important;
     white-space: normal !important;      /*to change element-plus's built in css, need to use !important*/
     word-break: break-word !important;
     text-overflow: ellipsis !important;
     /*max-width: 100% !important;*/
-    line-height: 1.2em !important;
+    line-height: 1.5rem !important;
   }
   </style>
 

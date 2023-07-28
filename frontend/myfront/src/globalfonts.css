@@ -21,7 +21,7 @@
 /* For large screens */
 @media screen and (min-width: 1920px) {
     :root {
-        font-size: 1vw;
+        font-size: 0.5vw;
     }
     #inner-content-wrapper{
         width: 60vw;

@@ -21,13 +21,7 @@ const routes = [
                 path: "",
                 name: "homepage",
                 component: HomePage,
-                props: route => ({ lang: route.query.lang })
-            },
-            {
-                path: "/myinfo",
-                name: "myinfo",
-                component: AboutMe,
-                props: route => ({ lang: route.query.lang })
+
             },
             {
                 path: "/blogs",
@@ -54,6 +48,12 @@ const routes = [
                 props: route => ({ query: route.query.lang })
             },
         ]
+    },
+    {
+        path: "/myinfo",
+        name: "myinfo",
+        component: AboutMe,
+
     },
     {
         path: "/blogs/:id",

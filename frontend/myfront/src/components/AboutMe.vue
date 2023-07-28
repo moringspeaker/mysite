@@ -33,8 +33,8 @@ export default {
   },
   data() {
     return {
-      avatar,  // replace with your avatar url
-      ENintroduction: "Welcome to my personal website! This website is mainly used for recording fun and profound technologies",  // replace with your introduction
+      avatar,
+      ENintroduction: "Welcome to my personal website! This website is mainly used for recording fun and profound technologies",
       Chintroduction:"欢迎来到我的个人网站!本网站主要用于整理科研资料和有意思的计算机技术，以后会有更多功能，如果有任何建议，欢迎通过新建issue的方式给我留言",
     }
   }
@@ -88,7 +88,6 @@ export default {
   padding: 10px;
   background: url("@/static/avatar.jpg") center; /* Customize your background image */
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
 }
 .about-me__avatar p{
