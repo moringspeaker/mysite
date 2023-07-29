@@ -22,7 +22,10 @@
     <NavBar/>
         <div class="content-wrapper">
           <div class="inner-wrapper">
-            <blog-navbar :lang="lang" class="blog-nav" />
+            <div class="left-side-bar">
+              <recent-blogs  class="re-blogs" />
+              <collect-category class="co-blogs"/>
+            </div>
             <div class="blog-container" id="blog-render">
               <div v-html="markdownContent" ref="blogContainer"/>
             </div>
@@ -43,13 +46,15 @@ import { useStore } from 'vuex'
 import bgimg from '@/static/blog-background.png'
 import md from '@/markdownParser';
 import instance from "@/utils/request";
-import BlogNavbar from "@/components/BlogNavbar.vue";
 import MarkdownToc from "@/components/markdownTOC.vue";
 import NavBar from "@/components/NavBar.vue";
+import RecentBlogs from "@/components/RecentBlogs.vue";
+import CollectCategory from "@/components/CollectCategory.vue";
 export default {
   name: "MyBlogs",
   components: {
-    BlogNavbar,
+    RecentBlogs,
+    CollectCategory,
     MarkdownToc,
     NavBar,
   },
@@ -174,6 +179,15 @@ export default {
 </script>
 
 <style scoped>
+
+a{
+  text-decoration: none;
+  color: #fff3cd;
+}
+pre{
+  border-radius: 10px;
+}
+
 .page-wrapper{
   width: 100%;
   display: flex;
@@ -224,14 +238,17 @@ export default {
 .inner-wrapper{
   width: 100rem;
   display: grid;
-  grid-template-columns: 15% 70% 15%;
+  grid-template-columns: 20% 65% 15%;
   grid-gap: 10px;
   grid-template-rows: 1fr 1fr 1fr;
   background: transparent;
 }
-.blog-nav{
+.left-side-bar{
   grid-column: 1/2;
-  width: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 .blog-container {
   height: 100%;

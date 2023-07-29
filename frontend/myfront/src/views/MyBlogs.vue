@@ -9,7 +9,10 @@
       <h2 class="position2">/我的博客</h2>
     </div>
     <div class="content-wrapper">
-      <blog-navbar :lang="lang" class="blognav" />
+      <div class="left-side-bar">
+        <recent-blogs  class="re-blogs" />
+        <collect-category class="co-blogs"/>
+      </div>
       <div class="blog-container">
         <div v-html="welcome" />
       </div>
@@ -21,14 +24,15 @@
 import bgimg from '@/static/blog-background.png'
 import source1 from '@/assets/markdown-sample.md'
 import source2 from '@/assets/markdown-ch-sample.md'
-import BlogNavbar from "@/components/BlogNavbar.vue";
-import instance from "@/utils/request";
+// import BlogNavbar from "@/components/BlogNavbar.vue";
+import RecentBlogs from "@/components/RecentBlogs.vue";
 import md from "@/markdownParser";
-
+import CollectCategory from "@/components/CollectCategory.vue";
 export default {
   name: "MyBlogs",
   components: {
-    BlogNavbar,
+    RecentBlogs,
+    CollectCategory,
   },
   props:['getlang'],
   data(){
@@ -72,15 +76,6 @@ export default {
       }
     }
   },
-  async mounted() {
-    try {
-      const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/blogs/`);
-      this.blogdata = response.data;
-      console.log(this.blogdata);
-    } catch (error) {
-      console.error(error);
-    }
-  },
   created() {
     console.log(this.lang);
    if(this.lang==='EN'){
@@ -96,6 +91,7 @@ export default {
 </script>
 
 <style scoped>
+
 .blogcontent-wrapper{
   width: 100%;
   display: flex;
@@ -142,8 +138,19 @@ export default {
   border: 2px solid #222222;
   border-radius: 10px;
 }
-.blognav{
+.left-side-bar{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.re-blogs{
   min-height: 40%;
-  padding: 25px;
+  padding: 0px;
+}
+.co-blogs{
+  min-height: 40%;
+  padding: 0px;
 }
 </style>

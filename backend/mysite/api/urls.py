@@ -8,6 +8,7 @@ from blogs.views import (
     BlogCreateView,
     CategoryListView,
     CollectionListView,
+    GetCollectioonandCategory,
 )
 from user.views import SuperUserLoginView
 
@@ -19,6 +20,7 @@ urlpatterns = [
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path("collections/", CollectionListView.as_view(), name="collection-list"),
     path("superuser_login/",SuperUserLoginView.as_view(),name="superuser_login",),
+    path("collectcategory/", GetCollectioonandCategory.as_view(), name="collect_category"),
     ]
 
 

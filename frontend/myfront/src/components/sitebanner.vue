@@ -11,7 +11,6 @@
             <h1 class="site-title ">
               <transition>
                 <a id="webtitle" :style="{ fontFamily: webTitleFontFamily }" href="homepage" v-if="pageloaded">{{ Title }}</a>
-
               </transition>
             </h1>
             <h4 id="slogan" class="slogan">{{ slogan }}</h4>

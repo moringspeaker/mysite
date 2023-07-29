@@ -7,6 +7,14 @@
 #inner-content-wrapper{
     width: 80vw;
 }
+a{
+    text-decoration: none;
+    color: #fff3cd;
+}
+pre{
+    border-radius: 10px;
+    padding:10px;
+}
 
 /* For small screens */
 @media screen and (max-width: 1000px) {
@@ -15,6 +23,14 @@
     }
     #inner-content-wrapper{
         width: 90vw;
+    }
+    a{
+        text-decoration: none;
+        color: #fff3cd;
+    }
+    pre{
+        border-radius: 10px;
+        padding:10px;
     }
 }
 
@@ -26,6 +42,14 @@
     #inner-content-wrapper{
         width: 60vw;
     }
+    a{
+        text-decoration: none;
+        color: #fff3cd;
+    }
+    pre{
+        border-radius: 10px;
+        padding:10px;
+    }
 }
 
 @media screen and (min-width: 3440px) and (min-height: 1000px){
@@ -34,6 +58,14 @@
     }
     #inner-content-wrapper{
         width: 45vw;
+    }
+    a{
+        text-decoration: none;
+        color: #fff3cd;
+    }
+    pre{
+        border-radius: 10px;
+        padding:10px;
     }
 }
 

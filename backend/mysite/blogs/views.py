@@ -9,7 +9,8 @@ from rest_framework.response import Response
 from .models import Blog
 from .serializers import BlogsSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
-
+from rest_framework.decorators import api_view
+from django.core.paginator import Paginator
 
 class BlogDetailView(APIView):
     def get(self, request, pk):
@@ -82,12 +83,54 @@ class BlogCreateView(APIView):
 
 
 class BlogListView(generics.ListAPIView):
+    queryset = Blog.objects.all().order_by('-created_date')
+    serializer_class = BlogsSerializer  # replace this with your actual serializer
+
+    def post(self, request):
+        page_number = request.data.get('page', 1)
+        paginator = Paginator(self.get_queryset(), 6)  # 6 blogs per page
+
+        try:
+            current_page_blogs = paginator.page(page_number)
+        except EmptyPage:
+            return Response({"error": "No results for this page."}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = self.get_serializer(current_page_blogs, many=True)
+
+        # You can construct your paginated response here:
+        paginated_response = {
+            'count': paginator.count,
+            'num_pages': paginator.num_pages,
+            'current_page': page_number,
+            'results': serializer.data
+        }
+
+        return Response(paginated_response)
+
+class CategoryListView(APIView):
+    def get(self, request):
+        categories = Category.objects.all()
+        data = []
+        for category in categories:
+            data.append(category.name)
+        return Response(data)
+
+
+class CollectionListView(APIView):
+    def get(self, request):
+        collections = Collection.objects.all()
+        data = []
+        for collection in collections:
+            data.append(collection.name)
+        return Response(data)
+
+class GetCollectioonandCategory(APIView):
     queryset = Blog.objects.all()
     serializer_class = BlogsSerializer  # replace this with your actual serializer
 
-    def list(self, request):
-        data = {}
+    def get(self, request):
 
+        data = {}
         categories = Category.objects.all()
         data_category = {}
         for category in categories:
@@ -118,22 +161,4 @@ class BlogListView(generics.ListAPIView):
         data["category"] = data_category
         data["collection"] = data_collection
 
-        return Response(data)
-
-
-class CategoryListView(APIView):
-    def get(self, request):
-        categories = Category.objects.all()
-        data = []
-        for category in categories:
-            data.append(category.name)
-        return Response(data)
-
-
-class CollectionListView(APIView):
-    def get(self, request):
-        collections = Collection.objects.all()
-        data = []
-        for collection in collections:
-            data.append(collection.name)
         return Response(data)
