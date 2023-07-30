@@ -205,7 +205,7 @@ li:hover {
 }
 
 .expand-icon:hover {
-  color: #FF8844;
+  color: #393646;
 }
 
 .blogs-list {
