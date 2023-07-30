@@ -148,13 +148,14 @@ class GetCollectioonandCategory(APIView):
         data_collection = {}
 
         for collection in collections:
+            collection_data = {}
             collection_blogs = []
             data_collection[collection.name] = defaultdict(list)
             blogs = Blog.objects.filter(collection=collection)
-            for blog in blogs:
-                # use the serializer to transform the model instance to Python native datatypes.
-                serialized_blog = BlogsSerializer(blog).data
-                collection_blogs.append(serialized_blog)
+            serialized_blogs = [BlogsSerializer(blog).data for blog in blogs]
+            collection_data['blogs'] = serialized_blogs
+            collection_data['category'] = collection.category.name
+
             data_collection[collection.name] = collection_blogs
             data_collection[collection.name].append(collection.category.name)  #
 

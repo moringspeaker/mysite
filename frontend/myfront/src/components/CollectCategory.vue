@@ -8,11 +8,10 @@
           <p class="category-title">{{ category }}</p>
           <i class="bi bi-caret-down expand-icon"
              :class="expandedCategory === category ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
-             @click="toggleExpand(category)"
+             @click="toggleExpand('expandedCategory',category)"
              >
             </i>
         </li>
-
         <ul v-if="expandedCategory === category" class="blogs-list">
           <li v-for="blog in content" :key="blog.id">
             <a :href="'/#/blogs/' + blog.id">{{blog.ENtitle}}</a>
@@ -26,11 +25,10 @@
           <p class="category-title">{{ category }}</p>
           <i class="bi bi-caret-down expand-icon"
              :class="expandedCategory === category ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
-             @click="toggleExpand(category)"
+             @click="toggleExpand('expandedCategory',category)"
           >
           </i>
         </li>
-
         <ul v-if="expandedCategory === category" class="blogs-list">
           <li v-for="blog in content" :key="blog.id">
             <a :href="'/#/blogs/' + blog.id">{{blog.CHtitle}}</a>
@@ -38,24 +36,44 @@
         </ul>
       </ul>
     </div>
-<!--    <h3 v-if="lang==='EN'"  class="side-bar-header"> Collections</h3>-->
-<!--    <div class="aside-content">-->
-<!--      <ul v-for="(items, collect) in collections" :key="collect"  class="side-bar-ul">-->
-<!--        <li v-if="lang==='EN'">-->
-<!--          <p>{{ collect }}</p>-->
-<!--          <ul v-for="(blog, key) in items" :key="key"  class="collection-sub" >-->
-<!--            <li>-->
-<!--            -->
-<!--            </li>-->
-<!--          </ul>-->
-<!--          <span class="blog-tag">{{ collect.category }}</span>-->
-<!--        </li>-->
-<!--        <li v-if="lang!=='EN'">-->
-<!--          <p>{{ collect.CHtitle }}</p>-->
-<!--          <span class="blog-tag">{{ collect.category }}</span>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </div>-->
+     <h3 v-if="lang==='EN'"  class="side-bar-header"> Blog Collections</h3>
+     <h3 v-if="lang!=='EN'" class="side-bar-header"> 博客合集 </h3>
+     <div class="aside-content" v-if="lang==='EN'">
+      <ul v-for="(content, collect) in collections" :key="collect" class="side-bar-ul">
+        <li  class="collect-item">
+          <p class="collect-title">{{ collect }}</p>
+          <span class="collect-tag">{{ content.category }}</span>
+          <i class="bi bi-caret-down expand-icon"
+             :class="expandedCollect === collect ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
+             @click="toggleExpand('expandedCollect',collect)"
+          >
+          </i>
+        </li>
+        <ul v-if="expandedCollect === collect" class="blogs-list">
+          <li v-for="blog in content.blogs" :key="blog.id">
+            <a :href="'/#/blogs/' + blog.id">{{blog.ENtitle}}</a>
+          </li>
+        </ul>
+      </ul>
+    </div>
+    <div class="aside-content" v-if="lang!=='EN'">
+      <ul v-for="(content, collect) in collections" :key="collect" class="side-bar-ul">
+        <li  class="collect-item">
+          <p class="collect-title">{{ collect }}</p>
+          <span class="collect-tag">{{ content.category }}</span>
+          <i class="bi bi-caret-down expand-icon"
+             :class="expandedCollect === collect ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
+             @click="toggleExpand('expandedCollect',collect)"
+          >
+          </i>
+        </li>
+        <ul v-if="expandedCollect === collect" class="blogs-list">
+          <li v-for="blog in content.blogs" :key="blog.id">
+            <a :href="'/#/blogs/' + blog.id">{{blog.CHtitle}}</a>
+          </li>
+        </ul>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -69,36 +87,24 @@ export default {
       categories:'',
       collections:'',
       expandedCategory: null,
+      expandedCollect: null,
     }
   },
   methods:{
-    toggleExpand(category) {
-      if (this.expandedCategory === category) {
-        this.expandedCategory = null;  // Collapse if already expanded
+    toggleExpand(varName,value) {
+      if (this[varName] === value) {
+        this[varName] = null;  // Collapse if already expanded
       } else {
-        this.expandedCategory = category;  // Expand the clicked category
+        this[varName] = value;  // Expand the clicked category
       }
     }
   },
   async mounted() {
     try {
       const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/collectcategory/`);
-      const blogdata = response.data;
-      console.log(blogdata);
       this.categories = response.data.category;
-      let collections = {};
-      collections = blogdata.collection;
-      let newDictionary = {};   //Collate the obtained collection data
-      for (let collection in collections) {
-        let category = collections[collection].pop();
-        if (!newDictionary[category]) {
-          newDictionary[category] = {};
-        }
-        newDictionary[category][collection] = collections[collection];
-      }
-      this.collections= newDictionary;
+      this.collections = response.data.collection;
       console.log(this.collections);
-      console.log(this.categories);
     } catch (error) {
       console.error(error);
     }
@@ -177,7 +183,6 @@ li:hover {
 .side-bar-header{
   text-align: center;
   margin-top: 10px;
-
 }
 
 .side-bar-ul{
@@ -196,9 +201,19 @@ li:hover {
   flex-grow: 1; /* This allows the title to take up any available space, pushing the icon to the right */
 }
 
+.collect-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collect-title {
+  flex-grow: 1; /* This allows the title to take up any available space, pushing the icon to the right */
+}
+
 .expand-icon {
   cursor: pointer;
-  color: #FFAA33;
+  color: #D8D8D8;
   font-size: 20px;
   transition: color 0.3s ease;
   margin-left: 10px; /* Adds a bit of space between the title and the icon */
@@ -212,5 +227,15 @@ li:hover {
   margin-top: 5px;
   padding-left: 10px; /* To give a slight indentation to the list */
   color: #fff3cd;
+}
+
+.collect-tag {
+  margin-left: 10px;    /* Add some space between the title and the tag */
+  font-size: 0.8em;     /* Make it a bit smaller than the title */
+  color: #FFAA33;       /* Change the color to whatever suits your design */
+  border: 1px solid #FFAA33;
+  border-radius: 5px;   /* Give it rounded corners */
+  padding: 2px 5px;     /* Some padding for aesthetics */
+  float:right;
 }
 </style>
