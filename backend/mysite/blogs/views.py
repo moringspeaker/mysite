@@ -6,17 +6,20 @@ from collections import defaultdict
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Blog
-from .serializers import BlogsSerializer
+from .models import Blog, Category, Collection
+from .serializers import BlogsSerializer, CategorySerializer, CollectionSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.decorators import api_view
 from django.core.paginator import Paginator
+from rest_framework.generics import ListCreateAPIView, \
+    RetrieveUpdateDestroyAPIView, ListAPIView
+class BlogDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogsSerializer
 
-class BlogDetailView(APIView):
-    def get(self, request, pk):
-        blog = get_object_or_404(Blog, pk=pk)
-        serializer = BlogsSerializer(blog)
-        return Response(serializer.data)
+    # def get(self, request, pk):
+    #     blog = get_object_or_404(Blog, pk=pk)
+    #     serializer = BlogsSerializer(blog)
+    #     return Response(serializer.data)
 
 
 class BlogCreateView(APIView):
@@ -107,22 +110,15 @@ class BlogListView(generics.ListAPIView):
 
         return Response(paginated_response)
 
-class CategoryListView(APIView):
-    def get(self, request):
-        categories = Category.objects.all()
-        data = []
-        for category in categories:
-            data.append(category.name)
-        return Response(data)
+class CategoryListView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
-class CollectionListView(APIView):
-    def get(self, request):
-        collections = Collection.objects.all()
-        data = []
-        for collection in collections:
-            data.append(collection.name)
-        return Response(data)
+class CollectionListView(ListAPIView):
+    queryset = Collection.objects.all()
+    serializer_class = CollectionSerializer
+
 
 class GetCollectioonandCategory(APIView):
     queryset = Blog.objects.all()
@@ -156,8 +152,7 @@ class GetCollectioonandCategory(APIView):
             collection_data['blogs'] = serialized_blogs
             collection_data['category'] = collection.category.name
 
-            data_collection[collection.name] = collection_blogs
-            data_collection[collection.name].append(collection.category.name)  #
+            data_collection[collection.name] = collection_data
 
         data["category"] = data_category
         data["collection"] = data_collection

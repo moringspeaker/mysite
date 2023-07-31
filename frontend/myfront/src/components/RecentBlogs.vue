@@ -31,6 +31,7 @@ export default {
     try {
       const response = await instance.post(`${process.env.VUE_APP_BACKEND_URL}api/blogs/`,{ page: 1 });
       this.recentblogs= response.data.results;
+      console.log(this.recentblogs);
     } catch (error) {
       console.error(error);
     }

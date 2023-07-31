@@ -104,7 +104,7 @@ export default {
       const response = await instance.get(`${process.env.VUE_APP_BACKEND_URL}api/collectcategory/`);
       this.categories = response.data.category;
       this.collections = response.data.collection;
-      console.log(this.collections);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
