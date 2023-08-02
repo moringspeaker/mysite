@@ -101,7 +101,6 @@ li:hover {
   background-color: #222222;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   color: #f0f0f0;
   align-items: center;
 }

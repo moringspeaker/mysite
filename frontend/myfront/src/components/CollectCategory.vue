@@ -171,7 +171,6 @@ li:hover {
   background-color: #222222;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   color: #f0f0f0;
   align-items: center;
 }
@@ -190,7 +189,6 @@ li:hover {
   padding: 0;
   margin: 0;
 }
-
 .category-item {
   display: flex;
   justify-content: space-between;
@@ -200,13 +198,11 @@ li:hover {
 .category-title {
   flex-grow: 1; /* This allows the title to take up any available space, pushing the icon to the right */
 }
-
 .collect-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .collect-title {
   flex-grow: 1; /* This allows the title to take up any available space, pushing the icon to the right */
 }
@@ -218,17 +214,14 @@ li:hover {
   transition: color 0.3s ease;
   margin-left: 10px; /* Adds a bit of space between the title and the icon */
 }
-
 .expand-icon:hover {
   color: #393646;
 }
-
 .blogs-list {
   margin-top: 5px;
   padding-left: 10px; /* To give a slight indentation to the list */
   color: #fff3cd;
 }
-
 .collect-tag {
   margin-left: 10px;    /* Add some space between the title and the tag */
   font-size: 0.8em;     /* Make it a bit smaller than the title */

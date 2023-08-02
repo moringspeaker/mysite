@@ -74,16 +74,15 @@ export default {
     };
   },
   computed: {
-    // Use Vuex state as a computed property
+
     lang() {
       return this.$store.state.lang;
     }
   },
   methods: {
     getImageUrl(imageSrc) {
-      // Modify the image source URL here
-      return `${process.env.VUE_APP_BACKEND_URL}${imageSrc}`;
 
+      return `${process.env.VUE_APP_BACKEND_URL}${imageSrc}`;
     },
     getBackgroundStyle(blog, index) {
       return {
