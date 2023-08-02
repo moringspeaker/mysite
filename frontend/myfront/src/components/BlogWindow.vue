@@ -52,7 +52,7 @@ export default {
     blogs: {
       type: Array, // Update the type to Array
       default: function () {
-        return []; // Set the default value to an empty array
+      return []; // Set the default value to an empty array
       },
     },
   },
@@ -69,19 +69,19 @@ export default {
   data() {
     return {
       placeholder: placeholder,
-      // Remove the 'blogs' data property since it's now received as a prop
       bgs:[bg1,bg2,bg3,bg4,bg5,bg6],
     };
   },
   computed: {
-
     lang() {
       return this.$store.state.lang;
     }
   },
   methods: {
     getImageUrl(imageSrc) {
-
+      if (imageSrc.startsWith('https://')) {
+        return imageSrc;
+      }
       return `${process.env.VUE_APP_BACKEND_URL}${imageSrc}`;
     },
     getBackgroundStyle(blog, index) {

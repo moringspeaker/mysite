@@ -102,7 +102,6 @@ export default {
   async mounted() {
     try{
         const response = await instance.post(`${process.env.VUE_APP_BACKEND_URL}api/blogs/`, { page: 1 });
-        console.log(response);
         if (response && response.data) {
         this.search_blogs = response.data.results;
         let counts = response.data.count;
@@ -190,6 +189,7 @@ pre{
   flex-direction: column;
 }
 .right-side{
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
