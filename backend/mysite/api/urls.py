@@ -1,7 +1,6 @@
 from django.urls import path, include
 from homepage import views as homepage_views
-from blogs import views as blogs_views
-from user import views as user_views
+from user.views import LoginView
 from blogs.views import (
     BlogDetailView,
     BlogListView,
@@ -10,7 +9,6 @@ from blogs.views import (
     CollectionListView,
     GetCollectioonandCategory,
 )
-from user.views import SuperUserLoginView
 
 urlpatterns = [
     path("homepage/", homepage_views.homepage, name="homepage_api"),
@@ -19,7 +17,7 @@ urlpatterns = [
     path("blogwrite/", BlogCreateView.as_view(), name="blog-create"),
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path("collections/", CollectionListView.as_view(), name="collection-list"),
-    path("superuser_login/",SuperUserLoginView.as_view(),name="superuser_login",),
+    path("login/",LoginView.as_view(),name="user_login",),
     path("collectcategory/", GetCollectioonandCategory.as_view(), name="collect_category"),
     ]
 

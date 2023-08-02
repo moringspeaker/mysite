@@ -9,8 +9,10 @@ import HomePage from "@/views/HomePage.vue";
 import BlogPost from "@/views/BlogPost.vue";
 import WriteBlog from "@/views/WriteBlog.vue";
 import OwnerLogin from "@/views/OwnerLogin.vue";
+import BlogsDisplay from "@/views/BlogsDisplay.vue";
 import store from '../store'
 import DefaultLayout from "@/layout/DefaultLayout.vue";
+
 
 const routes = [
     {
@@ -72,9 +74,14 @@ const routes = [
         component: WriteBlog,
         meta: { requiresAuth: true },
     },
+
+    {
+        path: '/displayblogs',
+        name: 'displayblogs',
+        component: BlogsDisplay,
+    },
+
 ]
-
-
 const router = createRouter({
     history: createWebHashHistory(),
     routes

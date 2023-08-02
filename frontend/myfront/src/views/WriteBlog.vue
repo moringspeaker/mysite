@@ -30,18 +30,18 @@
              :filterable="true"
              allow-create
              :remote="true"
-             :fit-input-width="true"
+             
              default-first-option
              :reserve-keyword="false"
              placeholder="categories"
              v-if="categories"
          >
            <el-option
-               v-for="(item,index) in categories"
-               :key="index"
-               :label="item.id"
-               :value="item"
-           />
+               v-for="item in categories"
+               :key="item.name"
+               :label="item.name"
+               :value="item.name"
+            />
          </el-select>
          <p>==>category</p>
          <el-select
@@ -49,7 +49,7 @@
              :multiple="false"
              :filterable="true"
              allow-create
-             :fit-input-width="true"
+          
              default-first-option
              :remote="true"
              :reserve-keyword="false"
@@ -57,10 +57,10 @@
              v-if="collections"
          >
            <el-option
-               v-for="(item,index) in collections"
-               :key="index"
-               :label="item.id"
-               :value="item"
+               v-for="item in collections"
+               :key="item.name"
+               :label="item.name"
+               :value="item.name"
            />
          </el-select>
          <p>==>collections</p>
@@ -177,14 +177,14 @@ export default {
         // Add other properties as needed
         // ...
         date: this.date,
-        category: this.selectedCategory.toString(),
-        collection: this.selectedCollection.toString(),
+        category: this.selectedCategory,
+        collection: this.selectedCollection,
       };
-      console.log(blogData);
+      console.log(this.selectedCategory);
+      console.log(this.selectedCollection);
       try {
-        // Submit the blog
-        //check data at first:
-        if(this.selectedCategory === null || this.selectedCategory === "" || this.selectedCollection=== null || this.selectedCollection === ""){
+
+        if(this.selectedCategory === null || this.selectedCategory === "" ){
           alert('Please include valid category or collection!');
         }
         else{
@@ -193,6 +193,7 @@ export default {
               'Content-Type': 'multipart/form-data'
             }
           });
+  
           // If successful, reset the blog form data
           if (response.status === 201) {
             alert('Blog submitted successfully')

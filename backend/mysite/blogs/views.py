@@ -1,9 +1,5 @@
-from .models import Blog
-from .models import Category
-from .models import Collection
 from rest_framework import generics, status
 from collections import defaultdict
-from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Blog, Category, Collection
@@ -12,25 +8,18 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.core.paginator import Paginator
 from rest_framework.generics import ListCreateAPIView, \
     RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 class BlogDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogsSerializer
 
-    # def get(self, request, pk):
-    #     blog = get_object_or_404(Blog, pk=pk)
-    #     serializer = BlogsSerializer(blog)
-    #     return Response(serializer.data)
 
 
 class BlogCreateView(APIView):
     parser_classes = (MultiPartParser, FormParser)
-
-    def check_blog_data(self,data):
-        for key, value in data.items():
-            if value is None or value == "":
-                return False, key  # Returning the key as well to know which attribute was null
-        return True, None
-
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     def post(self, request, *args, **kwargs):
         category_name = request.data.get("category")
         category, created = Category.objects.get_or_create(
@@ -39,7 +28,6 @@ class BlogCreateView(APIView):
         # Get or create the Collection only if provided
         collection_name = request.data.get("collection")
         collection = None
-        print(collection_name)
 
         if collection_name:
             collection, created = Collection.objects.get_or_create(
@@ -63,26 +51,21 @@ class BlogCreateView(APIView):
             "category": category.id,
         }
 
-        # check the data
-        is_valid, invalid_key = self.check_blog_data(blog_data)
-        print('1111111111')
-        if not is_valid:
-            print('invalid data')
-            return response.Response(
-                data={"message": f"Invalid data: {invalid_key} is null"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        else:
-            if collection is not None:
-                blog_data["collection"] = collection.id
+        if collection is not None:
+            blog_data["collection"] = collection.id
 
-            serializer = BlogsSerializer(data=blog_data)
+        serializer = BlogsSerializer(data=blog_data)
+        if self.request.user.is_superuser:
             if serializer.is_valid():
                 serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data,
+                                status=status.HTTP_201_CREATED)
             else:
                 print('invalid serializer')
-                return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(data=serializer.errors,
+                                status=status.HTTP_400_BAD_REQUEST)
+        else:
+            raise PermissionError("Only superusers can create blog posts.")
 
 
 class BlogListView(generics.ListAPIView):
@@ -95,7 +78,8 @@ class BlogListView(generics.ListAPIView):
 
         try:
             current_page_blogs = paginator.page(page_number)
-        except EmptyPage:
+        except Exception as e:
+            print(e)
             return Response({"error": "No results for this page."}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = self.get_serializer(current_page_blogs, many=True)
@@ -145,7 +129,6 @@ class GetCollectioonandCategory(APIView):
 
         for collection in collections:
             collection_data = {}
-            collection_blogs = []
             data_collection[collection.name] = defaultdict(list)
             blogs = Blog.objects.filter(collection=collection)
             serialized_blogs = [BlogsSerializer(blog).data for blog in blogs]

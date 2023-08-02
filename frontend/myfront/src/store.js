@@ -11,6 +11,7 @@ export default createStore({
     ],
     state: {
         lang: 'EN',
+        search:'',
         user: null,
         token: '',
         status: '',
@@ -30,6 +31,9 @@ export default createStore({
     mutations: {
         setCurrentHeaderIndex(state, currentHeaderIndex) {
             state.currentHeaderIndex = currentHeaderIndex;
+        },
+         setSearch(state, keyword) {
+        state.search = keyword;
         },
         setNavItems(state, items) {
             state.navitems = items;
@@ -54,21 +58,27 @@ export default createStore({
             state.token = ''
             state.isLoggedIn = false // Set isLoggedIn false here
         },
+
     },
     actions: {
         async login({ commit }, user) {
             commit('auth_request')
             try {
-                let response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/superuser_login/`, user)
+                let response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/login/`, user)
                 const token = response.data.token
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-                commit('auth_success', { token, user: user }) // Pass user info here
+                console.log(token)
+                axios.defaults.headers.common['Authorization'] = 'Token ' + token
+                
+                commit('auth_success', { token, user: user }) 
             } catch (error) {
                 commit('auth_error')
                 throw error
             }
         },
-        logout({ commit }) {
+        updateSearch({ commit }, keyword) {
+        commit('setSearch', keyword);
+        },
+        logout({ commit }) { 
             return new Promise((resolve) => {
                 commit('logout')
                 delete axios.defaults.headers.common['Authorization']

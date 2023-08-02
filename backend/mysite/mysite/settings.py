@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "api",
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'knox',
 ]
 
@@ -71,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = "mysite.urls"
 

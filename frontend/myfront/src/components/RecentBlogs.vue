@@ -6,13 +6,17 @@
       <ul v-for="(blog,index) in recentblogs" :key="index" class="side-bar-ul">
         <li v-if="lang==='EN'">
           <a :href="'/#/blogs/' + blog.id">{{blog.ENtitle}}</a>
-          <span class="blog-tag">{{blog.category}}</span>
+          <span class="blog-tag">{{blog.category_name}}</span>
         </li>
         <li v-if="lang!=='EN'">
           <a :href="'/#/blogs/' + blog.id">{{blog.CHtitle}}</a>
-          <span class="blog-tag">{{blog.category}}</span>
+          <span class="blog-tag">{{blog.category_name}}</span>
         </li>
       </ul>
+    </div>
+     <div class="see-all-link">
+      <a href="/#/displayblogs" v-if="lang==='EN'">See all blogs</a>
+      <a href="/#/displayblogs" v-if="lang!=='EN'">查看所有博客</a>
     </div>
   </div>
 </template>
@@ -43,7 +47,6 @@ export default {
   },
   watch:{
     lang(newLang){
-      console.log('111111111'+newLang);
       if (newLang === "EN") {
         document.getElementById("webtitle").style.fontFamily="OribitronM";
         this.Title = "Chenyu's Website";
@@ -128,4 +131,19 @@ li:hover {
   padding: 2px 5px;     /* Some padding for aesthetics */
   float:right;
 }
+.see-all-link {
+  margin-top: 20px; /* Adjust as needed */
+  text-align: center;
+  width: 100%;
+}
+
+.see-all-link a {
+  color: #FFAA33; /* Use the same color as your blog-tag for consistency */
+  text-decoration: none;
+}
+
+.see-all-link a:hover {
+  text-decoration: underline;
+}
+
 </style>

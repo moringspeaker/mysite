@@ -3,7 +3,7 @@ from .models import Blog, Category, Collection
 
 
 class BlogsSerializer(serializers.ModelSerializer):
-    category_name = serializers.SerializerMethodField()
+    category_name = serializers.CharField(source='category.name', read_only=True)
     CHsummary = serializers.CharField(required=False, allow_blank=True)
 
     class Meta:
@@ -29,18 +29,22 @@ class BlogsSerializer(serializers.ModelSerializer):
         return obj.category.name
 
 class CollectionSerializer(serializers.ModelSerializer):
+    category_name = serializers.CharField(source='category.name', read_only=True)
     class Meta:
         model = Collection
         fields = [
             "id",
             "name",
-            "category",
+            "category_name",
+
         ]
 
 class CategorySerializer(serializers.ModelSerializer):
+    collection_name = serializers.CharField(source='collection.name', read_only=True)
     class Meta:
         model = Category
         fields = [
             "id",
             "name",
+            "collection_name",
         ]

@@ -39,6 +39,9 @@ export default {
 
     const login = async () => {
       try {
+        console.log(user.value);
+        console.log(user.value.username);
+        console.log(user.value.password);
         await store.dispatch('login', user.value)
         // If the login was successful, this line will be executed
         router.push(`/writeblog`)
