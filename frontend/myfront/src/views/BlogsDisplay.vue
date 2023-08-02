@@ -183,7 +183,6 @@ pre{
   background: transparent;
 
 }
-
 .left-side-bar{
   width: 20%;
   margin-top: 0;
@@ -206,6 +205,6 @@ pre{
 }
 .paginator{
   align-self: center;  /* This will center the paginator if the parent is a flex container */
-  margin: 20px 0; 
+  margin: 10px 0; 
 }
 </style>
