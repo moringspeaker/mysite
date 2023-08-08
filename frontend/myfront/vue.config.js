@@ -1,31 +1,32 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require("@vue/cli-service");
 
 module.exports = defineConfig({
-  assetsDir: 'static',
+  assetsDir: "static",
   pwa: {
     iconPaths: {
-      favicon32: 'favicon.ico',
-      favicon16: 'favicon.ico',
-      appleTouchIcon: 'favicon.ico',
-      maskIcon: 'favicon.ico',
-      msTileImage: 'favicon.ico',
-    }
+      favicon32: "favicon.ico",
+      favicon16: "favicon.ico",
+      appleTouchIcon: "favicon.ico",
+      maskIcon: "favicon.ico",
+      msTileImage: "favicon.ico",
+    },
   },
   devServer: {
     proxy: {
-      '^/api': {
-        target: 'http://localhost:8000',
+      "^/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+        secure: true,
         ws: true,
-        changeOrigin: true
-      }
-    }
+      },
+    },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module
-        .rule('md')
-        .test(/\.md$/)
-        .use('raw-loader')
-        .loader('raw-loader')
-        .end()
-  }
-})
+      .rule("md")
+      .test(/\.md$/)
+      .use("raw-loader")
+      .loader("raw-loader")
+      .end();
+  },
+});
