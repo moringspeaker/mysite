@@ -22,6 +22,7 @@ class BlogsSerializer(serializers.ModelSerializer):
             "created_date",
             "collection",
             "category",
+            "category_name",
         ]
 
     def get_category_name(self, obj):
