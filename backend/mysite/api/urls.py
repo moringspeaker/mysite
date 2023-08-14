@@ -1,6 +1,6 @@
 from django.urls import path, include
 from homepage import views as homepage_views
-from user.views import LoginView
+from user.views import UserRegViewSet
 from blogs.views import (
     BlogDetailView,
     BlogListView,
@@ -17,7 +17,10 @@ urlpatterns = [
     path("blogwrite/", BlogCreateView.as_view(), name="blog-create"),
     path("categories/", CategoryListView.as_view(), name="category-list"),
     path("collections/", CollectionListView.as_view(), name="collection-list"),
-    path("login/",LoginView.as_view(),name="user_login",),
+    path("user/", UserRegViewSet.as_view({
+        'get': 'list',
+        'post': 'create'
+    }), name="register"),
     path("collectcategory/", GetCollectioonandCategory.as_view(), name="collect_category"),
     ]
 

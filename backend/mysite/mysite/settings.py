@@ -28,16 +28,18 @@ DEBUG = False
 
 ALLOWED_HOSTS =  config('ALLOWED_HOSTS', cast=Csv())
 
+# AUTH_USER_MODEL = 'user.UserProfile'
+
 # Changes made for https:
 
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_SSL_REDIRECT = True # 将所有非SSL请求永久重定向到SSL
-SESSION_COOKIE_SECURE = True # 仅通过https传输cookie
-CSRF_COOKIE_SECURE = True # 仅通过https传输cookie
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True # 严格要求使用https协议传输
-SECURE_HSTS_PRELOAD = True # HSTS为
-SECURE_HSTS_SECONDS = 60
-SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+# SECURE_SSL_REDIRECT = True # 将所有非SSL请求永久重定向到SSL
+# SESSION_COOKIE_SECURE = True # 仅通过https传输cookie
+# CSRF_COOKIE_SECURE = True # 仅通过https传输cookie
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True # 严格要求使用https协议传输
+# SECURE_HSTS_PRELOAD = True # HSTS为
+# SECURE_HSTS_SECONDS = 60
+# SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # APPEND_SLASH=False
 
@@ -52,12 +54,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "blogs",
     "homepage",
-    "user",
     "api",
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'knox',
+    'user.apps.UserConfig',
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
