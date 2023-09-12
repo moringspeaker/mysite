@@ -11,11 +11,21 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    <div class="dropdown ">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" @click="toggleDropdown">
+        <i class="bi bi-translate"></i> {{ selectedLanguage }}
+      </button>
+      <ul v-show="isDropdownOpen" class="dropdown-menu dropdown-menu-lg-start"  id="languageDropdown">
+        <li v-for="(language, index) in languages" :key="index">
+          <button class="dropdown-item" href="" @click="selectLanguage(language)">
+            <i class="bi bi-translate"></i> {{ language }}
+          </button>
+        </li>
+      </ul>
+    </div>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav ml-auto" id="nav-dropdown">
         <li v-for="item in navitems" :key="item.id" class="nav-item" >
-
           <router-link :to="item.link" class="nav-link" ><i :class="item.icon"></i>  {{ item.name }}</router-link>
         </li>
       </ul>
@@ -78,18 +88,7 @@
       </ul>
     </div>
 
-    <div class="dropdown ">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" @click="toggleDropdown">
-        <i class="bi bi-translate"></i> {{ selectedLanguage }}
-      </button>
-      <ul v-show="isDropdownOpen" class="dropdown-menu dropdown-menu-lg-start" >
-        <li v-for="(language, index) in languages" :key="index">
-          <button class="dropdown-item" href="" @click="selectLanguage(language)">
-            <i class="bi bi-translate"></i> {{ language }}
-          </button>
-        </li>
-      </ul>
-    </div>
+    
   </nav>
 </template>
 
@@ -143,7 +142,7 @@ export default {
         { id: 4, name: "My Resource", link:"/resources", icon: "bi bi-folder" },
         { id: 5, name: "MyInfo", link:"/myinfo", icon: "bi bi-person-circle" },
         { id: 6, name: "Gallery", link:"/gallery", icon: "bi bi-images" },
-        { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
+        // { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
       let navitems2=[
         { id: 1, name: "主页", link:"/", icon: "bi bi-house-door" },
@@ -152,7 +151,7 @@ export default {
         { id: 4, name: "我的资源", link:"/resources", icon: "bi bi-folder" },
         { id: 5, name: "关于我", link:"/myinfo", icon: "bi bi-images" },
         {id: 6, name: "我的瞬间", link:"/gallery", icon: "bi bi-house-door"},
-        {id: 7, name: "登录", link:"/login", icon: "bi bi-box-arrow-in-right" }
+        // {id: 7, name: "登录", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
       if(language === "EN"){
         this.selectedLanguage = "EN";
@@ -230,15 +229,20 @@ ul:first-of-type {
 }
 
 ul:first-of-type li {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 ul:first-of-type li a{
   font-size: 1rem;
 }
 
 .dropdown{
-  margin-right: 10%;
-
+  margin-right: 30px;
+  margin-left: 30px;
 }
+#languageDropdown{
+  margin: 10px !important;
+  padding: 0px !important;
+}
+
 </style>
