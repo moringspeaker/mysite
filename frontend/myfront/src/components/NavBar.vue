@@ -20,6 +20,64 @@
         </li>
       </ul>
     </div>
+
+    <div class="dropdown">
+      <button v-if="lang==='EN'" class="btn btn-secondary dropdown-toggle" type="button" id="authDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Welcome, {{ username }} !
+      </button>
+      <button v-if="lang!=='EN'" class="btn btn-secondary dropdown-toggle" type="button" id="authDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        欢迎, {{ username }} !
+      </button>
+      <ul v-if="lang==='EN'" class="dropdown-menu" aria-labelledby="authDropdown">
+        <li v-if="isLoggedIn">
+          <button class="dropdown-item" @click="logout">
+            Logout
+          </button>
+        </li>
+        <template v-else>
+          <li>
+            <router-link to="/login" class="dropdown-item">
+              Login
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/register" class="dropdown-item">
+              Sign Up
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/logout" class="dropdown-item">
+              Logout
+            </router-link>
+          </li>
+        </template>
+      </ul>
+      <ul v-if="lang!=='EN'" class="dropdown-menu" aria-labelledby="authDropdown">
+        <li v-if="isLoggedIn">
+          <button class="dropdown-item" @click="logout">
+            Logout
+          </button>
+        </li>
+        <template v-else>
+          <li>
+            <router-link to="/login" class="dropdown-item">
+              登录
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/register" class="dropdown-item">
+              注册
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/logout" class="dropdown-item">
+              登出
+            </router-link>
+          </li>
+        </template>
+      </ul>
+    </div>
+
     <div class="dropdown ">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" @click="toggleDropdown">
         <i class="bi bi-translate"></i> {{ selectedLanguage }}
@@ -49,8 +107,25 @@ export default {
     lang(){
       return this.$store.state.lang;
     },
+    username(){
+      let is_logged = this.$store.state.isLoggedIn;
+      console.log(this.$store.state.user);
+      if (is_logged){
+        return this.$store.state.user;
+      }
+      else{
+        let tmp_name = "Guest"
+        return tmp_name;
+      }
+    },
     navitems() {
       return this.$store.state.navitems;
+    }
+  },
+  watch: {
+    username(newName, oldName) {
+      console.log(`Username changed from ${oldName} to ${newName}`);
+      this.user = newName;
     }
   },
   mounted() {
@@ -94,8 +169,6 @@ export default {
       // this.$emit("SelectLan",this.selectedLanguage);
 
       this.isDropdownOpen = false;
-
-
     },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen; // Toggle the dropdown state

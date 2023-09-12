@@ -169,7 +169,7 @@ pre{
     width: 100%;
 }
 .content-container{
-  width: 100%;
+  width: 100rem;
   display: flex;
   flex-direction: row;
 

@@ -8,11 +8,12 @@ import Resources from "@/views/Resources.vue";
 import HomePage from "@/views/HomePage.vue";
 import BlogPost from "@/views/BlogPost.vue";
 import WriteBlog from "@/views/WriteBlog.vue";
-import OwnerLogin from "@/views/OwnerLogin.vue";
+import UserLogin from "@/views/UserLogin.vue";
 import BlogsDisplay from "@/views/BlogsDisplay.vue";
 import store from '../store'
 import DefaultLayout from "@/layout/DefaultLayout.vue";
-
+import UserRegister from "@/views/UserRegister.vue";
+import UserLogout from "@/views/UserLogout.vue";
 
 const routes = [
     {
@@ -55,7 +56,6 @@ const routes = [
         path: "/myinfo",
         name: "myinfo",
         component: AboutMe,
-
     },
     {
         path: "/blogs/:id",
@@ -65,8 +65,18 @@ const routes = [
     },
     {
         path: '/login',
-        name: 'OwnerLogin',
-        component: OwnerLogin,
+        name: 'UserLogin',
+        component: UserLogin,
+    },
+    {
+        path: '/logout',
+        name: 'UserLogout',
+        component: UserLogout,
+    },
+    {
+        path: '/register',
+        name: 'UserRegister',
+        component: UserRegister,
     },
     {
         path: '/writeblog',

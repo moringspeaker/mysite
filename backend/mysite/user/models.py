@@ -21,7 +21,7 @@ class UserProfile(AbstractUser):
         (1, 'User'),
         (2, 'Admin'),
     )
-    name = models.CharField(max_length=100, null=True, blank=True,
+    name = models.CharField(max_length=20, null=True, blank=True,
                             verbose_name='Name')
     email = models.CharField(max_length=100, null=True, blank=True, verbose_name='Email')
     level = models.IntegerField(choices=LEVEL, default=1, verbose_name='Level')

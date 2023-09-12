@@ -48,7 +48,7 @@ export default createStore({
             state.status = 'success'
             state.token = token
             state.user = user
-            state.isLoggedIn = true // Set isLoggedIn true here
+            state.isLoggedIn = true
         },
         auth_error(state) {
             state.status = 'error'
@@ -64,12 +64,11 @@ export default createStore({
         async login({ commit }, user) {
             commit('auth_request')
             try {
-                let response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/login/`, user)
-                const token = response.data.token
-                console.log(token)
-                axios.defaults.headers.common['Authorization'] = 'Token ' + token
-                
-                commit('auth_success', { token, user: user }) 
+                let response = await axios.post(`${process.env.VUE_APP_BACKEND_URL}api/user/login/`, user)
+                const token = response.data.token;
+                const username = response.data.username;
+                axios.defaults.headers.common['Authorization'] = 'Token ' + token;
+                commit('auth_success', { token, user: username })
             } catch (error) {
                 commit('auth_error')
                 throw error
@@ -78,12 +77,11 @@ export default createStore({
         updateSearch({ commit }, keyword) {
         commit('setSearch', keyword);
         },
-        logout({ commit }) { 
-            return new Promise((resolve) => {
-                commit('logout')
-                delete axios.defaults.headers.common['Authorization']
-                resolve()
-            })
+        async logout({ commit }) {
+            await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/user/logout/`);
+            commit('logout');
+            delete axios.defaults.headers.common['Authorization'];
+            return Promise.resolve();
         },
     },
     getters: {

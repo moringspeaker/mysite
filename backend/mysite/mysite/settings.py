@@ -24,11 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
+DEBUG = True
 ALLOWED_HOSTS =  config('ALLOWED_HOSTS', cast=Csv())
 
-# AUTH_USER_MODEL = 'user.UserProfile'
+AUTH_USER_MODEL = 'user.UserProfile'
 
 # Changes made for https:
 
@@ -58,7 +57,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'knox',
     'user.apps.UserConfig',
 ]
 
@@ -74,6 +72,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
+
 
 
 ROOT_URLCONF = "mysite.urls"

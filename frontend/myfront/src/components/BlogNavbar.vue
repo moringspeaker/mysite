@@ -64,11 +64,7 @@
 
     export default {
       name:"BlogNavbar",
-      components:{
-        // Markdown,
-      },
       computed: {
-        // Use Vuex state as a computed property
         lang() {
           return this.$store.state.lang;
         }

@@ -3,7 +3,7 @@
     <h3 v-if="lang==='EN'" class="side-bar-header"> Recent Blogs</h3>
     <h3 v-if="lang!=='EN'" class="side-bar-header"> 近期博客</h3>
     <div class="aside-content">
-      <ul v-for="(blog,index) in recentblogs" :key="index" class="side-bar-ul">
+      <ul v-for="(blog,index) in blogs" :key="index" class="side-bar-ul">
         <li v-if="lang==='EN'">
           <a :href="'/#/blogs/' + blog.id">{{blog.ENtitle}}</a>
           <span class="blog-tag">{{blog.category_name}}</span>
@@ -15,8 +15,8 @@
       </ul>
     </div>
      <div class="see-all-link">
-      <a href="/#/displayblogs" v-if="lang==='EN'">See all blogs</a>
-      <a href="/#/displayblogs" v-if="lang!=='EN'">查看所有博客</a>
+      <a href="/#/displayblogs" v-show="lang==='EN'">See all blogs</a>
+      <a href="/#/displayblogs" v-show="lang!=='EN'">查看所有博客</a>
     </div>
   </div>
 </template>
@@ -28,14 +28,13 @@ export default {
   name: "RecentBlogs",
   data(){
     return{
-      recentblogs:'',
+      blogs:'',
     }
   },
   async mounted() {
     try {
       const response = await instance.post(`${process.env.VUE_APP_BACKEND_URL}api/blogs/`,{ page: 1 });
-      this.recentblogs= response.data.results;
-      console.log(this.recentblogs);
+      this.blogs= response.data.results;
     } catch (error) {
       console.error(error);
     }
@@ -44,21 +43,6 @@ export default {
     lang(){
      return this.$store.state.lang;
     },
-  },
-  watch:{
-    lang(newLang){
-      if (newLang === "EN") {
-        document.getElementById("webtitle").style.fontFamily="OribitronM";
-        this.Title = "Chenyu's Website";
-        this.slogan = "Live life. Learn lessons. Liberate yourself.";
-      } else if (newLang !== "EN") {
-        document.getElementById("webtitle").style.fontFamily="WY";
-        this.Title = "尘语的网站";
-        this.slogan = "宇宙以其不息的欲望将一个歌舞炼为永恒，\n" +
-            "这欲望有怎样一个人间的姓名，\n" +
-            "大可忽略不计。";
-      }
-    }
   },
 }
 </script>
