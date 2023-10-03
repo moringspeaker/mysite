@@ -25,7 +25,6 @@ export default createStore({
             { id: 4, name: "My Resource", link:"/resources", icon: "bi bi-folder" },
             { id: 5, name: "MyInfo", link:"/myinfo", icon: "bi bi-person-circle" },
             { id: 6, name: "Gallery", link:"/gallery", icon: "bi bi-images" },
-            { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
         ],
     },
     mutations: {

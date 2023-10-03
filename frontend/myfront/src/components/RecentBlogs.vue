@@ -33,8 +33,21 @@ export default {
   },
   async mounted() {
     try {
+      const EnMaxlength = 20;
+      const CHMaxlength =7;
       const response = await instance.post(`${process.env.VUE_APP_BACKEND_URL}api/blogs/`,{ page: 1 });
-      this.blogs= response.data.results;
+      const blogs_unchecked = response.data.results;
+      for (let blog of blogs_unchecked) {
+        if (blog.ENtitle.length > EnMaxlength){
+          blog.ENtitle = blog.ENtitle.substring(0,  EnMaxlength) + '...';
+        }
+        if (blog.CHtitle.length >  CHMaxlength){
+          blog.CHtitle = blog.CHtitle.substring(0,  CHMaxlength) + '...';
+        }
+      }
+
+      this.blogs= blogs_unchecked;
+
     } catch (error) {
       console.error(error);
     }

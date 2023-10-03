@@ -3,7 +3,8 @@ name: Deploy to DigitalOcean
 on:
   push:
     branches:
-      - deploy
+      - deploy'
+      - test
 
 jobs:
   build_and_push:
