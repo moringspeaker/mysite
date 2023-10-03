@@ -114,22 +114,6 @@ export default {
       return this.$store.state.lang;
     },
   },
-  watch:{
-    lang(newLang){
-      console.log('111111111'+newLang);
-      if (newLang === "EN") {
-        document.getElementById("webtitle").style.fontFamily="OribitronM";
-        this.Title = "Chenyu's Website";
-        this.slogan = "Live life. Learn lessons. Liberate yourself.";
-      } else if (newLang !== "EN") {
-        document.getElementById("webtitle").style.fontFamily="WY";
-        this.Title = "尘语的网站";
-        this.slogan = "宇宙以其不息的欲望将一个歌舞炼为永恒，\n" +
-            "这欲望有怎样一个人间的姓名，\n" +
-            "大可忽略不计。";
-      }
-    }
-  },
 }
 </script>
 

@@ -31,7 +31,11 @@ instance.interceptors.request.use(
 // before receive
 instance.interceptors.response.use(
     response => {
-        return response.status === 200 ? Promise.resolve(response) : Promise.reject(response);
+        if ((response.status >= 200 && response.status < 300) || response.status === 301 || response.status === 302) {
+            return Promise.resolve(response);
+        } else {
+            return Promise.reject(response);
+        }
     },
     error => {
         const { response } =error;

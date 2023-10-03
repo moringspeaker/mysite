@@ -11,20 +11,11 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li v-for="item in navitems" :key="item.id" class="nav-item" >
-
-          <router-link :to="item.link" class="nav-link" ><i :class="item.icon"></i>  {{ item.name }}</router-link>
-        </li>
-      </ul>
-    </div>
     <div class="dropdown ">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" @click="toggleDropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" @click="toggleDropdown">
         <i class="bi bi-translate"></i> {{ selectedLanguage }}
       </button>
-      <ul v-show="isDropdownOpen" class="dropdown-menu dropdown-menu-lg-start" >
+      <ul v-show="isDropdownOpen" class="dropdown-menu dropdown-menu-lg-start"  id="languageDropdown">
         <li v-for="(language, index) in languages" :key="index">
           <button class="dropdown-item" href="" @click="selectLanguage(language)">
             <i class="bi bi-translate"></i> {{ language }}
@@ -32,6 +23,72 @@
         </li>
       </ul>
     </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto" id="nav-dropdown">
+        <li v-for="item in navitems" :key="item.id" class="nav-item" >
+          <router-link :to="item.link" class="nav-link" ><i :class="item.icon"></i>  {{ item.name }}</router-link>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dropdown">
+      <button v-if="lang==='EN'" class="btn btn-secondary dropdown-toggle" type="button" id="authDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Welcome, {{ username }} !
+      </button>
+      <button v-if="lang!=='EN'" class="btn btn-secondary dropdown-toggle" type="button" id="authDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        欢迎, {{ username }} !
+      </button>
+      <ul v-if="lang==='EN'" class="dropdown-menu" aria-labelledby="authDropdown">
+        <li v-if="isLoggedIn">
+          <button class="dropdown-item" @click="logout">
+            Logout
+          </button>
+        </li>
+        <template v-else>
+          <li>
+            <router-link to="/login" class="dropdown-item">
+              Login
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/register" class="dropdown-item">
+              Sign Up
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/logout" class="dropdown-item">
+              Logout
+            </router-link>
+          </li>
+        </template>
+      </ul>
+      <ul v-if="lang!=='EN'" class="dropdown-menu" aria-labelledby="authDropdown">
+        <li v-if="isLoggedIn">
+          <button class="dropdown-item" @click="logout">
+            Logout
+          </button>
+        </li>
+        <template v-else>
+          <li>
+            <router-link to="/login" class="dropdown-item">
+              登录
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/register" class="dropdown-item">
+              注册
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/logout" class="dropdown-item">
+              登出
+            </router-link>
+          </li>
+        </template>
+      </ul>
+    </div>
+
+    
   </nav>
 </template>
 
@@ -49,8 +106,25 @@ export default {
     lang(){
       return this.$store.state.lang;
     },
+    username(){
+      let is_logged = this.$store.state.isLoggedIn;
+      console.log(this.$store.state.user);
+      if (is_logged){
+        return this.$store.state.user;
+      }
+      else{
+        let tmp_name = "Guest"
+        return tmp_name;
+      }
+    },
     navitems() {
       return this.$store.state.navitems;
+    }
+  },
+  watch: {
+    username(newName, oldName) {
+      console.log(`Username changed from ${oldName} to ${newName}`);
+      this.user = newName;
     }
   },
   mounted() {
@@ -68,7 +142,7 @@ export default {
         { id: 4, name: "My Resource", link:"/resources", icon: "bi bi-folder" },
         { id: 5, name: "MyInfo", link:"/myinfo", icon: "bi bi-person-circle" },
         { id: 6, name: "Gallery", link:"/gallery", icon: "bi bi-images" },
-        { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
+        // { id: 7, name: "Login", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
       let navitems2=[
         { id: 1, name: "主页", link:"/", icon: "bi bi-house-door" },
@@ -77,7 +151,7 @@ export default {
         { id: 4, name: "我的资源", link:"/resources", icon: "bi bi-folder" },
         { id: 5, name: "关于我", link:"/myinfo", icon: "bi bi-images" },
         {id: 6, name: "我的瞬间", link:"/gallery", icon: "bi bi-house-door"},
-        {id: 7, name: "登录", link:"/login", icon: "bi bi-box-arrow-in-right" }
+        // {id: 7, name: "登录", link:"/login", icon: "bi bi-box-arrow-in-right" }
       ];
       if(language === "EN"){
         this.selectedLanguage = "EN";
@@ -94,8 +168,6 @@ export default {
       // this.$emit("SelectLan",this.selectedLanguage);
 
       this.isDropdownOpen = false;
-
-
     },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen; // Toggle the dropdown state
@@ -157,15 +229,20 @@ ul:first-of-type {
 }
 
 ul:first-of-type li {
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 ul:first-of-type li a{
   font-size: 1rem;
 }
 
 .dropdown{
-  margin-right: 10%;
-
+  margin-right: 30px;
+  margin-left: 30px;
 }
+#languageDropdown{
+  margin: 10px !important;
+  padding: 0px !important;
+}
+
 </style>
